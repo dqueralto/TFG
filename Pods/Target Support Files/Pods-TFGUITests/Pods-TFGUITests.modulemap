@@ -1,0 +1,6 @@
+framework module Pods_TFGUITests {
+  umbrella header "Pods-TFGUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
