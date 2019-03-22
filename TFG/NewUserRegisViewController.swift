@@ -11,9 +11,11 @@ import SQLite3
 
 class NewUserRegisViewController: UIViewController {
     var db: OpaquePointer?
-    var usuarios = [Usu]()
+    var usuarios = [Usuario]()
+    var funcion = Funciones()
     var pickerData: [String] = [String]()
     var tipo: String = "A"
+    //var dbMethod = DBComunMethod()
     
     @IBOutlet weak var alerta: UILabel!
     @IBOutlet weak var alerta2: UILabel!
@@ -27,7 +29,8 @@ class NewUserRegisViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        conectarDB()
+        funcion.crearBD()
+        //conectarDB()
         for usu in usuarios
         {
             print(usu.usuario)
@@ -40,8 +43,10 @@ class NewUserRegisViewController: UIViewController {
     }
     @IBAction func registrar(_ sender: Any)
     {
+        
         for usu in usuarios
         {
+            
             alerta.isHidden = true
             alerta2.isHidden = true
             alerta3.isHidden = true
@@ -64,35 +69,43 @@ class NewUserRegisViewController: UIViewController {
                 print(contrasenia.text!)
                 print(confirmarContrasenia.text!)
                 print(tipo)
-                insertar()
+                funcion.insertarUsuario(usu: usuario.text!, pass: contrasenia.text!,tipo: "U")
+                //leerUsuarios()
+                funcion.crearObjUsuario()
+                autologin()
                 return
             }
+            
         }
-        leerValores()
-        autologin()
+        
+        
+        
     }
     
     func autologin(){
         
+        //leerUsuarios()
+        funcion.crearObjUsuario()
         if usuarios.count == 0
         {
-            insertarAdmin()
+            funcion.insertarAdmin()
         }
-        print("0")
+        print("auto 0")
+        
         for usu in usuarios
         {
             alerta.isHidden = true
             alerta2.isHidden = true
-            print("1")
+            print("auto 1")
             print(usu.usuario)
             print(usu.contrasenia)
             
             if (usuario.text!.elementsEqual(usu.usuario) )
             {
-                print("2")
+                print("auto 2")
                 if contrasenia.text!.elementsEqual(usu.contrasenia)
                 {
-                    print("3")
+                    print("auto 3")
                     /*if usu.tipo.elementsEqual("A")
                     {
                         print("3.1")
@@ -103,22 +116,21 @@ class NewUserRegisViewController: UIViewController {
                     else */
                     if usu.tipo.elementsEqual("U")
                     {
-                        print("3.2")
+                        print("auto 3.2")
                         performSegue(withIdentifier: "contenidoRegistrar", sender: nil)
                         return
-                        
                     }
                 }
                 else
                 {
-                    print("4")
+                    print("auto 4")
                     alerta2.isHidden = false
                     //return
                 }
             }
             else
             {
-                print("5")
+                print("auto 5")
                 alerta.isHidden = false
                 //return
             }
@@ -152,7 +164,7 @@ class NewUserRegisViewController: UIViewController {
             }
         }*/
     }
-
+    /*
     //---------------------------------------------------------------------------------------------------------
     func conectarDB()
     {
@@ -164,20 +176,20 @@ class NewUserRegisViewController: UIViewController {
         }
         else {
             print("base abierta")
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT)", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
             }
         }
-        leerValores()
+        leerUsuarios()
     }
     
-    func insertar()  {
+    public func insertarUsuario(usu:String,pass:String)  {
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var stmt: OpaquePointer?
         
         //CREAMOS NUESTRA SENTENCIA
-        let queryString = "INSERT INTO Usuarios VALUES ('"+String(usuario.text!)+"','"+String(contrasenia.text!)+"','U')"
+        let queryString = "INSERT INTO Usuarios VALUES ('"+String(usu)+"','"+String(pass)+"','U')"
         //PREPARAMOS LA SENTENCIA
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
             let errmsg = String(cString: sqlite3_errmsg(db)!)
@@ -205,7 +217,7 @@ class NewUserRegisViewController: UIViewController {
         
     }
     
-    func leerValores(){
+    func leerUsuarios(){
         
         //GUARDAMOS NUESTRA CONSULTA
         let queryString = "SELECT * FROM Usuarios"
@@ -218,6 +230,7 @@ class NewUserRegisViewController: UIViewController {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
             print("error preparing insert: \(errmsg)")
             return
+            
         }
         
         //RECORREMOS LOS REGISTROS
@@ -225,10 +238,24 @@ class NewUserRegisViewController: UIViewController {
             let usuario = String(cString: sqlite3_column_text(stmt, 0))
             let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
             let tipo = String(cString: sqlite3_column_text(stmt, 2))
-            
+            //let nombre = String(cString: (sqlite3_column_text(stmt, 3)))
+            //let apellidos = String(cString: (sqlite3_column_text(stmt, 4)))
+            //let fec_nac = String(cString: (sqlite3_column_text(stmt, 5)))
+            //let email = String(cString: (sqlite3_column_text(stmt, 6)))
+            //let sexo = String(cString: (sqlite3_column_text(stmt, 7)))
             
             //AÑADIMOS LOS VALORES A LA LISTA
-            usuarios.append(Usu(usuario: String(describing: usuario), contrasenia: String(describing: contrasenia),tipo: String(describing: tipo)))
+            usuarios.append(Usuario(
+                usuario: String(describing: usuario),
+                contrasenia: String(describing: contrasenia),
+                tipo:String(describing: tipo)
+                //,nombre:String(describing: nombre)
+                //,apellidos:String(describing: apellidos)
+                //,fec_nac:String(describing: fec_nac)
+                //,email:String(describing: email)
+                //,sexo:String(describing: sexo)
+                
+            ))
             
             print(usuario)
             print(contrasenia)
@@ -266,9 +293,10 @@ class NewUserRegisViewController: UIViewController {
         
     }
     //---------------------------------------------------------------------------------------------------------
+     
+*/
 
-
-
+    //---------------------------------------------------------------------------------------------------------
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {

@@ -15,10 +15,15 @@
 		7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668872239212C00705E62 /* LaunchScreen.storyboard */; };
 		7F0668942239212C00705E62 /* TFGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0668932239212C00705E62 /* TFGTests.swift */; };
 		7F06689F2239212C00705E62 /* TFGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06689E2239212C00705E62 /* TFGUITests.swift */; };
+		7F16DD872244D3F50070F0D3 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */; };
+		7F16DD892244DA9B0070F0D3 /* Boton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F16DD882244DA980070F0D3 /* Boton.jpg */; };
+		7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8B2244F32D0070F0D3 /* Usuario.swift */; };
+		7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */; };
+		7F6DF5E62243E130007C196A /* Funciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6DF5E52243E130007C196A /* Funciones.swift */; };
+		7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DF5ED2243EAED007C196A /* Fondo.jpg */; };
 		7FA2072C22414BB500AC966E /* ContenidoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */; };
 		7FA2072E22414C6200AC966E /* ContenidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072D22414C6200AC966E /* ContenidoViewController.swift */; };
 		7FA207302241514400AC966E /* EliminarUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */; };
-		7FA20732224151BB00AC966E /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA20731224151BB00AC966E /* NewUserViewController.swift */; };
 		7FA20734224151CA00AC966E /* VisualizarUsuariosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */; };
 		7FC695A32240061D00A4122B /* NewUserRegisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */; };
 		7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FC695A42241067900A4122B /* GoogleService-Info.plist */; };
@@ -65,10 +70,15 @@
 		7F06689A2239212C00705E62 /* TFGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F06689E2239212C00705E62 /* TFGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFGUITests.swift; sourceTree = "<group>"; };
 		7F0668A02239212C00705E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
+		7F16DD882244DA980070F0D3 /* Boton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Boton.jpg; sourceTree = "<group>"; };
+		7F16DD8B2244F32D0070F0D3 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
+		7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimiento.swift; sourceTree = "<group>"; };
+		7F6DF5E52243E130007C196A /* Funciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Funciones.swift; sourceTree = "<group>"; };
+		7F6DF5ED2243EAED007C196A /* Fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fondo.jpg; sourceTree = "<group>"; };
 		7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoAdminViewController.swift; sourceTree = "<group>"; };
 		7FA2072D22414C6200AC966E /* ContenidoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoViewController.swift; sourceTree = "<group>"; };
 		7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminarUsuarioViewController.swift; sourceTree = "<group>"; };
-		7FA20731224151BB00AC966E /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewUserViewController.swift; path = ../../PracticaFinalSwift/PracticaFinalSwift/NewUserViewController.swift; sourceTree = "<group>"; };
 		7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizarUsuariosTableViewController.swift; sourceTree = "<group>"; };
 		7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegisViewController.swift; sourceTree = "<group>"; };
 		7FC695A42241067900A4122B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -106,6 +116,7 @@
 		7F0668722239212B00705E62 = {
 			isa = PBXGroup;
 			children = (
+				7F6DF5E72243E9D6007C196A /* Recursos */,
 				7F06687D2239212B00705E62 /* TFG */,
 				7F0668922239212C00705E62 /* TFGTests */,
 				7F06689D2239212C00705E62 /* TFGUITests */,
@@ -128,19 +139,21 @@
 		7F06687D2239212B00705E62 /* TFG */ = {
 			isa = PBXGroup;
 			children = (
+				7F16DD8A2244F3080070F0D3 /* Objetos */,
 				7F06687E2239212B00705E62 /* AppDelegate.swift */,
 				7F0668802239212B00705E62 /* ViewController.swift */,
 				7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */,
-				7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */,
 				7FA2072D22414C6200AC966E /* ContenidoViewController.swift */,
 				7F0668822239212B00705E62 /* Main.storyboard */,
+				7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */,
+				7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */,
 				7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */,
-				7FA20731224151BB00AC966E /* NewUserViewController.swift */,
 				7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */,
 				7F0668852239212C00705E62 /* Assets.xcassets */,
 				7F0668872239212C00705E62 /* LaunchScreen.storyboard */,
 				7F06688A2239212C00705E62 /* Info.plist */,
 				7FC695A42241067900A4122B /* GoogleService-Info.plist */,
+				7F6DF5E52243E130007C196A /* Funciones.swift */,
 			);
 			path = TFG;
 			sourceTree = "<group>";
@@ -161,6 +174,32 @@
 				7F0668A02239212C00705E62 /* Info.plist */,
 			);
 			path = TFGUITests;
+			sourceTree = "<group>";
+		};
+		7F16DD8A2244F3080070F0D3 /* Objetos */ = {
+			isa = PBXGroup;
+			children = (
+				7F16DD8B2244F32D0070F0D3 /* Usuario.swift */,
+				7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */,
+			);
+			path = Objetos;
+			sourceTree = "<group>";
+		};
+		7F6DF5E72243E9D6007C196A /* Recursos */ = {
+			isa = PBXGroup;
+			children = (
+				7F6DF5E82243E9E6007C196A /* img */,
+			);
+			path = Recursos;
+			sourceTree = "<group>";
+		};
+		7F6DF5E82243E9E6007C196A /* img */ = {
+			isa = PBXGroup;
+			children = (
+				7F6DF5ED2243EAED007C196A /* Fondo.jpg */,
+				7F16DD882244DA980070F0D3 /* Boton.jpg */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 		BAB992A352D13DECA6927AFA /* Pods */ = {
@@ -295,6 +334,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
+				7F16DD892244DA9B0070F0D3 /* Boton.jpg in Resources */,
+				7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
 				7F0668862239212C00705E62 /* Assets.xcassets in Resources */,
 				7F0668842239212B00705E62 /* Main.storyboard in Resources */,
@@ -403,10 +444,13 @@
 				7FA2072C22414BB500AC966E /* ContenidoAdminViewController.swift in Sources */,
 				7FA20734224151CA00AC966E /* VisualizarUsuariosTableViewController.swift in Sources */,
 				7F0668812239212B00705E62 /* ViewController.swift in Sources */,
+				7F6DF5E62243E130007C196A /* Funciones.swift in Sources */,
 				7FC695A32240061D00A4122B /* NewUserRegisViewController.swift in Sources */,
+				7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */,
 				7FA207302241514400AC966E /* EliminarUsuarioViewController.swift in Sources */,
+				7F16DD872244D3F50070F0D3 /* NewUserViewController.swift in Sources */,
 				7F06687F2239212B00705E62 /* AppDelegate.swift in Sources */,
-				7FA20732224151BB00AC966E /* NewUserViewController.swift in Sources */,
+				7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

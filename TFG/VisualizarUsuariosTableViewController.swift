@@ -10,17 +10,18 @@ import UIKit
 import SQLite3
 
 //class VisualizarUsuariosTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
-class VisualizarUsuariosTableViewController: UITableViewController
+class VisualizarUsuariosViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
     var db: OpaquePointer?
-    var usuarios = [Usu]()
+    var usuarios = [Usuario]()
+    var funcion = Funciones()
     var usu: [String] = []
     var cabeceras: [[String]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("0")
-        conectarDB()
+        funcion.crearBD()
         genUsu()
         print("0.0")
 
@@ -53,27 +54,28 @@ class VisualizarUsuariosTableViewController: UITableViewController
     //VISUALIZAR HISTORIAL EN TABLEVIEW
     //---------------------------------------------------------------------------------------------------------------
     //INDICAMOS EL NUMERO DE FILAS QUE TENDRA NUESTRA SECCIÓN A PARTIR DEL TOTAL DE OBJETOS QUE SE HABRAN CREADO GRACIAS A NUESTRA BASE DE DATOS
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //rellenarUsuInfo()
         return cabeceras[section].count
     }
     
-     override func numberOfSections(in tableView: UITableView) -> Int {
+      func numberOfSections(in tableView: UITableView) -> Int {
         //rellenarUsuInfo()
         return cabeceras.count
     }
     
-     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return usu[section]
     }
     
     //IPOR CADA REGISTRO CREAMOS UNA LINEA Y LA RELLENAMOS CON LOS OBJETOS EXTRAIDOS DE LA BASE DE DATOS
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let celda=tableView.dequeueReusableCell(withIdentifier: "celdilla", for: indexPath)
         celda.textLabel?.text=cabeceras[indexPath.section][indexPath.row]
         return celda
     }
+/*
     //---------------------------------------------------------------------------------------------------------------
     //Base de Datos
     //---------------------------------------------------------------------------------------------------------------
@@ -87,7 +89,7 @@ class VisualizarUsuariosTableViewController: UITableViewController
         }
         else {
             print("base abierta")
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT,tipo TEXT)", nil, nil, nil) != SQLITE_OK  {
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
             }
@@ -119,20 +121,35 @@ class VisualizarUsuariosTableViewController: UITableViewController
             let usuario = String(cString: sqlite3_column_text(stmt, 0))
             let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
             let tipo = String(cString: sqlite3_column_text(stmt, 2))
-            
+            //let nombre = String(cString: (sqlite3_column_text(stmt, 3)))
+            //let apellidos = String(cString: (sqlite3_column_text(stmt, 4)))
+            //let fec_nac = String(cString: (sqlite3_column_text(stmt, 5)))
+            //let email = String(cString: (sqlite3_column_text(stmt, 6)))
+            //let sexo = String(cString: (sqlite3_column_text(stmt, 7)))
             
             //AÑADIMOS LOS VALORES A LA LISTA
-            usuarios.append(Usu(usuario: String(describing: usuario), contrasenia: String(describing: contrasenia),tipo:String(describing: tipo)))
+            usuarios.append(Usuario(
+                usuario: String(describing: usuario),
+                contrasenia: String(describing: contrasenia),
+                tipo:String(describing: tipo)
+                //,nombre:String(describing: nombre)
+                //,apellidos:String(describing: apellidos)
+                //,fec_nac:String(describing: fec_nac)
+                //,email:String(describing: email)
+                //,sexo:String(describing: sexo)
+                
+            ))
         }
         
     }
-    //---------------------------------------------------------------------------------------------------------------
-
-    
+    */
+    //---------------------------------------------------------------------------------------------------------
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         self.view.endEditing(true)
     }
+    //---------------------------------------------------------------------------------------------------------
+    
     
 }

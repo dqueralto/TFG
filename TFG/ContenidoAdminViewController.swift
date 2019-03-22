@@ -12,7 +12,8 @@ import SQLite3
 class ContenidoAdminViewController: UIViewController {
     var usuario: String?
     var db: OpaquePointer?
-    var usuarios = [Usu]()
+    var usuarios = [Usuario]()
+    var funcion = Funciones()
     
     @IBOutlet weak var usu: UILabel!
     @IBOutlet weak var alertContenEli: UILabel!
@@ -20,12 +21,14 @@ class ContenidoAdminViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        conectarDB()
+        funcion.crearBD()
         usu.text = self.usuario
         alertUsuEli.isHidden = true
         alertContenEli.isHidden = true
         // Do any additional setup after loading the view.
     }
+    
+    /*
     //---------------------------------------------------------------------------------------------------------
     func conectarDB()
     {
@@ -37,15 +40,15 @@ class ContenidoAdminViewController: UIViewController {
         }
         else {
             print("base abierta")
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT,tipo TEXT)", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
             }
         }
-        leerValores()
+        leerUsuarios()
     }
     
-    func leerValores(){
+    func leerUsuarios(){
         
         
         
@@ -63,27 +66,48 @@ class ContenidoAdminViewController: UIViewController {
         }
         
         //RECORREMOS LOS REGISTROS
-        while(sqlite3_step(stmt) == SQLITE_ROW){
-            let usuario = String(cString: sqlite3_column_text(stmt, 0))
-            let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
-            let tipo = String(cString: sqlite3_column_text(stmt, 2))
+
             
             
             //AÑADIMOS LOS VALORES A LA LISTA
-            usuarios.append(Usu(usuario: String(describing: usuario), contrasenia: String(describing: contrasenia),tipo: String(describing: tipo)))
+            while(sqlite3_step(stmt) == SQLITE_ROW){
+                let usuario = String(cString: sqlite3_column_text(stmt, 0))
+                let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
+                let tipo = String(cString: sqlite3_column_text(stmt, 2))
+                //let nombre = String(cString: (sqlite3_column_text(stmt, 3)))
+                //let apellidos = String(cString: (sqlite3_column_text(stmt, 4)))
+                //let fec_nac = String(cString: (sqlite3_column_text(stmt, 5)))
+                //let email = String(cString: (sqlite3_column_text(stmt, 6)))
+                //let sexo = String(cString: (sqlite3_column_text(stmt, 7)))
+                
+                //AÑADIMOS LOS VALORES A LA LISTA
+                usuarios.append(Usuario(
+                    usuario: String(describing: usuario),
+                    contrasenia: String(describing: contrasenia),
+                    tipo:String(describing: tipo)
+                    //,nombre:String(describing: nombre)
+                    //,apellidos:String(describing: apellidos)
+                    //,fec_nac:String(describing: fec_nac)
+                    //,email:String(describing: email)
+                    //,sexo:String(describing: sexo)
+                    
+                ))
         }
         
+        
+        
     }
-
+    */
     @IBAction func borrarTodosUsuarios(_ sender: Any)
     {
         alertContenEli.isHidden = true
-        eliminarUsuarios()
-        leerValores()
-        insertarAdmin()
+        funcion.eliminarUsuarios()
+        //leerUsuarios()
+        funcion.crearObjUsuario()
+        funcion.insertarAdmin()
         alertUsuEli.isHidden = false
     }
-   
+   /*
     func insertarAdmin()  {
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var stmt: OpaquePointer?
@@ -144,12 +168,14 @@ class ContenidoAdminViewController: UIViewController {
         //insertarAdmin()
     }
     
+    */
     
     //---------------------------------------------------------------------------------------------------------
-
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         self.view.endEditing(true)
     }
+    //---------------------------------------------------------------------------------------------------------
+    
 }
