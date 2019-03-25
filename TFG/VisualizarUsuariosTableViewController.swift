@@ -14,14 +14,14 @@ class VisualizarUsuariosViewController: UIViewController,UITableViewDelegate,UIT
 {
     var db: OpaquePointer?
     var usuarios = [Usuario]()
-    var funcion = Funciones()
+    var conexion = Conexion()
     var usu: [String] = []
     var cabeceras: [[String]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("0")
-        funcion.crearBD()
+        conexion.conectarDB(nombreDB: "Datos.sqlite")
         genUsu()
         print("0.0")
 
@@ -75,74 +75,7 @@ class VisualizarUsuariosViewController: UIViewController,UITableViewDelegate,UIT
         celda.textLabel?.text=cabeceras[indexPath.section][indexPath.row]
         return celda
     }
-/*
-    //---------------------------------------------------------------------------------------------------------------
-    //Base de Datos
-    //---------------------------------------------------------------------------------------------------------------
-    func conectarDB()
-    {
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("Datos.sqlite")
-        
-        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
-            print("error opening database")
-        }
-        else {
-            print("base abierta")
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
-                let errmsg = String(cString: sqlite3_errmsg(db)!)
-                print("error creating table: \(errmsg)")
-            }
-        }
-        leerValores()
-    }
-    
-    
-    func leerValores(){
-        
-        //PRIMERO LIMPIAMOS LA LISTA "HISTORIAL"
-        usuarios.removeAll()
-        
-        //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "SELECT * FROM Usuarios"
-        
-        //PUNTERO DE INSTRUCCIÓN
-        var stmt:OpaquePointer?
-        
-        //PREPARACIÓN DE LA CONSULTA
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        
-        //RECORREMOS LOS REGISTROS
-        while(sqlite3_step(stmt) == SQLITE_ROW){
-            let usuario = String(cString: sqlite3_column_text(stmt, 0))
-            let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
-            let tipo = String(cString: sqlite3_column_text(stmt, 2))
-            //let nombre = String(cString: (sqlite3_column_text(stmt, 3)))
-            //let apellidos = String(cString: (sqlite3_column_text(stmt, 4)))
-            //let fec_nac = String(cString: (sqlite3_column_text(stmt, 5)))
-            //let email = String(cString: (sqlite3_column_text(stmt, 6)))
-            //let sexo = String(cString: (sqlite3_column_text(stmt, 7)))
-            
-            //AÑADIMOS LOS VALORES A LA LISTA
-            usuarios.append(Usuario(
-                usuario: String(describing: usuario),
-                contrasenia: String(describing: contrasenia),
-                tipo:String(describing: tipo)
-                //,nombre:String(describing: nombre)
-                //,apellidos:String(describing: apellidos)
-                //,fec_nac:String(describing: fec_nac)
-                //,email:String(describing: email)
-                //,sexo:String(describing: sexo)
-                
-            ))
-        }
-        
-    }
-    */
+
     //---------------------------------------------------------------------------------------------------------
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)

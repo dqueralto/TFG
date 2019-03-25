@@ -121,7 +121,7 @@
                         <outlet property="alerta" destination="PNZ-pd-2kX" id="PZb-ge-bWO"/>
                         <outlet property="alerta2" destination="E5I-ag-ycs" id="Xxd-xE-GC3"/>
                         <outlet property="contrasenia" destination="EUA-E7-lbV" id="LdJ-dy-1i8"/>
-                        <outlet property="usuario" destination="k5B-Ir-4c1" id="ATp-Ys-zw3"/>
+                        <outlet property="usuario" destination="k5B-Ir-4c1" id="eYn-WQ-ul2"/>
                         <segue destination="11v-Nx-avL" kind="show" identifier="contenido" id="b59-ku-uIh"/>
                         <segue destination="B7k-7g-l73" kind="show" identifier="contenidoAdmin" id="JYl-Kz-8Hc"/>
                     </connections>

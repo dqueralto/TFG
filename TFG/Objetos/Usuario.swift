@@ -15,15 +15,15 @@ internal class Usuario
     var usuario: String
     var contrasenia: String
     var tipo: String
-    var nombre: String??
-    var apellidos: String??
-    var fec_nac: String??
-    var email: String??
-    var sexo: String??
+    var nombre: String
+    var apellidos: String
+    var fec_nac: String
+    var email: String
+    var sexo: String
 
 
     
-    init (usuario: String, contrasenia: String, tipo: String, nombre: String??, apellidos: String??, fec_nac: String??, email: String??, sexo: String??)
+    init (usuario: String, contrasenia: String, tipo: String, nombre: String, apellidos: String, fec_nac: String, email: String, sexo: String)
     //init (usuario: String, contrasenia: String, tipo: String)
         
     {
@@ -61,27 +61,27 @@ internal class Usuario
         return self.tipo
     }
     
-    func getNombre() -> String??
+    func getNombre() -> String
     {
         return self.nombre
     }
     
-    func getApellidos() -> String??
+    func getApellidos() -> String
     {
         return self.apellidos
     }
     
-    func getFec_nac() -> String??
+    func getFec_nac() -> String
     {
         return self.fec_nac
     }
     
-    func getEmail() -> String??
+    func getEmail() -> String
     {
         return self.email
     }
     
-    func getSexo() -> String??
+    func getSexo() -> String
     {
         return self.sexo
     }
@@ -105,27 +105,27 @@ internal class Usuario
         self.tipo = tipo
     }
     
-    func setNombre(nombre: String??)
+    func setNombre(nombre: String)
     {
         self.nombre = nombre
     }
     
-    func setApellidos(apellidos: String??)
+    func setApellidos(apellidos: String)
     {
         self.apellidos = apellidos
     }
     
-    func setFec_nac(fec_nac: String??)
+    func setFec_nac(fec_nac: String)
     {
         self.fec_nac = fec_nac
     }
     
-    func setEmail(email: String??)
+    func setEmail(email: String)
     {
         self.email = email
     }
     
-    func setSexo(sexo: String??)
+    func setSexo(sexo: String)
     {
         self.sexo = sexo
     }
