@@ -12,7 +12,7 @@ import SQLite3
 class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var db: OpaquePointer?
     var usuarios = [Usuario]()
-    var conexion = Conexion()
+    var conexion = ConexionDB()
     var pickerData: [String] = [String]()
     var tipo: String = "A"
     

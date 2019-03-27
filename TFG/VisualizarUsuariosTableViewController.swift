@@ -14,7 +14,7 @@ class VisualizarUsuariosViewController: UIViewController,UITableViewDelegate,UIT
 {
     var db: OpaquePointer?
     var usuarios = [Usuario]()
-    var conexion = Conexion()
+    var conexion = ConexionDB()
     var usu: [String] = []
     var cabeceras: [[String]] = []
 

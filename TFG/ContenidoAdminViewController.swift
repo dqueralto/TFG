@@ -13,7 +13,7 @@ class ContenidoAdminViewController: UIViewController {
     var usuario: String?
     var db: OpaquePointer?
     var usuarios = [Usuario]()
-    var conexion = Conexion()
+    var conexion = ConexionDB()
     
     @IBOutlet weak var usu: UILabel!
     @IBOutlet weak var alertContenEli: UILabel!
@@ -45,6 +45,8 @@ class ContenidoAdminViewController: UIViewController {
     {
         self.view.endEditing(true)
     }
+    
+    
     //---------------------------------------------------------------------------------------------------------
     
 }

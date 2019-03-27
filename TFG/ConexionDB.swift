@@ -9,18 +9,25 @@
 import Foundation
 import SQLite3
 
-internal class Conexion {
+internal class ConexionDB {
     
-    var db: OpaquePointer?
-    var usuarios = [Usuario]()
+    private var db: OpaquePointer?
+    private var usuarios = [Usuario]()
     private var dbName: String = "Datos.sqlite"
 
-
+    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT;"
+    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
+    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
+    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
+    
+    
+    
+    
     internal func conectarDB()
     {
         //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("Datos.sqlite")
+            .appendingPathComponent(dbName)
         //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
             print("error al abrir la base de datos")
@@ -28,7 +35,7 @@ internal class Conexion {
         else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
             print("base abierta")
             //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, sentAddTabUsu, nil, nil, nil) != SQLITE_OK {
                 //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
@@ -57,7 +64,7 @@ internal class Conexion {
         else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
             print("base abierta")
             //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, sentAddTabUsu, nil, nil, nil) != SQLITE_OK {
                 //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
@@ -125,7 +132,7 @@ internal class Conexion {
         var stmt: OpaquePointer?
         
         //CREAMOS NUESTRA SENTENCIA
-        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');"
+        let queryString = sentInsertUsu+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');commit;"
         //PREPARAMOS LA SENTENCIA
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
             let errmsg = String(cString: sqlite3_errmsg(db)!)
@@ -156,7 +163,7 @@ internal class Conexion {
     internal func eliminarUsuarios()
     {
         //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "DELETE FROM Usuarios;"
+        let queryString = sentDelAllUsu
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var deleteStatement: OpaquePointer? = nil
         
@@ -186,7 +193,7 @@ internal class Conexion {
     internal func eliminarUsuario(usu: String)
     {
         //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "DELETE FROM Usuarios WHERE usuario ='"+usu+"';"
+        let queryString = sentDelUsu+usu+"';COMMIT;"
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var deleteStatement: OpaquePointer? = nil
         

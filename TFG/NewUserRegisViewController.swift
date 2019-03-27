@@ -12,7 +12,7 @@ import SQLite3
 class NewUserRegisViewController: UIViewController {
     var db: OpaquePointer?
     var usuarios = [Usuario]()
-    var conexion = Conexion()
+    var conexion = ConexionDB()
     var pickerData: [String] = [String]()
     var tipo: String = "A"
     //var dbMethod = DBComunMethod()

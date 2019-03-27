@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,16 +18,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7440.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="udV-ab-qVh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MiFondoTalesOfPNG.png" translatesAutoresizingMaskIntoConstraints="NO" id="udV-ab-qVh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Daniel Queraltó Parra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydt-0E-nuS">
+                                <rect key="frame" x="116" y="841" width="182" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7Tq-z7-RTu">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="udV-ab-qVh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5Fe-mt-146"/>
+                            <constraint firstItem="ydt-0E-nuS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="116" id="5Oh-fr-4wC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ydt-0E-nuS" secondAttribute="trailing" constant="116" id="5Zf-fk-ND9"/>
                             <constraint firstAttribute="trailing" secondItem="udV-ab-qVh" secondAttribute="trailing" id="AJ0-SJ-JUF"/>
+                            <constraint firstItem="7Tq-z7-RTu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="197" id="G8z-qv-Qx0"/>
                             <constraint firstItem="udV-ab-qVh" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="JA9-FB-zXY"/>
+                            <constraint firstItem="ydt-0E-nuS" firstAttribute="top" secondItem="7Tq-z7-RTu" secondAttribute="bottom" constant="383" id="N4x-q4-37T"/>
+                            <constraint firstItem="ydt-0E-nuS" firstAttribute="top" secondItem="7Tq-z7-RTu" secondAttribute="bottom" constant="383" id="NeV-6e-BpC"/>
+                            <constraint firstItem="7Tq-z7-RTu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="394" id="Oiz-vL-MAj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Tq-z7-RTu" secondAttribute="trailing" constant="197" id="XaO-j1-P2J"/>
                             <constraint firstAttribute="bottom" secondItem="udV-ab-qVh" secondAttribute="bottom" id="aSc-U4-Yad"/>
+                            <constraint firstItem="ydt-0E-nuS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="kKd-F6-DDM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +56,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7440.jpg" width="3542" height="5000"/>
+        <image name="MiFondoTalesOfPNG.png" width="850.08001708984375" height="1200"/>
     </resources>
 </document>

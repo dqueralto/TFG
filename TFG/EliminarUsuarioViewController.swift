@@ -13,7 +13,7 @@ class EliminarUsuarioViewController: UIViewController,UITableViewDelegate,UITabl
     
     var db: OpaquePointer?
     var usuario = [Usuario]()
-    var conexion = Conexion()
+    var conexion = ConexionDB()
     var usu: [String] = []
     var usuSelect: String = ""
 
