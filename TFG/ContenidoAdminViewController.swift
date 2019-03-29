@@ -10,19 +10,24 @@ import UIKit
 import SQLite3
 
 class ContenidoAdminViewController: UIViewController {
-    var usuario: String?
-    var db: OpaquePointer?
-    var usuarios = [Usuario]()
-    var conexion = ConexionDB()
-    
+    internal var usuario: String?
+    internal var db: OpaquePointer?
+    internal var usuarios = [Usuario]()
+    internal var conexion = ConexionDB()
+    internal var cabecera: String?
+
+    @IBOutlet weak var titulo: UINavigationItem!
     @IBOutlet weak var usu: UILabel!
     @IBOutlet weak var alertContenEli: UILabel!
     @IBOutlet weak var alertUsuEli: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        conexion.conectarDB(nombreDB: "Datos.sqlite")
-        usu.text = self.usuario
+        //conexion.conectarDB(nombreDB: "Datos.sqlite")
+        //usu.text = self.usuario
+        
+        cabecera = self.usuario! 
+        titulo.title = cabecera
         alertUsuEli.isHidden = true
         alertContenEli.isHidden = true
         // Do any additional setup after loading the view.
@@ -32,10 +37,10 @@ class ContenidoAdminViewController: UIViewController {
     @IBAction func borrarTodosUsuarios(_ sender: Any)
     {
         alertContenEli.isHidden = true
-        conexion.eliminarUsuarios()
+        //conexion.eliminarUsuarios()
         //leerUsuarios()
-        conexion.crearObjUsuario()
-        conexion.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
+        //conexion.crearObjUsuario()
+        //conexion.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
         alertUsuEli.isHidden = false
     }
    

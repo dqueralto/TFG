@@ -15,10 +15,12 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var conexion = ConexionDB()
     var pickerData: [String] = [String]()
     var tipo: String = "A"
+
     
     @IBOutlet weak var usuario: UITextField!
     @IBOutlet weak var confirmarContrasenia: UITextField!
     @IBOutlet weak var contrasenia: UITextField!
+    @IBOutlet weak var email: UITextField!
     
     @IBOutlet weak var alerta: UILabel!
     
@@ -31,26 +33,35 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //conectarDBUsu()
-        conexion.conectarDB(nombreDB: "Datos.sqlite")
-        for usu in usuarios
-        {
-            print(usu.usuario)
-            print(usu.contrasenia)
-            print(usu.tipo)
+        DispatchQueue.global(qos: .background).async {//hilo de fonde
+            print("Esto se ejecuta en la cola de fondo")
+            ViewController().conectarDB()
+            
+            DispatchQueue.main.async {//hilo principal
+                print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
+                for usu in self.usuarios
+                {
+                    print(usu.usuario)
+                    print(usu.contrasenia)
+                    print(usu.tipo)
+                    
+                }
+                self.pickerData = ["ADMINISTRADOR", "USUARIO"]
+                self.picker.delegate = self
+                self.picker.dataSource = self
+            }
             
         }
-        pickerData = ["ADMINISTRADOR", "USUARIO"]
-        self.picker.delegate = self
-        self.picker.dataSource = self
+        
+
+
         
         
     }
     
     @IBAction func nuevo(_ sender: Any)
     {
-        //leerValores()
+        ViewController().crearObjUsuario()
         print("000")
         for usu in usuarios
         {
@@ -76,13 +87,13 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 print(contrasenia.text!)
                 print(confirmarContrasenia.text!)
                 print(tipo)
-                conexion.insertarUsuario(usu: usuario.text!, pass: contrasenia.text!,tipo: tipo,nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
+                ConexionDB().insertarUsuarioSQLite(usu: usuario.text!, pass: contrasenia.text!,tipo: tipo,nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
                 //insertar()
                 return
             }
         }
         //leerValores()
-        conexion.crearObjUsuario()
+        //conexion.crearObjUsuario()
     }
     
     

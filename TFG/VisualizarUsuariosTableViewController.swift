@@ -21,7 +21,7 @@ class VisualizarUsuariosViewController: UIViewController,UITableViewDelegate,UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         print("0")
-        conexion.conectarDB(nombreDB: "Datos.sqlite")
+        //conexion.conectarDB(nombreDB: "Datos.sqlite")
         genUsu()
         print("0.0")
 

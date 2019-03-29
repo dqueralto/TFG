@@ -22,8 +22,8 @@ class EliminarUsuarioViewController: UIViewController,UITableViewDelegate,UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        conexion.conectarDB(nombreDB: "Datos.sqlite")
-        conexion.crearObjUsuario()
+        //conexion.conectarDB(nombreDB: "Datos.sqlite")
+        //conexion.crearObjUsuario()
         //leerValores()
         
         // Do any additional setup after loading the view.
@@ -39,11 +39,11 @@ class EliminarUsuarioViewController: UIViewController,UITableViewDelegate,UITabl
     {
         print(usuSelect)
         //if usuSelect != usuario.getUsuario() {
-            conexion.eliminarUsuario(usu: usuSelect)
+            //conexion.eliminarUsuario(usu: usuSelect)
         //}
         //conexion.insertarUsuario(usu: "admin", pass: "admin", tipo: "A")
         //leerValores()
-        conexion.crearObjUsuario()
+        //conexion.crearObjUsuario()
         tabla.reloadData()
     }
     

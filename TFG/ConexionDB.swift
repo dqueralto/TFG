@@ -5,21 +5,65 @@
 //  Created by Daniel Queraltó Parra on 22/03/2019.
 //  Copyright © 2019 Daniel Queraltó Parra. All rights reserved.
 //
-
+import UIKit
 import Foundation
 import SQLite3
+import Firebase
+import FirebaseAuth
+import FirebaseFunctions
+
+//import SQLite
+//typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
+
+
+typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
 
 internal class ConexionDB {
+    //------------------------Firebase-------------------------------------------------------------
+    internal func insertarUsuarioFirebase(email:String, pass:String, vc: UIViewController)
+    {
+        Auth.auth().createUser(withEmail: email, password: pass) { (authResult, error) in
+            if error != nil {
+                self.handleFirebaseError(error: error! as NSError,vc: vc)
+            }
+        }
+    }
     
+    
+    func handleFirebaseError(error: NSError, vc: UIViewController) {
+        if let errorCode = AuthErrorCode(rawValue: error.code) {
+            switch errorCode {
+            case .invalidEmail:
+                //onComplete?("Invalid email address", nil)
+                Alertas().nuevoUsuario(vc: vc, ms: "Correo invalido.")
+                break
+            case .wrongPassword:
+                //onComplete?("Invalid password", nil)
+                Alertas().nuevoUsuario(vc: vc, ms: "Contraseña invalida.")
+                break
+            case .emailAlreadyInUse, .accountExistsWithDifferentCredential:
+                //onComplete?("Could not create account. Email already in use", nil)
+                Alertas().nuevoUsuario(vc: vc, ms: "Correo existente.")
+                break
+            case .userNotFound:
+                //onComplete?("Correct you email or sign up if you not have an account", nil)
+                break
+            default:
+                Alertas().nuevoUsuario(vc: vc, ms: "")
+                //onComplete?("There was a problem authenticating. Try again.", nil)
+            }
+        }
+    }
+    //----------------------------------------------------------------------------------------------
+
     private var db: OpaquePointer?
     private var usuarios = [Usuario]()
     private var dbName: String = "Datos.sqlite"
-
-    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT;"
+    
+    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);"
     private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
     private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
     private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
-    
     
     
     
@@ -46,7 +90,7 @@ internal class ConexionDB {
         print("Usuarios creados")
         if usuarios.count == 0
         {
-            self.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             print("ADMIN insertado.")
         }
         
@@ -75,12 +119,12 @@ internal class ConexionDB {
         print("Usuarios creados")
         if usuarios.count == 0
         {
-            self.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             print("ADMIN insertado.")
         }
         
     }
-
+    
     
     
     internal func crearObjUsuario(){
@@ -126,13 +170,15 @@ internal class ConexionDB {
         }
         print("siiiiiiiiii")
     }
-
-    internal func insertarUsuario(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
+    
+    internal func insertarUsuarioSQLite(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var stmt: OpaquePointer?
         
         //CREAMOS NUESTRA SENTENCIA
-        let queryString = sentInsertUsu+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');commit;"
+        //let queryString = sentInsertUsu+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');commit;"
+        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email,sexo) VALUES ('usu','usu','U','u','u','u','u','u');"
+
         //PREPARAMOS LA SENTENCIA
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
             let errmsg = String(cString: sqlite3_errmsg(db)!)
@@ -219,6 +265,152 @@ internal class ConexionDB {
         sqlite3_finalize(deleteStatement)
         //insertarAdmin()
     }
+    
+    //
+    //------------------------------
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    //------------------------SQLite3-------------------------------------------------------------
+    
+    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT;"
+    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
+    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
+    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
+    
+    internal func crearTablasDB()
+    {
+        
+        crearTablaUsuariosDB()
+        crearTablaMovimientosDB()
+    }
+
+    internal func crearTablaUsuariosDB()
+    {
+        do{
+            let db = try Connection("tfgDataBase.sqlite3")
+
+            let usuario = Table("Usuarios")
+            let usu = Expression<String>("usuario")
+            let pass = Expression<String?>("contrasenia")
+            let tipo = Expression<String?>("tipo")
+            let nombre = Expression<String>("nombre")
+            let apellido = Expression<String>("apellido")
+            let fec_nac = Expression<String>("fec_nac")
+            let email = Expression<String>("email")
+            let sex = Expression<String>("sexo")
+            
+            
+            try db.run(usuario.create{t in
+                t.column(usu, unique: true)
+                t.column(pass)
+                t.column(tipo)
+                t.column(nombre)
+                t.column(apellido)
+                t.column(fec_nac)
+                t.column(email, primaryKey: true)
+                t.column(sex)
+                
+            })
+            
+            
+        }catch{}
+    }
+    internal func crearTablaMovimientosDB()
+    {
+        do{
+            let db = try Connection("tfgDataBase.sqlite3")
+            
+            let movimientos = Table("Usuarios")
+            let num_reg = Expression<Int>("usuario")
+            let usuario = Expression<String?>("contrasenia")
+            let fecha = Expression<String>("nombre")
+            let importe = Expression<Double>("apellido")
+            let tipo = Expression<String>("fec_nac")
+            
+            
+            try db.run(movimientos.create{t in
+                t.column(num_reg, primaryKey: true)
+                t.column(usuario)
+                t.column(fecha)
+                t.column(importe)
+                t.column(tipo)
+            })
+        }catch{}
+        
+    }
+    
+    internal func insertarUsuario(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)
+    {
+        do{
+            let db = try Connection("tfgDataBase.sqlite3")
+
+            let stmt = try db.prepare("INSERT INTO usuario (email) VALUES (?)")
+            for email in ["betty@icloud.com", "cathy@icloud.com"] {
+                try stmt.run(email)
+            }
+            
+            //db.totalChanges    // 3
+            //db.changes         // 1
+            //db.lastInsertRowid // 3
+
+        }catch{}
+        
+    }
+ 
+    internal func insertarMovimiento()
+    {
+        
+    }
+    
+    */
 
 }
 

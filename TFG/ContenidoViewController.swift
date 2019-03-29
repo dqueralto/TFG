@@ -9,15 +9,29 @@
 import UIKit
 
 class ContenidoViewController: UIViewController {
+ 
+    
     var usuario: String?
+    internal var cabecera: String? 
     
-    @IBOutlet weak var usu: UILabel!
+    @IBOutlet weak var titulo: UINavigationItem!
+    @IBOutlet weak var menu: UIView!
     
+    @IBAction func menu(_ sender: Any)
+    {
+        menu.isHidden = false
+    }
     
+    @IBAction func cerrar(_ sender: Any)
+    {
+        menu.isHidden = true
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        usu.text = self.usuario
-        // Do any additional setup after loading the view.
+        
+        //cabecera = self.usuario!
+        titulo.title = cabecera
     }
 
     //---------------------------------------------------------------------------------------------------------

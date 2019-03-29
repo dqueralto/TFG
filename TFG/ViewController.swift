@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite3
+import FirebaseAuth
 
 class ViewController: UIViewController{
     private var db: OpaquePointer?
@@ -28,28 +29,28 @@ class ViewController: UIViewController{
     
     
     
+    @IBAction func bNuevoUsu(_ sender: Any)
+    {
+        if funciones.tengoConexion()
+        {
+            self.alertas.nuevoUsuario(vc: self,ms: "")
+        }
+        else
+        {
+            self.funciones.comprobarConexion(donde: self)
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.funciones.comprobarConexion(donde: self)
         
         
         //--------------------------------------------------------------------------------------------------------------------------
         DispatchQueue.global(qos: .background).async {//hilo de fonde
             print("Esto se ejecuta en la cola de fondo")
             self.conexion.conectarDB()
-            func viewDidAppear(_ animated: Bool) {
-                // if self.funciones.tengoConexion()
-                //{
-                self.alertas.alertaSinConexion()
-                //}
-            }
-            
-             func didReceiveMemoryWarning() {
-                self.didReceiveMemoryWarning()
-                // Dispose of any resources that can be recreated.
-            }
             
             DispatchQueue.main.async {//hilo principal
                 print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
@@ -57,8 +58,9 @@ class ViewController: UIViewController{
                 //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
                 if self.usuarios.count == 0
                 {
-                    self.conexion.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-                    self.conexion.insertarUsuario(usu: "vu", pass: "vu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "vu@vu.vu",sexo: "poco")
+                    //ConexionDB().insertarUsuarioFirebase(email: "admin@admin.admin", pass: "admin1",vc: self)
+                    self.conexion.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+                    self.insertarUsuarioSQLite(usu: "usu", pass: "usu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "vu@vu.vu",sexo: "poco")
                     if self.usuarios.count == 2
                     {
                         print("ADMIN insertado al loguear")
@@ -76,15 +78,29 @@ class ViewController: UIViewController{
                 }
                 print("fin :"+String(self.usuarios.count))
                 
+                
+                
             }//fin hilo de principal
         }//fin del hilo de fondo
         //--------------------------------------------------------------------------------------------------------------------------
 
         
     }
+    
+    
+
     //-------------------------------
-
-
+    override func viewDidAppear(_ animated: Bool) {
+        //self.alertas.alertaSinConexion(donde: self)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        self.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    /*
     internal func alertaConexion(){
         self.alertas.crearAlerta(titulo: "Sin Conexion", mensaje: "No dispone de conexion a internet, algunas funciones que requieran dicha conexion podrian verse afectadas o inutilizadas.  Ejemplo: Copia de seguridad automatica/manual...")
     }
@@ -106,6 +122,9 @@ class ViewController: UIViewController{
         
         self.present(alert, animated: true, completion: nil)
     }
+     */
+ 
+ 
     //-------------------------------------
     @IBAction func Conectar(_ sender: Any)
     {
@@ -113,9 +132,10 @@ class ViewController: UIViewController{
         //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
         if self.usuarios.count == 0
         {
-            self.conexion.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            //self.conexion.insertarUsuarioFirebase(email: "admin@admin.admin", pass: "admin")
+            //self.conexion.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             
-            self.conexion.insertarUsuario(usu: "vu", pass: "vu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "vu@vu.vu",sexo: "poco")
+            //self.conexion.insertarUsuarioSQLite(usu: "vu", pass: "vu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "vu@vu.vu",sexo: "poco")
             if self.usuarios.count == 2
             {
                 print("ADMIN insertado al loguear")
@@ -206,7 +226,6 @@ class ViewController: UIViewController{
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
-        //self.alertaSinConexion.isHidden = true
         self.view.endEditing(true)
     }
     
@@ -235,7 +254,7 @@ class ViewController: UIViewController{
         print("Usuarios creados")
         if usuarios.count == 0
         {
-            self.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             print("ADMIN insertado.")
         }
         
@@ -264,8 +283,8 @@ class ViewController: UIViewController{
         print("Usuarios creados")
         if usuarios.count == 0
         {
-            self.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            print("ADMIN insertado.")
+            //self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            //print("ADMIN insertado.")
         }
         
     }
@@ -316,12 +335,12 @@ class ViewController: UIViewController{
         print("siiiiiiiiii")
     }
     
-    internal func insertarUsuario(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
+    internal func insertarUsuarioSQLite(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var stmt: OpaquePointer?
         
         //CREAMOS NUESTRA SENTENCIA
-        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');commit;"
+        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email,sexo) VALUES ('"+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');"
         //PREPARAMOS LA SENTENCIA
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
             let errmsg = String(cString: sqlite3_errmsg(db)!)

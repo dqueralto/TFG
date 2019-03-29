@@ -29,7 +29,7 @@ class NewUserRegisViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        conexion.conectarDB(nombreDB: "Datos.sqlite")
+        //conexion.conectarDB(nombreDB: "Datos.sqlite")
         //conectarDB()
         for usu in usuarios
         {
@@ -69,9 +69,9 @@ class NewUserRegisViewController: UIViewController {
                 print(contrasenia.text!)
                 print(confirmarContrasenia.text!)
                 print(tipo)
-                conexion.insertarUsuario(usu: usuario.text!, pass: contrasenia.text!,tipo: "U",nom: "",apell: "",fec_nac: "",email: "",sexo: "")
+                //conexion.insertarUsuarioSQLite(usu: usuario.text!, pass: contrasenia.text!,tipo: "U",nom: "",apell: "",fec_nac: "",email: "",sexo: "")
                 //leerUsuarios()
-                conexion.crearObjUsuario()
+                //conexion.crearObjUsuario()
                 autologin()
                 return
             }
@@ -85,10 +85,10 @@ class NewUserRegisViewController: UIViewController {
     func autologin(){
         
         //leerUsuarios()
-        conexion.crearObjUsuario()
+        //conexion.crearObjUsuario()
         if usuarios.count == 0
         {
-            conexion.insertarUsuario(usu: "admin", pass: "admin", tipo: "A",nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
+            //conexion.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
         }
         print("auto 0")
         

@@ -8,15 +8,17 @@
 import UIKit
 import SystemConfiguration
 import Foundation
+import FirebaseAuth
 
-internal class Funciones: UIViewController
-{
+internal class Funciones{
+    internal var alerta = Alertas()
     var usuarios = [Usuario]()
     
     
+    //----------------------------------Conexion a Internet----------------------------------
 
     
-    //la siguiente funcion nos devuelve
+    //la siguiente funcion nos devuelve si tenemos conexion a interner (Wifi o Datos) mediante un true/false
     internal func tengoConexion() -> Bool {
     
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
@@ -49,10 +51,50 @@ internal class Funciones: UIViewController
         return ret
     
     }
-
-
-
+    //------------------------------------------------------------------------------------------
+    internal func comprobarConexion(donde: UIViewController){//comprobamos si tenemos conexion a internet
+        if !tengoConexion() {//en caso negativo
+            alerta.alertaSinConexion(donde: donde)//mostramos alerta de informacion
+        }
+    }
     
+    internal func comprobarUsuarioFirebase(usu:String) //-> Bool//
+    {
+
+    }
+
+    func singup(with email: String, and password: String, onComplete: Completion?) {
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            
+            if error != nil {
+                self.handleFirebaseError(error: error! as NSError, onComplete: onComplete)
+            } else {
+                onComplete?(nil, user)
+            }
+            
+        }
+    }
+    
+    func handleFirebaseError(error: NSError, onComplete: Completion?) {
+        if let errorCode = AuthErrorCode(rawValue: error.code) {
+            switch errorCode {
+            case .invalidEmail:
+                onComplete?("Invalid email address", nil)
+                break
+            case .wrongPassword:
+                onComplete?("Invalid password", nil)
+                break
+            case .emailAlreadyInUse, .accountExistsWithDifferentCredential:
+                onComplete?("Could not create account. Email already in use", nil)
+                break
+            case .userNotFound:
+                onComplete?("Correct you email or sign up if you not have an account", nil)
+                break
+            default:
+                onComplete?("There was a problem authenticating. Try again.", nil)
+            }
+        }
+    }
 
     //por ahora no uso esta clase
     internal func tipo_Usuario(usua: String, pass: String, confPass: String)
@@ -101,16 +143,40 @@ internal class Funciones: UIViewController
         
     }
     
+    //----------------------------------Calculos matematicos----------------------------------
+    
+    internal func claculoSuma(valUno: Double, valDos: Double ) -> Double
+    {
+        let total:Double = valUno+valDos
+        return total
+    }
+    
+    internal func claculoResta(valUno: Double, valDos: Double ) -> Double
+    {
+        let total:Double = valUno-valDos
+        return total
+    }
     
     
+    internal func claculoMultiplicacion(valUno: Double, valDos: Double ) -> Double
+    {
+        let total:Double = valUno*valDos
+        return total
+    }
+    
+    internal func claculoDivision(valUno: Double, valDos: Double ) -> Double
+    {
+        let total:Double = valUno/valDos
+        return total
+    }
     
     
-    
-    
-    
-    
-    
-    
+    //------------------------------------------------------------------------------------------
+    internal func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
     
     
     
