@@ -9,27 +9,53 @@
 /* Begin PBXBuildFile section */
 		577318D416C43E7CDCFFD6FA /* Pods_TFG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C630DE8CA7C4DA051B730B8 /* Pods_TFG.framework */; };
 		7F06687F2239212B00705E62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06687E2239212B00705E62 /* AppDelegate.swift */; };
-		7F0668812239212B00705E62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0668802239212B00705E62 /* ViewController.swift */; };
 		7F0668842239212B00705E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668822239212B00705E62 /* Main.storyboard */; };
 		7F0668862239212C00705E62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668852239212C00705E62 /* Assets.xcassets */; };
 		7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668872239212C00705E62 /* LaunchScreen.storyboard */; };
 		7F0668942239212C00705E62 /* TFGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0668932239212C00705E62 /* TFGTests.swift */; };
 		7F06689F2239212C00705E62 /* TFGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06689E2239212C00705E62 /* TFGUITests.swift */; };
-		7F16DD872244D3F50070F0D3 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */; };
-		7F16DD892244DA9B0070F0D3 /* Boton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F16DD882244DA980070F0D3 /* Boton.jpg */; };
 		7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8B2244F32D0070F0D3 /* Usuario.swift */; };
 		7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */; };
-		7F16DD9122450C800070F0D3 /* ConexionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD9022450C800070F0D3 /* ConexionDB.swift */; };
-		7F1DC8DE224CC3E000CBA4E6 /* Alertas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1DC8DD224CC3E000CBA4E6 /* Alertas.swift */; };
 		7F6B29A02248FCF6007B15C5 /* MiFondoTalesOfPNG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */; };
-		7F6DF5E62243E130007C196A /* Funciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6DF5E52243E130007C196A /* Funciones.swift */; };
 		7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DF5ED2243EAED007C196A /* Fondo.jpg */; };
-		7FA2072C22414BB500AC966E /* ContenidoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */; };
-		7FA2072E22414C6200AC966E /* ContenidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072D22414C6200AC966E /* ContenidoViewController.swift */; };
-		7FA207302241514400AC966E /* EliminarUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */; };
-		7FA20734224151CA00AC966E /* VisualizarUsuariosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */; };
-		7FC695A32240061D00A4122B /* NewUserRegisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */; };
 		7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FC695A42241067900A4122B /* GoogleService-Info.plist */; };
+		7FF039AC2252626500C56563 /* recargar.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A42252626500C56563 /* recargar.svg */; };
+		7FF039AD2252626500C56563 /* boton-de-suma.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A52252626500C56563 /* boton-de-suma.png */; };
+		7FF039AE2252626500C56563 /* menos.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A62252626500C56563 /* menos.svg */; };
+		7FF039AF2252626500C56563 /* menos.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A72252626500C56563 /* menos.png */; };
+		7FF039B02252626500C56563 /* boton-de-suma.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A82252626500C56563 /* boton-de-suma.svg */; };
+		7FF039B12252626500C56563 /* recargar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A92252626500C56563 /* recargar.png */; };
+		7FF039B22252626500C56563 /* refrescar.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039AA2252626500C56563 /* refrescar.svg */; };
+		7FF039B32252626500C56563 /* refrescar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039AB2252626500C56563 /* refrescar.png */; };
+		7FF039B62252690B00C56563 /* simbolo-de-resta.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B42252690A00C56563 /* simbolo-de-resta.svg */; };
+		7FF039B72252690B00C56563 /* simbolo-de-resta.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B52252690A00C56563 /* simbolo-de-resta.png */; };
+		7FF039BA2253BFF500C56563 /* simbolo-de-resta-r.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */; };
+		7FF039BB2253BFF500C56563 /* boton-de-suma-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B92253BFF500C56563 /* boton-de-suma-g.png */; };
+		7FF039BE2254B25000C56563 /* Divisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039BD2254B25000C56563 /* Divisa.swift */; };
+		7FF039CA2254BEA900C56563 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C32254BEA900C56563 /* ViewController.swift */; };
+		7FF039CB2254BEA900C56563 /* EliminarUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */; };
+		7FF039CC2254BEA900C56563 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C52254BEA900C56563 /* NewUserViewController.swift */; };
+		7FF039CD2254BEA900C56563 /* VisualizarUsuariosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */; };
+		7FF039CE2254BEA900C56563 /* ContenidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C72254BEA900C56563 /* ContenidoViewController.swift */; };
+		7FF039CF2254BEA900C56563 /* ContenidoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */; };
+		7FF039D72254BF4D00C56563 /* ConexionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D32254BF4D00C56563 /* ConexionDB.swift */; };
+		7FF039D82254BF4D00C56563 /* Funciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D42254BF4D00C56563 /* Funciones.swift */; };
+		7FF039D92254BF4D00C56563 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D52254BF4D00C56563 /* Constantes.swift */; };
+		7FF039DA2254BF4D00C56563 /* Alertas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D62254BF4D00C56563 /* Alertas.swift */; };
+		7FF039DC2254C7F500C56563 /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039DB2254C7F500C56563 /* Rates.swift */; };
+		7FF039E522550FDA00C56563 /* llamada.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E322550FDA00C56563 /* llamada.php */; };
+		7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E422550FDA00C56563 /* cambioMoneda.php */; };
+		7FF039EB2257529E00C56563 /* fondoLightBlue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E72257529E00C56563 /* fondoLightBlue.jpg */; };
+		7FF039EC2257529E00C56563 /* fondoDarkBlue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */; };
+		7FF039ED2257529E00C56563 /* fondoYellow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E92257529E00C56563 /* fondoYellow.jpg */; };
+		7FF039EE2257529E00C56563 /* fondoPurple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039EA2257529E00C56563 /* fondoPurple.jpg */; };
+		7FF039F1225757EB00C56563 /* FondoA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039EF225757E900C56563 /* FondoA.jpg */; };
+		7FF039F2225757EB00C56563 /* fondoB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F0225757EB00C56563 /* fondoB.jpg */; };
+		7FF039F422575C4300C56563 /* fondoC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F322575C4200C56563 /* fondoC.jpg */; };
+		7FF039F6225761A800C56563 /* botonPlata.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F5225761A800C56563 /* botonPlata.png */; };
+		7FF039F82257642700C56563 /* bucle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F72257642700C56563 /* bucle.png */; };
+		7FF039FB2257A8C500C56563 /* botonadd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F92257A8C400C56563 /* botonadd.png */; };
+		7FF039FC2257A8C500C56563 /* botonDel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039FA2257A8C400C56563 /* botonDel.png */; };
 		BB746AF682804D2695AB7B2D /* Pods_TFGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5C7DEAB18B2565C1429CF3 /* Pods_TFGTests.framework */; };
 		D77C3212CF94FCC83C591EFB /* Pods_TFGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAD979F0743E2EC41FF2202 /* Pods_TFGUITests.framework */; };
 /* End PBXBuildFile section */
@@ -62,7 +88,6 @@
 		7D319BAADCE72D19081ACFD1 /* Pods-TFG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFG.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFG/Pods-TFG.release.xcconfig"; sourceTree = "<group>"; };
 		7F06687B2239212B00705E62 /* TFG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F06687E2239212B00705E62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7F0668802239212B00705E62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7F0668832239212B00705E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F0668852239212C00705E62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F0668882239212C00705E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,24 +98,51 @@
 		7F06689A2239212C00705E62 /* TFGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F06689E2239212C00705E62 /* TFGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFGUITests.swift; sourceTree = "<group>"; };
 		7F0668A02239212C00705E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
-		7F16DD882244DA980070F0D3 /* Boton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Boton.jpg; sourceTree = "<group>"; };
 		7F16DD8B2244F32D0070F0D3 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
 		7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimiento.swift; sourceTree = "<group>"; };
-		7F16DD9022450C800070F0D3 /* ConexionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConexionDB.swift; sourceTree = "<group>"; };
-		7F1DC8DD224CC3E000CBA4E6 /* Alertas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertas.swift; sourceTree = "<group>"; };
 		7F1DC929224CC7FB00CBA4E6 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1DC946224CCCCB00CBA4E6 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1DC94C224CEB8200CBA4E6 /* tfgDataBase.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tfgDataBase.sqlite3; sourceTree = "<group>"; };
 		7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiFondoTalesOfPNG.png; sourceTree = "<group>"; };
-		7F6DF5E52243E130007C196A /* Funciones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Funciones.swift; sourceTree = "<group>"; };
 		7F6DF5ED2243EAED007C196A /* Fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fondo.jpg; sourceTree = "<group>"; };
-		7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoAdminViewController.swift; sourceTree = "<group>"; };
-		7FA2072D22414C6200AC966E /* ContenidoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoViewController.swift; sourceTree = "<group>"; };
-		7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminarUsuarioViewController.swift; sourceTree = "<group>"; };
-		7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizarUsuariosTableViewController.swift; sourceTree = "<group>"; };
-		7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegisViewController.swift; sourceTree = "<group>"; };
 		7FC695A42241067900A4122B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7FF039A42252626500C56563 /* recargar.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = recargar.svg; sourceTree = "<group>"; };
+		7FF039A52252626500C56563 /* boton-de-suma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boton-de-suma.png"; sourceTree = "<group>"; };
+		7FF039A62252626500C56563 /* menos.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menos.svg; sourceTree = "<group>"; };
+		7FF039A72252626500C56563 /* menos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menos.png; sourceTree = "<group>"; };
+		7FF039A82252626500C56563 /* boton-de-suma.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "boton-de-suma.svg"; sourceTree = "<group>"; };
+		7FF039A92252626500C56563 /* recargar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recargar.png; sourceTree = "<group>"; };
+		7FF039AA2252626500C56563 /* refrescar.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = refrescar.svg; sourceTree = "<group>"; };
+		7FF039AB2252626500C56563 /* refrescar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refrescar.png; sourceTree = "<group>"; };
+		7FF039B42252690A00C56563 /* simbolo-de-resta.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "simbolo-de-resta.svg"; sourceTree = "<group>"; };
+		7FF039B52252690A00C56563 /* simbolo-de-resta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta.png"; sourceTree = "<group>"; };
+		7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta-r.png"; sourceTree = "<group>"; };
+		7FF039B92253BFF500C56563 /* boton-de-suma-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boton-de-suma-g.png"; sourceTree = "<group>"; };
+		7FF039BD2254B25000C56563 /* Divisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisa.swift; sourceTree = "<group>"; };
+		7FF039C32254BEA900C56563 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminarUsuarioViewController.swift; sourceTree = "<group>"; };
+		7FF039C52254BEA900C56563 /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
+		7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizarUsuariosTableViewController.swift; sourceTree = "<group>"; };
+		7FF039C72254BEA900C56563 /* ContenidoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoViewController.swift; sourceTree = "<group>"; };
+		7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoAdminViewController.swift; sourceTree = "<group>"; };
+		7FF039D32254BF4D00C56563 /* ConexionDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConexionDB.swift; sourceTree = "<group>"; };
+		7FF039D42254BF4D00C56563 /* Funciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Funciones.swift; sourceTree = "<group>"; };
+		7FF039D52254BF4D00C56563 /* Constantes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
+		7FF039D62254BF4D00C56563 /* Alertas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertas.swift; sourceTree = "<group>"; };
+		7FF039DB2254C7F500C56563 /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; usesTabs = 0; };
+		7FF039E322550FDA00C56563 /* llamada.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = llamada.php; sourceTree = "<group>"; };
+		7FF039E422550FDA00C56563 /* cambioMoneda.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = cambioMoneda.php; sourceTree = "<group>"; };
+		7FF039E72257529E00C56563 /* fondoLightBlue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoLightBlue.jpg; sourceTree = "<group>"; };
+		7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoDarkBlue.jpg; sourceTree = "<group>"; };
+		7FF039E92257529E00C56563 /* fondoYellow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoYellow.jpg; sourceTree = "<group>"; };
+		7FF039EA2257529E00C56563 /* fondoPurple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoPurple.jpg; sourceTree = "<group>"; };
+		7FF039EF225757E900C56563 /* FondoA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FondoA.jpg; sourceTree = "<group>"; };
+		7FF039F0225757EB00C56563 /* fondoB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoB.jpg; sourceTree = "<group>"; };
+		7FF039F322575C4200C56563 /* fondoC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoC.jpg; sourceTree = "<group>"; };
+		7FF039F5225761A800C56563 /* botonPlata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlata.png; sourceTree = "<group>"; };
+		7FF039F72257642700C56563 /* bucle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bucle.png; sourceTree = "<group>"; };
+		7FF039F92257A8C400C56563 /* botonadd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonadd.png; sourceTree = "<group>"; };
+		7FF039FA2257A8C400C56563 /* botonDel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonDel.png; sourceTree = "<group>"; };
 		D89C7B0445789B4883C121F8 /* Pods-TFGTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,23 +201,16 @@
 		7F06687D2239212B00705E62 /* TFG */ = {
 			isa = PBXGroup;
 			children = (
+				7FF039E222550FDA00C56563 /* php */,
 				7F06687E2239212B00705E62 /* AppDelegate.swift */,
-				7F0668802239212B00705E62 /* ViewController.swift */,
-				7FC695A22240061D00A4122B /* NewUserRegisViewController.swift */,
-				7FA2072D22414C6200AC966E /* ContenidoViewController.swift */,
 				7F0668822239212B00705E62 /* Main.storyboard */,
-				7FA2072B22414BB500AC966E /* ContenidoAdminViewController.swift */,
-				7F16DD862244D3F50070F0D3 /* NewUserViewController.swift */,
-				7FA2072F2241514400AC966E /* EliminarUsuarioViewController.swift */,
-				7FA20733224151CA00AC966E /* VisualizarUsuariosTableViewController.swift */,
-				7F0668852239212C00705E62 /* Assets.xcassets */,
-				7F0668872239212C00705E62 /* LaunchScreen.storyboard */,
 				7F06688A2239212C00705E62 /* Info.plist */,
-				7FC695A42241067900A4122B /* GoogleService-Info.plist */,
-				7F16DD9022450C800070F0D3 /* ConexionDB.swift */,
-				7F6DF5E52243E130007C196A /* Funciones.swift */,
-				7F1DC8DD224CC3E000CBA4E6 /* Alertas.swift */,
+				7F0668872239212C00705E62 /* LaunchScreen.storyboard */,
+				7F0668852239212C00705E62 /* Assets.xcassets */,
+				7FF039D22254BF4D00C56563 /* Otros */,
 				7F16DD8A2244F3080070F0D3 /* Objetos */,
+				7FF039C22254BEA900C56563 /* Controladores */,
+				7FC695A42241067900A4122B /* GoogleService-Info.plist */,
 			);
 			path = TFG;
 			sourceTree = "<group>";
@@ -193,6 +238,8 @@
 			children = (
 				7F16DD8B2244F32D0070F0D3 /* Usuario.swift */,
 				7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */,
+				7FF039BD2254B25000C56563 /* Divisa.swift */,
+				7FF039DB2254C7F500C56563 /* Rates.swift */,
 			);
 			path = Objetos;
 			sourceTree = "<group>";
@@ -200,6 +247,7 @@
 		7F6DF5E72243E9D6007C196A /* Recursos */ = {
 			isa = PBXGroup;
 			children = (
+				7FF039A32252626500C56563 /* icon */,
 				7F6DF5E82243E9E6007C196A /* img */,
 			);
 			path = Recursos;
@@ -210,9 +258,71 @@
 			children = (
 				7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */,
 				7F6DF5ED2243EAED007C196A /* Fondo.jpg */,
-				7F16DD882244DA980070F0D3 /* Boton.jpg */,
+				7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */,
+				7FF039E72257529E00C56563 /* fondoLightBlue.jpg */,
+				7FF039EA2257529E00C56563 /* fondoPurple.jpg */,
+				7FF039E92257529E00C56563 /* fondoYellow.jpg */,
+				7FF039EF225757E900C56563 /* FondoA.jpg */,
+				7FF039F0225757EB00C56563 /* fondoB.jpg */,
+				7FF039F322575C4200C56563 /* fondoC.jpg */,
+				7FF039F5225761A800C56563 /* botonPlata.png */,
+				7FF039F72257642700C56563 /* bucle.png */,
 			);
 			path = img;
+			sourceTree = "<group>";
+		};
+		7FF039A32252626500C56563 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				7FF039F92257A8C400C56563 /* botonadd.png */,
+				7FF039FA2257A8C400C56563 /* botonDel.png */,
+				7FF039B92253BFF500C56563 /* boton-de-suma-g.png */,
+				7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */,
+				7FF039B52252690A00C56563 /* simbolo-de-resta.png */,
+				7FF039B42252690A00C56563 /* simbolo-de-resta.svg */,
+				7FF039A42252626500C56563 /* recargar.svg */,
+				7FF039A52252626500C56563 /* boton-de-suma.png */,
+				7FF039A62252626500C56563 /* menos.svg */,
+				7FF039A72252626500C56563 /* menos.png */,
+				7FF039A82252626500C56563 /* boton-de-suma.svg */,
+				7FF039A92252626500C56563 /* recargar.png */,
+				7FF039AA2252626500C56563 /* refrescar.svg */,
+				7FF039AB2252626500C56563 /* refrescar.png */,
+			);
+			path = icon;
+			sourceTree = "<group>";
+		};
+		7FF039C22254BEA900C56563 /* Controladores */ = {
+			isa = PBXGroup;
+			children = (
+				7FF039C32254BEA900C56563 /* ViewController.swift */,
+				7FF039C72254BEA900C56563 /* ContenidoViewController.swift */,
+				7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */,
+				7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */,
+				7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */,
+				7FF039C52254BEA900C56563 /* NewUserViewController.swift */,
+			);
+			path = Controladores;
+			sourceTree = "<group>";
+		};
+		7FF039D22254BF4D00C56563 /* Otros */ = {
+			isa = PBXGroup;
+			children = (
+				7FF039D32254BF4D00C56563 /* ConexionDB.swift */,
+				7FF039D42254BF4D00C56563 /* Funciones.swift */,
+				7FF039D52254BF4D00C56563 /* Constantes.swift */,
+				7FF039D62254BF4D00C56563 /* Alertas.swift */,
+			);
+			path = Otros;
+			sourceTree = "<group>";
+		};
+		7FF039E222550FDA00C56563 /* php */ = {
+			isa = PBXGroup;
+			children = (
+				7FF039E322550FDA00C56563 /* llamada.php */,
+				7FF039E422550FDA00C56563 /* cambioMoneda.php */,
+			);
+			path = php;
 			sourceTree = "<group>";
 		};
 		BAB992A352D13DECA6927AFA /* Pods */ = {
@@ -353,13 +463,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF039AE2252626500C56563 /* menos.svg in Resources */,
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
-				7F16DD892244DA9B0070F0D3 /* Boton.jpg in Resources */,
+				7FF039AC2252626500C56563 /* recargar.svg in Resources */,
+				7FF039F2225757EB00C56563 /* fondoB.jpg in Resources */,
 				7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */,
+				7FF039B02252626500C56563 /* boton-de-suma.svg in Resources */,
+				7FF039AF2252626500C56563 /* menos.png in Resources */,
+				7FF039B12252626500C56563 /* recargar.png in Resources */,
+				7FF039F1225757EB00C56563 /* FondoA.jpg in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
+				7FF039EC2257529E00C56563 /* fondoDarkBlue.jpg in Resources */,
+				7FF039E522550FDA00C56563 /* llamada.php in Resources */,
+				7FF039FB2257A8C500C56563 /* botonadd.png in Resources */,
 				7F0668862239212C00705E62 /* Assets.xcassets in Resources */,
+				7FF039F422575C4300C56563 /* fondoC.jpg in Resources */,
 				7F6B29A02248FCF6007B15C5 /* MiFondoTalesOfPNG.png in Resources */,
+				7FF039EE2257529E00C56563 /* fondoPurple.jpg in Resources */,
+				7FF039B62252690B00C56563 /* simbolo-de-resta.svg in Resources */,
+				7FF039FC2257A8C500C56563 /* botonDel.png in Resources */,
+				7FF039F6225761A800C56563 /* botonPlata.png in Resources */,
 				7F0668842239212B00705E62 /* Main.storyboard in Resources */,
+				7FF039F82257642700C56563 /* bucle.png in Resources */,
+				7FF039ED2257529E00C56563 /* fondoYellow.jpg in Resources */,
+				7FF039EB2257529E00C56563 /* fondoLightBlue.jpg in Resources */,
+				7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */,
+				7FF039B32252626500C56563 /* refrescar.png in Resources */,
+				7FF039B22252626500C56563 /* refrescar.svg in Resources */,
+				7FF039BA2253BFF500C56563 /* simbolo-de-resta-r.png in Resources */,
+				7FF039B72252690B00C56563 /* simbolo-de-resta.png in Resources */,
+				7FF039AD2252626500C56563 /* boton-de-suma.png in Resources */,
+				7FF039BB2253BFF500C56563 /* boton-de-suma-g.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +539,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -423,6 +558,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -539,18 +675,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F16DD9122450C800070F0D3 /* ConexionDB.swift in Sources */,
-				7FA2072E22414C6200AC966E /* ContenidoViewController.swift in Sources */,
-				7FA2072C22414BB500AC966E /* ContenidoAdminViewController.swift in Sources */,
-				7FA20734224151CA00AC966E /* VisualizarUsuariosTableViewController.swift in Sources */,
-				7F0668812239212B00705E62 /* ViewController.swift in Sources */,
-				7F6DF5E62243E130007C196A /* Funciones.swift in Sources */,
-				7FC695A32240061D00A4122B /* NewUserRegisViewController.swift in Sources */,
+				7FF039CD2254BEA900C56563 /* VisualizarUsuariosTableViewController.swift in Sources */,
+				7FF039DC2254C7F500C56563 /* Rates.swift in Sources */,
+				7FF039D72254BF4D00C56563 /* ConexionDB.swift in Sources */,
+				7FF039D92254BF4D00C56563 /* Constantes.swift in Sources */,
 				7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */,
-				7F1DC8DE224CC3E000CBA4E6 /* Alertas.swift in Sources */,
-				7FA207302241514400AC966E /* EliminarUsuarioViewController.swift in Sources */,
-				7F16DD872244D3F50070F0D3 /* NewUserViewController.swift in Sources */,
+				7FF039DA2254BF4D00C56563 /* Alertas.swift in Sources */,
+				7FF039CE2254BEA900C56563 /* ContenidoViewController.swift in Sources */,
+				7FF039CF2254BEA900C56563 /* ContenidoAdminViewController.swift in Sources */,
+				7FF039D82254BF4D00C56563 /* Funciones.swift in Sources */,
+				7FF039BE2254B25000C56563 /* Divisa.swift in Sources */,
 				7F06687F2239212B00705E62 /* AppDelegate.swift in Sources */,
+				7FF039CA2254BEA900C56563 /* ViewController.swift in Sources */,
+				7FF039CB2254BEA900C56563 /* EliminarUsuarioViewController.swift in Sources */,
+				7FF039CC2254BEA900C56563 /* NewUserViewController.swift in Sources */,
 				7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

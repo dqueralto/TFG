@@ -5,9 +5,12 @@ project 'TFG.xcodeproj'
 #pod 'Firebase'
 pod 'Firebase'
 pod 'Firebase/Core'
+pod 'Firebase/Firestore'
 pod 'Firebase/Auth'
 pod 'Firebase/Functions'
 pod 'FirebaseUI'
+pod 'Alamofire'
+
 
 target 'TFG' do
 

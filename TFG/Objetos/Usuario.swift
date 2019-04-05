@@ -10,8 +10,6 @@ import Foundation
 
 internal class Usuario
 {
-
-    
     var usuario: String
     var contrasenia: String
     var tipo: String
@@ -25,7 +23,6 @@ internal class Usuario
     
     init (usuario: String, contrasenia: String, tipo: String, nombre: String, apellidos: String, fec_nac: String, email: String, sexo: String)
     //init (usuario: String, contrasenia: String, tipo: String)
-        
     {
         self.usuario = usuario
         self.contrasenia = contrasenia
@@ -36,52 +33,54 @@ internal class Usuario
         self.email = email
         self.sexo = sexo
     }
- 
+    
+    
+
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
     //GET
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
     
-    func getUsu() -> Usuario
+    internal func getUsu() -> Usuario
     {
         return self
     }
     
-    func getUsuario() -> String
+    internal func getUsuario() -> String
     {
         return self.usuario
     }
     
-    func getContrasenia() -> String
+    internal func getContrasenia() -> String
     {
         return self.contrasenia
     }
     
-    func getTipo() -> String
+    internal func getTipo() -> String
     {
         return self.tipo
     }
     
-    func getNombre() -> String
+    internal func getNombre() -> String
     {
         return self.nombre
     }
     
-    func getApellidos() -> String
+    internal func getApellidos() -> String
     {
         return self.apellidos
     }
     
-    func getFec_nac() -> String
+    internal func getFec_nac() -> String
     {
         return self.fec_nac
     }
     
-    func getEmail() -> String
+    internal func getEmail() -> String
     {
         return self.email
     }
     
-    func getSexo() -> String
+    internal func getSexo() -> String
     {
         return self.sexo
     }
@@ -90,42 +89,42 @@ internal class Usuario
     //SET
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
     
-    func setUsuario(usuario: String)
+    internal func setUsuario(usuario: String)
     {
         self.usuario = usuario
     }
 
-    func setContrasenia(contrasenia: String)
+    internal func setContrasenia(contrasenia: String)
     {
         self.contrasenia = contrasenia
     }
     
-    func setTipo(tipo: String)
+    internal func setTipo(tipo: String)
     {
         self.tipo = tipo
     }
     
-    func setNombre(nombre: String)
+    internal func setNombre(nombre: String)
     {
         self.nombre = nombre
     }
     
-    func setApellidos(apellidos: String)
+    internal func setApellidos(apellidos: String)
     {
         self.apellidos = apellidos
     }
     
-    func setFec_nac(fec_nac: String)
+    internal func setFec_nac(fec_nac: String)
     {
         self.fec_nac = fec_nac
     }
     
-    func setEmail(email: String)
+    internal func setEmail(email: String)
     {
         self.email = email
     }
     
-    func setSexo(sexo: String)
+    internal func setSexo(sexo: String)
     {
         self.sexo = sexo
     }
