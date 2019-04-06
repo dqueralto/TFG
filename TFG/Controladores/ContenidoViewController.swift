@@ -252,6 +252,13 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func harcoreConverter()
     {
+        let array = Array(self.valor.text!)
+        if array[0] == ","
+        {
+            let intermedia = self.valor.text!
+            self.valor.text = "0"+intermedia
+        }
+        
         if(self.valor.text! == "," ){
             
             self.valor.text = "0,0"

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MiFondoTalesOfPNG.png" translatesAutoresizingMaskIntoConstraints="NO" id="udV-ab-qVh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondoInicio.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="udV-ab-qVh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Daniel Queraltó Parra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydt-0E-nuS">
@@ -53,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MiFondoTalesOfPNG.png" width="850.08001708984375" height="1200"/>
+        <image name="fondoInicio.jpg" width="1024" height="1369"/>
     </resources>
 </document>
