@@ -20,16 +20,6 @@
 		7F6B29A02248FCF6007B15C5 /* MiFondoTalesOfPNG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */; };
 		7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DF5ED2243EAED007C196A /* Fondo.jpg */; };
 		7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FC695A42241067900A4122B /* GoogleService-Info.plist */; };
-		7FF039AC2252626500C56563 /* recargar.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A42252626500C56563 /* recargar.svg */; };
-		7FF039AD2252626500C56563 /* boton-de-suma.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A52252626500C56563 /* boton-de-suma.png */; };
-		7FF039AE2252626500C56563 /* menos.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A62252626500C56563 /* menos.svg */; };
-		7FF039AF2252626500C56563 /* menos.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A72252626500C56563 /* menos.png */; };
-		7FF039B02252626500C56563 /* boton-de-suma.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A82252626500C56563 /* boton-de-suma.svg */; };
-		7FF039B12252626500C56563 /* recargar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039A92252626500C56563 /* recargar.png */; };
-		7FF039B22252626500C56563 /* refrescar.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039AA2252626500C56563 /* refrescar.svg */; };
-		7FF039B32252626500C56563 /* refrescar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039AB2252626500C56563 /* refrescar.png */; };
-		7FF039B62252690B00C56563 /* simbolo-de-resta.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B42252690A00C56563 /* simbolo-de-resta.svg */; };
-		7FF039B72252690B00C56563 /* simbolo-de-resta.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B52252690A00C56563 /* simbolo-de-resta.png */; };
 		7FF039BA2253BFF500C56563 /* simbolo-de-resta-r.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */; };
 		7FF039BB2253BFF500C56563 /* boton-de-suma-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039B92253BFF500C56563 /* boton-de-suma-g.png */; };
 		7FF039BE2254B25000C56563 /* Divisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039BD2254B25000C56563 /* Divisa.swift */; };
@@ -46,12 +36,6 @@
 		7FF039DC2254C7F500C56563 /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039DB2254C7F500C56563 /* Rates.swift */; };
 		7FF039E522550FDA00C56563 /* llamada.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E322550FDA00C56563 /* llamada.php */; };
 		7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E422550FDA00C56563 /* cambioMoneda.php */; };
-		7FF039EB2257529E00C56563 /* fondoLightBlue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E72257529E00C56563 /* fondoLightBlue.jpg */; };
-		7FF039EC2257529E00C56563 /* fondoDarkBlue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */; };
-		7FF039ED2257529E00C56563 /* fondoYellow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E92257529E00C56563 /* fondoYellow.jpg */; };
-		7FF039EE2257529E00C56563 /* fondoPurple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039EA2257529E00C56563 /* fondoPurple.jpg */; };
-		7FF039F1225757EB00C56563 /* FondoA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039EF225757E900C56563 /* FondoA.jpg */; };
-		7FF039F2225757EB00C56563 /* fondoB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F0225757EB00C56563 /* fondoB.jpg */; };
 		7FF039F422575C4300C56563 /* fondoC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F322575C4200C56563 /* fondoC.jpg */; };
 		7FF039F6225761A800C56563 /* botonPlata.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F5225761A800C56563 /* botonPlata.png */; };
 		7FF039F82257642700C56563 /* bucle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F72257642700C56563 /* bucle.png */; };
@@ -108,16 +92,6 @@
 		7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiFondoTalesOfPNG.png; sourceTree = "<group>"; };
 		7F6DF5ED2243EAED007C196A /* Fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fondo.jpg; sourceTree = "<group>"; };
 		7FC695A42241067900A4122B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7FF039A42252626500C56563 /* recargar.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = recargar.svg; sourceTree = "<group>"; };
-		7FF039A52252626500C56563 /* boton-de-suma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boton-de-suma.png"; sourceTree = "<group>"; };
-		7FF039A62252626500C56563 /* menos.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menos.svg; sourceTree = "<group>"; };
-		7FF039A72252626500C56563 /* menos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menos.png; sourceTree = "<group>"; };
-		7FF039A82252626500C56563 /* boton-de-suma.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "boton-de-suma.svg"; sourceTree = "<group>"; };
-		7FF039A92252626500C56563 /* recargar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recargar.png; sourceTree = "<group>"; };
-		7FF039AA2252626500C56563 /* refrescar.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = refrescar.svg; sourceTree = "<group>"; };
-		7FF039AB2252626500C56563 /* refrescar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refrescar.png; sourceTree = "<group>"; };
-		7FF039B42252690A00C56563 /* simbolo-de-resta.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "simbolo-de-resta.svg"; sourceTree = "<group>"; };
-		7FF039B52252690A00C56563 /* simbolo-de-resta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta.png"; sourceTree = "<group>"; };
 		7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta-r.png"; sourceTree = "<group>"; };
 		7FF039B92253BFF500C56563 /* boton-de-suma-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boton-de-suma-g.png"; sourceTree = "<group>"; };
 		7FF039BD2254B25000C56563 /* Divisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisa.swift; sourceTree = "<group>"; };
@@ -134,12 +108,6 @@
 		7FF039DB2254C7F500C56563 /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; usesTabs = 0; };
 		7FF039E322550FDA00C56563 /* llamada.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = llamada.php; sourceTree = "<group>"; };
 		7FF039E422550FDA00C56563 /* cambioMoneda.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = cambioMoneda.php; sourceTree = "<group>"; };
-		7FF039E72257529E00C56563 /* fondoLightBlue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoLightBlue.jpg; sourceTree = "<group>"; };
-		7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoDarkBlue.jpg; sourceTree = "<group>"; };
-		7FF039E92257529E00C56563 /* fondoYellow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoYellow.jpg; sourceTree = "<group>"; };
-		7FF039EA2257529E00C56563 /* fondoPurple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoPurple.jpg; sourceTree = "<group>"; };
-		7FF039EF225757E900C56563 /* FondoA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FondoA.jpg; sourceTree = "<group>"; };
-		7FF039F0225757EB00C56563 /* fondoB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoB.jpg; sourceTree = "<group>"; };
 		7FF039F322575C4200C56563 /* fondoC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoC.jpg; sourceTree = "<group>"; };
 		7FF039F5225761A800C56563 /* botonPlata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlata.png; sourceTree = "<group>"; };
 		7FF039F72257642700C56563 /* bucle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bucle.png; sourceTree = "<group>"; };
@@ -260,12 +228,6 @@
 			children = (
 				7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */,
 				7F6DF5ED2243EAED007C196A /* Fondo.jpg */,
-				7FF039E82257529E00C56563 /* fondoDarkBlue.jpg */,
-				7FF039E72257529E00C56563 /* fondoLightBlue.jpg */,
-				7FF039EA2257529E00C56563 /* fondoPurple.jpg */,
-				7FF039E92257529E00C56563 /* fondoYellow.jpg */,
-				7FF039EF225757E900C56563 /* FondoA.jpg */,
-				7FF039F0225757EB00C56563 /* fondoB.jpg */,
 				7FF039F322575C4200C56563 /* fondoC.jpg */,
 				7FF039F5225761A800C56563 /* botonPlata.png */,
 				7F01CE282258B993009E27DC /* fondoInicio.jpg */,
@@ -281,16 +243,6 @@
 				7FF039FA2257A8C400C56563 /* botonDel.png */,
 				7FF039B92253BFF500C56563 /* boton-de-suma-g.png */,
 				7FF039B82253BFF500C56563 /* simbolo-de-resta-r.png */,
-				7FF039B52252690A00C56563 /* simbolo-de-resta.png */,
-				7FF039B42252690A00C56563 /* simbolo-de-resta.svg */,
-				7FF039A42252626500C56563 /* recargar.svg */,
-				7FF039A52252626500C56563 /* boton-de-suma.png */,
-				7FF039A62252626500C56563 /* menos.svg */,
-				7FF039A72252626500C56563 /* menos.png */,
-				7FF039A82252626500C56563 /* boton-de-suma.svg */,
-				7FF039A92252626500C56563 /* recargar.png */,
-				7FF039AA2252626500C56563 /* refrescar.svg */,
-				7FF039AB2252626500C56563 /* refrescar.png */,
 			);
 			path = icon;
 			sourceTree = "<group>";
@@ -466,37 +418,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FF039AE2252626500C56563 /* menos.svg in Resources */,
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
-				7FF039AC2252626500C56563 /* recargar.svg in Resources */,
-				7FF039F2225757EB00C56563 /* fondoB.jpg in Resources */,
 				7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */,
-				7FF039B02252626500C56563 /* boton-de-suma.svg in Resources */,
-				7FF039AF2252626500C56563 /* menos.png in Resources */,
-				7FF039B12252626500C56563 /* recargar.png in Resources */,
-				7FF039F1225757EB00C56563 /* FondoA.jpg in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
-				7FF039EC2257529E00C56563 /* fondoDarkBlue.jpg in Resources */,
 				7FF039E522550FDA00C56563 /* llamada.php in Resources */,
 				7FF039FB2257A8C500C56563 /* botonadd.png in Resources */,
 				7F0668862239212C00705E62 /* Assets.xcassets in Resources */,
 				7FF039F422575C4300C56563 /* fondoC.jpg in Resources */,
 				7F01CE292258B993009E27DC /* fondoInicio.jpg in Resources */,
 				7F6B29A02248FCF6007B15C5 /* MiFondoTalesOfPNG.png in Resources */,
-				7FF039EE2257529E00C56563 /* fondoPurple.jpg in Resources */,
-				7FF039B62252690B00C56563 /* simbolo-de-resta.svg in Resources */,
 				7FF039FC2257A8C500C56563 /* botonDel.png in Resources */,
 				7FF039F6225761A800C56563 /* botonPlata.png in Resources */,
 				7F0668842239212B00705E62 /* Main.storyboard in Resources */,
 				7FF039F82257642700C56563 /* bucle.png in Resources */,
-				7FF039ED2257529E00C56563 /* fondoYellow.jpg in Resources */,
-				7FF039EB2257529E00C56563 /* fondoLightBlue.jpg in Resources */,
 				7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */,
-				7FF039B32252626500C56563 /* refrescar.png in Resources */,
-				7FF039B22252626500C56563 /* refrescar.svg in Resources */,
 				7FF039BA2253BFF500C56563 /* simbolo-de-resta-r.png in Resources */,
-				7FF039B72252690B00C56563 /* simbolo-de-resta.png in Resources */,
-				7FF039AD2252626500C56563 /* boton-de-suma.png in Resources */,
 				7FF039BB2253BFF500C56563 /* boton-de-suma-g.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

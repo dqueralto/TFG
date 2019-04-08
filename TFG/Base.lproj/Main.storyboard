@@ -399,7 +399,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondoYellow.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eU8-Z7-TwK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondoC.jpg" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eU8-Z7-TwK">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contenidos Eliminados" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahk-2I-6Hl">
@@ -508,7 +508,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondoPurple.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fmI-dC-rXI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondoC.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fmI-dC-rXI">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contraseña:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZH-BH-gYA">
@@ -801,8 +801,6 @@
         <image name="botonadd.png" width="514" height="451"/>
         <image name="bucle.png" width="1500" height="1500"/>
         <image name="fondoC.jpg" width="1024" height="1369"/>
-        <image name="fondoPurple.jpg" width="3375" height="7308"/>
-        <image name="fondoYellow.jpg" width="3375" height="7308"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Dt-3S-Yr9"/>

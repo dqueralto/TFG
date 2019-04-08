@@ -132,38 +132,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
             
             
-
-            
-            
-            /*
-        let inverseSet = CharacterSet(charactersIn:"0123456789").inverted
-        let components = string.components(separatedBy: inverseSet)
-        let filtered = components.joined(separator: "")
-        
-        if filtered == string {
-            return true
-        } else {
-            if string == "." || string == "," {
-                let countDots = textField.text!.components(separatedBy:".").count - 1
-                let countCommas = textField.text!.components(separatedBy:",").count - 1
-                
-                if countDots == 0 && countCommas == 0 {
-                    return true
-                } else {
-                    return false
-                }
-            } else  {
-                return false
-            }
-        }
-        
-        
-  
-            let allowedCharacters = CharacterSet(charactersIn:"+0123456789,.")//Here change this characters based on your requirement
-            let characterSet = CharacterSet(charactersIn: string)
-            
-            return allowedCharacters.isSuperset(of: characterSet)
-            */
             
             
         }
@@ -197,49 +165,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.valor.text = "0,0"
         self.resultado.text = "0,0"
     }
-    /* @IBAction func convertir(_ sender: Any)
-    {
-        if(codDivDes == "" ){
-            
-            codDivDes = codDivisa[0]
-        }
-        if(codDivOri == "" ){
-            
-            codDivOri = codDivisa[0]
-        }
-            let url = "https://api.exchangeratesapi.io/latest?base="+self.codDivOri.uppercased()
-            print("val1: "+self.codDivOri.uppercased())
-            print("val2: "+self.codDivDes.uppercased())
-            Alamofire.request(url,method: .get).responseJSON { response in
-                if let JSON = response.result.value as? [String:AnyObject] {
-                    var cambio: Double = 0.0
-                    
-                    cambio = JSON["rates"]![self.codDivDes.uppercased()]!! as! Double
-                    var valor = self.valor.text!.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
-                    if valor.count != 0{
-                        
-                        valor = valor.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)
-                        var paso:Double=0.0
-                        
-                        paso = (Double(valor) as! Double)
-                        
-                        var fin: Double = 0.0
-                        
-                        fin = Funciones().calcularConversion(cantidad: paso,cambio: cambio)
-
-                        print("uffff")
-                        self.resultado.text = String(fin)
-                    }
-                    else
-                    {
-                        Alertas().crearAlertainformacion(titulo: "Cuidadin", mensaje: "No a introducido una cantidad que convertir...",vc: self)
-                    }
-                    
-                }
-                
-            }
-
-    }*/
+    
     
     @IBAction func convertir(_ sender: Any)
     {
@@ -257,8 +183,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let str = self.valor.text!
         print(array.count)
 
-        //let comienzo = str.firstIndex(of: ",")!
-        //let antesDeLaComa = str[...comienzo]
         
         if self.valor.text!.count == 0
         {
