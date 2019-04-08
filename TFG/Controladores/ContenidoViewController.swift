@@ -80,12 +80,12 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let array = Array(self.valor.text!)
+        /*let array = Array(self.valor.text!)
         if array[0] == ","
         {
             let intermedia = self.valor.text!
             self.valor.text = "0"+intermedia
-        }
+        }*/
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -252,17 +252,39 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func harcoreConverter()
     {
-        let array = Array(self.valor.text!)
-        if array[0] == ","
-        {
-            let intermedia = self.valor.text!
-            self.valor.text = "0"+intermedia
-        }
         
-        if(self.valor.text! == "," ){
-            
+        let array = Array(self.valor.text!)
+        let str = self.valor.text!
+        print(array.count)
+
+        //let comienzo = str.firstIndex(of: ",")!
+        //let antesDeLaComa = str[...comienzo]
+        
+        if self.valor.text!.count == 0
+        {
             self.valor.text = "0,0"
         }
+        else if   array[0] == ","
+        {
+            if array[0] == "," && array.count == 1
+            {
+                self.valor.text = "0,0"
+            }
+            else if array[0] == "," && array.count > 1 //|| array[1] == ","
+            {
+                let intermedia = self.valor.text!
+                self.valor.text = "0"+intermedia
+            }
+        }
+        else if array[0] == "0"  && array.count == 1
+        {
+            self.valor.text = "0,0"
+        }
+        else if  array[1] == "," && array[0] == "0" && array.count == 2
+        {
+            self.valor.text = "0,0"
+        }
+        
 
         if(codDivDes == "" ){
             
@@ -310,6 +332,8 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         {
             self.resultado.text = self.valor.text!
         }
+            
+        
     }
     
     @IBAction func intercambiar(_ sender: Any)
@@ -343,7 +367,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
             self.resultado.text = self.valor.text!
         }
-
+        
     }
 //------------------------------------------------------------------------------------------------------------------------------------
     let codDivisa = ["AUD","BGN","BRL","CAD","CHF","CNY","CZK","DKK","EUR","GBP","HKD","HRK","HUF","IDR","ILS","INR","ISK","JPY","KRW","MXN","MYR","NOK","NZD","PHP","PLN","RON","RUB","SEK","SGD","THB","TRY","USD","ZAR"]
