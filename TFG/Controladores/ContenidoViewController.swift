@@ -204,10 +204,10 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         {
             self.valor.text = "0,0"
         }
-        else if  array[1] == "," && array[0] == "0" && array.count == 2
+        /*else if  array[1] == "," && array[0] == "0" && array.count == 2
         {
             self.valor.text = "0,0"
-        }
+        }*/
         
 
         if(codDivDes == "" ){

@@ -35,7 +35,7 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
         DispatchQueue.global(qos: .background).async {//hilo de fonde
             print("Esto se ejecuta en la cola de fondo")
-            ViewController().conectarDB()
+            //ViewController().conectarDB()
             
             DispatchQueue.main.async {//hilo principal
                 print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
@@ -61,7 +61,7 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBAction func nuevo(_ sender: Any)
     {
-        ViewController().crearObjUsuario()
+        //ViewController().crearObjUsuario()
         print("000")
         for usu in usuarios
         {
@@ -87,7 +87,7 @@ class NewUserViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 print(contrasenia.text!)
                 print(confirmarContrasenia.text!)
                 print(tipo)
-                ConexionDB().insertarUsuarioSQLite(usu: usuario.text!, pass: contrasenia.text!,tipo: tipo,nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
+                //ConexionDB().insertarUsuarioSQLite(usu: usuario.text!, pass: contrasenia.text!,tipo: tipo,nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
                 //insertar()
                 return
             }

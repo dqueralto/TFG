@@ -98,7 +98,7 @@ class Alertas{
                                                             if Funciones().isValidEmail(testStr: correo)
                                                             {
                                                                 //ConexionDB().insertarUsuarioFirebase(email: correo, pass: contrasenia,vc: vc)
-                                                                ViewController().insertarUsuarioSQLite(usu: usuario, pass: contrasenia, tipo: "U", nom: "u", apell: "u", fec_nac: "u", email: correo, sexo: "otro")
+                                                                //ViewController().insertarUsuarioSQLite(usu: usuario, pass: contrasenia, tipo: "U", nom: "u", apell: "u", fec_nac: "u", email: correo, sexo: "otro")
                                                                 
                                                                 ConexionDB().addUsuarioFirebase(usu: usuario, pass: contrasenia, tipo: "U",nom: "", apell: ""
                                                                     ,fec_nac: "",email: correo,sexo: "poco")

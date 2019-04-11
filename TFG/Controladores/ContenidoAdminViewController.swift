@@ -28,20 +28,20 @@ class ContenidoAdminViewController: UIViewController {
         
         cabecera = self.usuario! 
         titulo.title = cabecera
-        alertUsuEli.isHidden = true
-        alertContenEli.isHidden = true
+        //alertUsuEli.isHidden = true
+        //alertContenEli.isHidden = true
         // Do any additional setup after loading the view.
     }
     
    
     @IBAction func borrarTodosUsuarios(_ sender: Any)
     {
-        alertContenEli.isHidden = true
+        //alertContenEli.isHidden = true
         //conexion.eliminarUsuarios()
         //leerUsuarios()
         //conexion.crearObjUsuario()
         //conexion.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "null",apell: "null",fec_nac: "null",email: "null",sexo: "null")
-        alertUsuEli.isHidden = false
+        //alertUsuEli.isHidden = false
     }
    
     //---------------------------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@
 //
 import UIKit
 import Foundation
+import SQLite
 import SQLite3
 import Firebase
 import FirebaseAuth
@@ -21,6 +22,65 @@ import Firebase
 typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
 
 internal class ConexionDB {
+    
+    //-------------------------SQLite------------------------------------------------------------------
+    
+    private var db: OpaquePointer?
+    private var usuarios = [Usuario]()
+    private var dbName = "Datos.sqlite"
+    
+    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);"
+    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
+    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
+    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
+    
+    internal func conectarDBSQLite(){
+        let db = try! Connection("/Datos.sqlite")
+        
+        let users = Table("usuarios")
+        let usu = Expression<String>("usuario")
+        let pass = Expression<String>("pass")
+        let tipo = Expression<String>("tipo")
+        let nom = Expression<String?>("nombre")
+        let ape = Expression<String?>("apellidos")
+        let fec_naz = Expression<String?>("fec_nac")
+        let email = Expression<String>("email")
+        let sexo = Expression<String?>("sexo")
+        
+        try! db.run(users.create { t in
+            t.column(usu, primaryKey: true)
+            t.column(pass)
+            t.column(tipo)
+            t.column(nom)
+            t.column(ape)
+            t.column(fec_naz)
+            t.column(email, unique: true)
+            t.column(sexo)
+            print("usuarios parece creado")
+            
+        })
+        
+        let movimientos = Table("movimientos")
+        let numReg = Expression<String>("numero_registro")
+        let usuar = Expression<String>("usuario")
+        let fecha = Expression<String>("fecha")
+        let importe = Expression<Double>("importe")
+        let tipoIngreso = Expression<Bool>("tipo")
+        
+        
+        try! db.run(movimientos.create { t in
+            t.column(numReg, primaryKey: true)
+            t.column(usuar)
+            t.column(fecha)
+            t.column(importe)
+            t.column(tipoIngreso)
+            print("movimientos parece creado")
+            
+        })
+        
+    }
+    
+    
     //------------------------Firebase-------------------------------------------------------------
     var dbFirestore = Firestore.firestore()
     
@@ -207,19 +267,20 @@ internal class ConexionDB {
             }
         }
     }
-    //-------------------------SQLite------------------------------------------------------------------
-
-    private var db: OpaquePointer?
-    private var usuarios = [Usuario]()
-    private var dbName: String = "Datos.sqlite"
-    
-    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);"
-    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
-    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
-    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     internal func conectarDB()
     {
         //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
@@ -417,153 +478,33 @@ internal class ConexionDB {
         //FINALIZAMOS LA SENTENCIA
         sqlite3_finalize(deleteStatement)
         //insertarAdmin()
-    }
+    }*/
     
     //
     //------------------------------
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    //------------------------SQLite3-------------------------------------------------------------
-    
-    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT;"
-    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
-    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
-    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
-    
-    internal func crearTablasDB()
-    {
-        
-        crearTablaUsuariosDB()
-        crearTablaMovimientosDB()
-    }
 
-    internal func crearTablaUsuariosDB()
-    {
-        do{
-            let db = try Connection("tfgDataBase.sqlite3")
-
-            let usuario = Table("Usuarios")
-            let usu = Expression<String>("usuario")
-            let pass = Expression<String?>("contrasenia")
-            let tipo = Expression<String?>("tipo")
-            let nombre = Expression<String>("nombre")
-            let apellido = Expression<String>("apellido")
-            let fec_nac = Expression<String>("fec_nac")
-            let email = Expression<String>("email")
-            let sex = Expression<String>("sexo")
-            
-            
-            try db.run(usuario.create{t in
-                t.column(usu, unique: true)
-                t.column(pass)
-                t.column(tipo)
-                t.column(nombre)
-                t.column(apellido)
-                t.column(fec_nac)
-                t.column(email, primaryKey: true)
-                t.column(sex)
-                
-            })
-            
-            
-        }catch{}
-    }
-    internal func crearTablaMovimientosDB()
-    {
-        do{
-            let db = try Connection("tfgDataBase.sqlite3")
-            
-            let movimientos = Table("Usuarios")
-            let num_reg = Expression<Int>("usuario")
-            let usuario = Expression<String?>("contrasenia")
-            let fecha = Expression<String>("nombre")
-            let importe = Expression<Double>("apellido")
-            let tipo = Expression<String>("fec_nac")
-            
-            
-            try db.run(movimientos.create{t in
-                t.column(num_reg, primaryKey: true)
-                t.column(usuario)
-                t.column(fecha)
-                t.column(importe)
-                t.column(tipo)
-            })
-        }catch{}
-        
-    }
     
-    internal func insertarUsuario(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)
-    {
-        do{
-            let db = try Connection("tfgDataBase.sqlite3")
-
-            let stmt = try db.prepare("INSERT INTO usuario (email) VALUES (?)")
-            for email in ["betty@icloud.com", "cathy@icloud.com"] {
-                try stmt.run(email)
-            }
-            
-            //db.totalChanges    // 3
-            //db.changes         // 1
-            //db.lastInsertRowid // 3
-
-        }catch{}
-        
-    }
- 
-    internal func insertarMovimiento()
-    {
-        
-    }
     
-    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
 
 }
 

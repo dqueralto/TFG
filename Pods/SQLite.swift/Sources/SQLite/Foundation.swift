@@ -35,7 +35,7 @@ extension Data : Value {
     }
 
     public var datatypeValue: Blob {
-            return withUnsafeBytes { (pointer: UnsafePointer<UInt8>) -> Blob in
+        return withUnsafeBytes { (pointer: UnsafePointer<UInt8>) -> Blob in
             return Blob(bytes: pointer, length: count)
         }
     }

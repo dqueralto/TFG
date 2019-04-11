@@ -22,13 +22,6 @@ class ViewController: UIViewController{
 
     @IBOutlet weak var usuario: UITextField!
     @IBOutlet weak var contrasenia: UITextField!
-    
-    
-    
-    @IBOutlet weak var alerta: UILabel!
-    @IBOutlet weak var alerta2: UILabel!
-    
-
 
     
     @IBAction func bNuevoUsu(_ sender: Any)
@@ -59,20 +52,16 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        self.funciones.comprobarConexion(donde: self)
+        
+        //self.funciones.comprobarConexion(donde: self)
         //self.ref.child("admin").child(user.uid)
         
         //--------------------------------------------------------------------------------------------------------------------------
         DispatchQueue.global(qos: .background).async {//hilo de fonde
             print("Esto se ejecuta en la cola de fondo")
             self.funciones.comprobarConexion(donde: self)
-            self.conectarDB()
-            self.visUsu()
-            self.visUsu()
-            self.visUsu()
-            self.visUsu()
-            self.visUsu()
-            self.visUsu()
+            //self.conectarDB()
+            //ConexionDB().conectarDBSQLite()
             self.visUsu()
             self.visUsu()
             
@@ -133,16 +122,25 @@ class ViewController: UIViewController{
     
  
     //-------------------------------------
+    @IBAction func informacion(_ sender: Any)
+    {
+            Alertas().crearAlertainformacion(titulo: "Información", mensaje: "El inicio de sesion requiere que el usuario exista y la contraseña sea correcta. \nEn caso de no tener usuario pulse 'No tengo usuario' y rellene el formulario.", vc: self)    }
+    
     @IBAction func Conectar(_ sender: Any)
     {
-        self.crearObjUsuario()
+        //self.crearObjUsuario()
+        
+        if self.usuario.text?.count == 0 || self.contrasenia.text?.count == 0
+        {
+            Alertas().crearAlertainformacion(titulo: "Cuidadin...", mensaje: "Los campos usuario y conraseña no pueden estar vacíos si quiere conectarse.\nLogica de primero de primaria.", vc: self)
+        }else{
         //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
         if self.usuarios.count <= 1
         {
             //self.conexion.insertarUsuarioFirebase(email: "admin@admin.admin", pass: "admin", vc: self)
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            //self.insertarUsuarioSQLite(usu: "admin", pass: "admiadmin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             
-            self.insertarUsuarioSQLite(usu: "usu", pass: "usu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
+            //self.insertarUsuarioSQLite(usu: "usu", pass: "usuusu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
             
             if self.usuarios.count == 2
             {
@@ -199,6 +197,8 @@ class ViewController: UIViewController{
             }
         }
         
+        }
+        
     }
     
     //Carga de la interfaz correspondiente al tipo de segue que le indicamos ----------------------------------------------
@@ -240,6 +240,7 @@ class ViewController: UIViewController{
     
     
    //* //_---------------------------------------------------------------------------------------------------------------
+    /*
     internal func conectarDB()
     {
         //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
@@ -253,7 +254,7 @@ class ViewController: UIViewController{
             print("base abierta")
             //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
             //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT; CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);COMMIT;", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT; CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
             }
@@ -263,9 +264,9 @@ class ViewController: UIViewController{
         print("Usuarios creados")
         if usuarios.count == 0
         {
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
+            self.insertarUsuarioSQLite(usu: "admin", pass: "admiadmin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
             print("ADMIN insertado.")
-            self.insertarUsuarioSQLite(usu: "usu", pass: "usu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
+            self.insertarUsuarioSQLite(usu: "usu", pass: "usuusu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
             ConexionDB().insertarUsuarioFirebase(email: "admin@admin.admin", pass: "administrador",vc: self)
             ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuario",vc: self)
         }
@@ -444,7 +445,8 @@ class ViewController: UIViewController{
     }
 
     
-    //*/
+    */
+ 
     
     
 }

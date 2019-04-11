@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		577318D416C43E7CDCFFD6FA /* Pods_TFG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C630DE8CA7C4DA051B730B8 /* Pods_TFG.framework */; };
+		71B7392F0C7703E23904E91C /* Pods_TFG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A01C9A4BF5FF14D8488C92 /* Pods_TFG.framework */; };
 		7F01CE292258B993009E27DC /* fondoInicio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F01CE282258B993009E27DC /* fondoInicio.jpg */; };
 		7F06687F2239212B00705E62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06687E2239212B00705E62 /* AppDelegate.swift */; };
 		7F0668842239212B00705E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668822239212B00705E62 /* Main.storyboard */; };
@@ -15,8 +15,11 @@
 		7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0668872239212C00705E62 /* LaunchScreen.storyboard */; };
 		7F0668942239212C00705E62 /* TFGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0668932239212C00705E62 /* TFGTests.swift */; };
 		7F06689F2239212C00705E62 /* TFGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06689E2239212C00705E62 /* TFGUITests.swift */; };
+		7F0AE93A225F2EC000CEF780 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F137AA0225CB9FD00F773F2 /* botonPlataAdmin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F137A9F225CB9FD00F773F2 /* botonPlataAdmin.png */; };
 		7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8B2244F32D0070F0D3 /* Usuario.swift */; };
 		7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */; };
+		7F67C91C225E2D0A0015CC4B /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F67C91B225E2D090015CC4B /* NewUserViewController.swift */; };
 		7F6B29A02248FCF6007B15C5 /* MiFondoTalesOfPNG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */; };
 		7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DF5ED2243EAED007C196A /* Fondo.jpg */; };
 		7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FC695A42241067900A4122B /* GoogleService-Info.plist */; };
@@ -25,7 +28,6 @@
 		7FF039BE2254B25000C56563 /* Divisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039BD2254B25000C56563 /* Divisa.swift */; };
 		7FF039CA2254BEA900C56563 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C32254BEA900C56563 /* ViewController.swift */; };
 		7FF039CB2254BEA900C56563 /* EliminarUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */; };
-		7FF039CC2254BEA900C56563 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C52254BEA900C56563 /* NewUserViewController.swift */; };
 		7FF039CD2254BEA900C56563 /* VisualizarUsuariosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */; };
 		7FF039CE2254BEA900C56563 /* ContenidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C72254BEA900C56563 /* ContenidoViewController.swift */; };
 		7FF039CF2254BEA900C56563 /* ContenidoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */; };
@@ -34,15 +36,13 @@
 		7FF039D92254BF4D00C56563 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D52254BF4D00C56563 /* Constantes.swift */; };
 		7FF039DA2254BF4D00C56563 /* Alertas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039D62254BF4D00C56563 /* Alertas.swift */; };
 		7FF039DC2254C7F500C56563 /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039DB2254C7F500C56563 /* Rates.swift */; };
-		7FF039E522550FDA00C56563 /* llamada.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E322550FDA00C56563 /* llamada.php */; };
-		7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039E422550FDA00C56563 /* cambioMoneda.php */; };
 		7FF039F422575C4300C56563 /* fondoC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F322575C4200C56563 /* fondoC.jpg */; };
 		7FF039F6225761A800C56563 /* botonPlata.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F5225761A800C56563 /* botonPlata.png */; };
 		7FF039F82257642700C56563 /* bucle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F72257642700C56563 /* bucle.png */; };
 		7FF039FB2257A8C500C56563 /* botonadd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039F92257A8C400C56563 /* botonadd.png */; };
 		7FF039FC2257A8C500C56563 /* botonDel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FF039FA2257A8C400C56563 /* botonDel.png */; };
-		BB746AF682804D2695AB7B2D /* Pods_TFGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5C7DEAB18B2565C1429CF3 /* Pods_TFGTests.framework */; };
-		D77C3212CF94FCC83C591EFB /* Pods_TFGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAD979F0743E2EC41FF2202 /* Pods_TFGUITests.framework */; };
+		93D1F7E873CE7E596556BC7B /* Pods_TFGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA3F361AC76A6FB2DA04790 /* Pods_TFGTests.framework */; };
+		D7FF2A919687C2F4C097F5E4 /* Pods_TFGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F18261FDE7486D824EEDEA1A /* Pods_TFGUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,15 +62,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7F0AE936225F2E5400CEF780 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7F0AE93A225F2EC000CEF780 /* BuildFile in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		0500682F490508ED81018466 /* Pods-TFGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests.release.xcconfig"; sourceTree = "<group>"; };
-		0DAD979F0743E2EC41FF2202 /* Pods_TFGUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFGUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AD64476C6464140B415A61B /* Pods-TFGUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFGUITests/Pods-TFGUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		2B5C7DEAB18B2565C1429CF3 /* Pods_TFGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C630DE8CA7C4DA051B730B8 /* Pods_TFG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		648DD7163B13DC2A271CAC12 /* Pods-TFGUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFGUITests/Pods-TFGUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6DF9D55A6B8F5C078DC772FB /* Pods-TFG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFG.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFG/Pods-TFG.debug.xcconfig"; sourceTree = "<group>"; };
-		7D319BAADCE72D19081ACFD1 /* Pods-TFG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFG.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFG/Pods-TFG.release.xcconfig"; sourceTree = "<group>"; };
+		0029425451F6A2C3F99698BA /* Pods-TFG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFG.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFG/Pods-TFG.release.xcconfig"; sourceTree = "<group>"; };
+		24854201E37C4C7E224AF4FB /* Pods-TFGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests.release.xcconfig"; sourceTree = "<group>"; };
+		7C7E5281BD6EB85C1AD60867 /* Pods-TFGTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7DA3F361AC76A6FB2DA04790 /* Pods_TFGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F01CE282258B993009E27DC /* fondoInicio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoInicio.jpg; sourceTree = "<group>"; };
 		7F06687B2239212B00705E62 /* TFG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F06687E2239212B00705E62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,11 +94,11 @@
 		7F06689A2239212C00705E62 /* TFGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F06689E2239212C00705E62 /* TFGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFGUITests.swift; sourceTree = "<group>"; };
 		7F0668A02239212C00705E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F137A9F225CB9FD00F773F2 /* botonPlataAdmin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlataAdmin.png; sourceTree = "<group>"; };
 		7F16DD8B2244F32D0070F0D3 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
 		7F16DD8E2244F8BC0070F0D3 /* Movimiento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimiento.swift; sourceTree = "<group>"; };
-		7F1DC929224CC7FB00CBA4E6 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1DC946224CCCCB00CBA4E6 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1DC94C224CEB8200CBA4E6 /* tfgDataBase.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tfgDataBase.sqlite3; sourceTree = "<group>"; };
+		7F67C91B225E2D090015CC4B /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiFondoTalesOfPNG.png; sourceTree = "<group>"; };
 		7F6DF5ED2243EAED007C196A /* Fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fondo.jpg; sourceTree = "<group>"; };
 		7FC695A42241067900A4122B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -97,7 +107,6 @@
 		7FF039BD2254B25000C56563 /* Divisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisa.swift; sourceTree = "<group>"; };
 		7FF039C32254BEA900C56563 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EliminarUsuarioViewController.swift; sourceTree = "<group>"; };
-		7FF039C52254BEA900C56563 /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizarUsuariosTableViewController.swift; sourceTree = "<group>"; };
 		7FF039C72254BEA900C56563 /* ContenidoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoViewController.swift; sourceTree = "<group>"; };
 		7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContenidoAdminViewController.swift; sourceTree = "<group>"; };
@@ -106,14 +115,16 @@
 		7FF039D52254BF4D00C56563 /* Constantes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		7FF039D62254BF4D00C56563 /* Alertas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertas.swift; sourceTree = "<group>"; };
 		7FF039DB2254C7F500C56563 /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; usesTabs = 0; };
-		7FF039E322550FDA00C56563 /* llamada.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = llamada.php; sourceTree = "<group>"; };
-		7FF039E422550FDA00C56563 /* cambioMoneda.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = cambioMoneda.php; sourceTree = "<group>"; };
 		7FF039F322575C4200C56563 /* fondoC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoC.jpg; sourceTree = "<group>"; };
 		7FF039F5225761A800C56563 /* botonPlata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlata.png; sourceTree = "<group>"; };
 		7FF039F72257642700C56563 /* bucle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bucle.png; sourceTree = "<group>"; };
 		7FF039F92257A8C400C56563 /* botonadd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonadd.png; sourceTree = "<group>"; };
 		7FF039FA2257A8C400C56563 /* botonDel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonDel.png; sourceTree = "<group>"; };
-		D89C7B0445789B4883C121F8 /* Pods-TFGTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests.debug.xcconfig"; sourceTree = "<group>"; };
+		84A01C9A4BF5FF14D8488C92 /* Pods_TFG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2514E0C84DBC68E9BCD2FC8 /* Pods-TFG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFG.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFG/Pods-TFG.debug.xcconfig"; sourceTree = "<group>"; };
+		EA6659A8B584FEF9B6565160 /* Pods-TFGUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TFGUITests/Pods-TFGUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F18261FDE7486D824EEDEA1A /* Pods_TFGUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFGUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC8F4CF8D0FD8007CC7D2B28 /* Pods-TFGUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFGUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TFGUITests/Pods-TFGUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				577318D416C43E7CDCFFD6FA /* Pods_TFG.framework in Frameworks */,
+				71B7392F0C7703E23904E91C /* Pods_TFG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB746AF682804D2695AB7B2D /* Pods_TFGTests.framework in Frameworks */,
+				93D1F7E873CE7E596556BC7B /* Pods_TFGTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,13 +148,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D77C3212CF94FCC83C591EFB /* Pods_TFGUITests.framework in Frameworks */,
+				D7FF2A919687C2F4C097F5E4 /* Pods_TFGUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DD80899527693FE286F0702 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2514E0C84DBC68E9BCD2FC8 /* Pods-TFG.debug.xcconfig */,
+				0029425451F6A2C3F99698BA /* Pods-TFG.release.xcconfig */,
+				7C7E5281BD6EB85C1AD60867 /* Pods-TFGTests.debug.xcconfig */,
+				24854201E37C4C7E224AF4FB /* Pods-TFGTests.release.xcconfig */,
+				EA6659A8B584FEF9B6565160 /* Pods-TFGUITests.debug.xcconfig */,
+				FC8F4CF8D0FD8007CC7D2B28 /* Pods-TFGUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		767927D2387D7F00CCF688C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84A01C9A4BF5FF14D8488C92 /* Pods_TFG.framework */,
+				7DA3F361AC76A6FB2DA04790 /* Pods_TFGTests.framework */,
+				F18261FDE7486D824EEDEA1A /* Pods_TFGUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7F0668722239212B00705E62 = {
 			isa = PBXGroup;
 			children = (
@@ -153,8 +187,8 @@
 				7F0668922239212C00705E62 /* TFGTests */,
 				7F06689D2239212C00705E62 /* TFGUITests */,
 				7F06687C2239212B00705E62 /* Products */,
-				BAB992A352D13DECA6927AFA /* Pods */,
-				FC507B1B71B03F9385CE5DF1 /* Frameworks */,
+				5DD80899527693FE286F0702 /* Pods */,
+				767927D2387D7F00CCF688C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,7 +205,6 @@
 		7F06687D2239212B00705E62 /* TFG */ = {
 			isa = PBXGroup;
 			children = (
-				7FF039E222550FDA00C56563 /* php */,
 				7F06687E2239212B00705E62 /* AppDelegate.swift */,
 				7F0668822239212B00705E62 /* Main.storyboard */,
 				7F06688A2239212C00705E62 /* Info.plist */,
@@ -226,6 +259,7 @@
 		7F6DF5E82243E9E6007C196A /* img */ = {
 			isa = PBXGroup;
 			children = (
+				7F137A9F225CB9FD00F773F2 /* botonPlataAdmin.png */,
 				7F6B299F2248FCF6007B15C5 /* MiFondoTalesOfPNG.png */,
 				7F6DF5ED2243EAED007C196A /* Fondo.jpg */,
 				7FF039F322575C4200C56563 /* fondoC.jpg */,
@@ -255,7 +289,7 @@
 				7FF039C82254BEA900C56563 /* ContenidoAdminViewController.swift */,
 				7FF039C42254BEA900C56563 /* EliminarUsuarioViewController.swift */,
 				7FF039C62254BEA900C56563 /* VisualizarUsuariosTableViewController.swift */,
-				7FF039C52254BEA900C56563 /* NewUserViewController.swift */,
+				7F67C91B225E2D090015CC4B /* NewUserViewController.swift */,
 			);
 			path = Controladores;
 			sourceTree = "<group>";
@@ -271,40 +305,6 @@
 			path = Otros;
 			sourceTree = "<group>";
 		};
-		7FF039E222550FDA00C56563 /* php */ = {
-			isa = PBXGroup;
-			children = (
-				7FF039E322550FDA00C56563 /* llamada.php */,
-				7FF039E422550FDA00C56563 /* cambioMoneda.php */,
-			);
-			path = php;
-			sourceTree = "<group>";
-		};
-		BAB992A352D13DECA6927AFA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6DF9D55A6B8F5C078DC772FB /* Pods-TFG.debug.xcconfig */,
-				7D319BAADCE72D19081ACFD1 /* Pods-TFG.release.xcconfig */,
-				D89C7B0445789B4883C121F8 /* Pods-TFGTests.debug.xcconfig */,
-				0500682F490508ED81018466 /* Pods-TFGTests.release.xcconfig */,
-				2AD64476C6464140B415A61B /* Pods-TFGUITests.debug.xcconfig */,
-				648DD7163B13DC2A271CAC12 /* Pods-TFGUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		FC507B1B71B03F9385CE5DF1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7F1DC946224CCCCB00CBA4E6 /* SQLite.framework */,
-				7F1DC929224CC7FB00CBA4E6 /* SQLite.framework */,
-				4C630DE8CA7C4DA051B730B8 /* Pods_TFG.framework */,
-				2B5C7DEAB18B2565C1429CF3 /* Pods_TFGTests.framework */,
-				0DAD979F0743E2EC41FF2202 /* Pods_TFGUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,12 +312,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F0668A32239212C00705E62 /* Build configuration list for PBXNativeTarget "TFG" */;
 			buildPhases = (
-				817890DFA287EBA33318AEF9 /* [CP] Check Pods Manifest.lock */,
+				001F141130D84AF74BCF2761 /* [CP] Check Pods Manifest.lock */,
 				7F0668772239212B00705E62 /* Sources */,
 				7F0668782239212B00705E62 /* Frameworks */,
 				7F0668792239212B00705E62 /* Resources */,
-				84D6A57FA9760A59A44A0B59 /* [CP] Embed Pods Frameworks */,
-				86795BC8D4AF2FA0EC34D64D /* [CP] Copy Pods Resources */,
+				7F0AE936225F2E5400CEF780 /* Embed Frameworks */,
+				E9A6432D9908F810C16781DB /* [CP] Embed Pods Frameworks */,
+				AB01DE1EB0F9A2E5C8F6CA2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -332,11 +333,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F0668A62239212C00705E62 /* Build configuration list for PBXNativeTarget "TFGTests" */;
 			buildPhases = (
-				B4C8EAB4DBBD2840F72EE5AD /* [CP] Check Pods Manifest.lock */,
+				AE911E6862D7D1B8AA2A0F7D /* [CP] Check Pods Manifest.lock */,
 				7F06688B2239212C00705E62 /* Sources */,
 				7F06688C2239212C00705E62 /* Frameworks */,
 				7F06688D2239212C00705E62 /* Resources */,
-				F1BE0EED920CE49E325778EC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,7 +352,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F0668A92239212C00705E62 /* Build configuration list for PBXNativeTarget "TFGUITests" */;
 			buildPhases = (
-				AD58A3EBB150B1D963603C44 /* [CP] Check Pods Manifest.lock */,
+				08F41114E38F29085B061B9B /* [CP] Check Pods Manifest.lock */,
 				7F0668962239212C00705E62 /* Sources */,
 				7F0668972239212C00705E62 /* Frameworks */,
 				7F0668982239212C00705E62 /* Resources */,
@@ -421,7 +421,6 @@
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
 				7F6DF5EE2243EAED007C196A /* Fondo.jpg in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
-				7FF039E522550FDA00C56563 /* llamada.php in Resources */,
 				7FF039FB2257A8C500C56563 /* botonadd.png in Resources */,
 				7F0668862239212C00705E62 /* Assets.xcassets in Resources */,
 				7FF039F422575C4300C56563 /* fondoC.jpg in Resources */,
@@ -430,8 +429,8 @@
 				7FF039FC2257A8C500C56563 /* botonDel.png in Resources */,
 				7FF039F6225761A800C56563 /* botonPlata.png in Resources */,
 				7F0668842239212B00705E62 /* Main.storyboard in Resources */,
+				7F137AA0225CB9FD00F773F2 /* botonPlataAdmin.png in Resources */,
 				7FF039F82257642700C56563 /* bucle.png in Resources */,
-				7FF039E622550FDA00C56563 /* cambioMoneda.php in Resources */,
 				7FF039BA2253BFF500C56563 /* simbolo-de-resta-r.png in Resources */,
 				7FF039BB2253BFF500C56563 /* boton-de-suma-g.png in Resources */,
 			);
@@ -454,7 +453,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		817890DFA287EBA33318AEF9 /* [CP] Check Pods Manifest.lock */ = {
+		001F141130D84AF74BCF2761 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,55 +471,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		84D6A57FA9760A59A44A0B59 /* [CP] Embed Pods Frameworks */ = {
+		08F41114E38F29085B061B9B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"$(DERIVED_FILE_DIR)/Pods-TFGUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		86795BC8D4AF2FA0EC34D64D /* [CP] Copy Pods Resources */ = {
+		AB01DE1EB0F9A2E5C8F6CA2A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -554,25 +523,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AD58A3EBB150B1D963603C44 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TFGUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B4C8EAB4DBBD2840F72EE5AD /* [CP] Check Pods Manifest.lock */ = {
+		AE911E6862D7D1B8AA2A0F7D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -590,22 +541,54 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F1BE0EED920CE49E325778EC /* [CP] Embed Pods Frameworks */ = {
+		E9A6432D9908F810C16781DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TFGTests/Pods-TFGTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TFG/Pods-TFG-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -622,13 +605,13 @@
 				7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */,
 				7FF039DA2254BF4D00C56563 /* Alertas.swift in Sources */,
 				7FF039CE2254BEA900C56563 /* ContenidoViewController.swift in Sources */,
+				7F67C91C225E2D0A0015CC4B /* NewUserViewController.swift in Sources */,
 				7FF039CF2254BEA900C56563 /* ContenidoAdminViewController.swift in Sources */,
 				7FF039D82254BF4D00C56563 /* Funciones.swift in Sources */,
 				7FF039BE2254B25000C56563 /* Divisa.swift in Sources */,
 				7F06687F2239212B00705E62 /* AppDelegate.swift in Sources */,
 				7FF039CA2254BEA900C56563 /* ViewController.swift in Sources */,
 				7FF039CB2254BEA900C56563 /* EliminarUsuarioViewController.swift in Sources */,
-				7FF039CC2254BEA900C56563 /* NewUserViewController.swift in Sources */,
 				7F16DD8F2244F8BC0070F0D3 /* Movimiento.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -802,7 +785,7 @@
 		};
 		7F0668A42239212C00705E62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DF9D55A6B8F5C078DC772FB /* Pods-TFG.debug.xcconfig */;
+			baseConfigurationReference = B2514E0C84DBC68E9BCD2FC8 /* Pods-TFG.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -861,7 +844,7 @@
 		};
 		7F0668A52239212C00705E62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D319BAADCE72D19081ACFD1 /* Pods-TFG.release.xcconfig */;
+			baseConfigurationReference = 0029425451F6A2C3F99698BA /* Pods-TFG.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -920,7 +903,7 @@
 		};
 		7F0668A72239212C00705E62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D89C7B0445789B4883C121F8 /* Pods-TFGTests.debug.xcconfig */;
+			baseConfigurationReference = 7C7E5281BD6EB85C1AD60867 /* Pods-TFGTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -942,7 +925,7 @@
 		};
 		7F0668A82239212C00705E62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0500682F490508ED81018466 /* Pods-TFGTests.release.xcconfig */;
+			baseConfigurationReference = 24854201E37C4C7E224AF4FB /* Pods-TFGTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -964,7 +947,7 @@
 		};
 		7F0668AA2239212C00705E62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AD64476C6464140B415A61B /* Pods-TFGUITests.debug.xcconfig */;
+			baseConfigurationReference = EA6659A8B584FEF9B6565160 /* Pods-TFGUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -985,7 +968,7 @@
 		};
 		7F0668AB2239212C00705E62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 648DD7163B13DC2A271CAC12 /* Pods-TFGUITests.release.xcconfig */;
+			baseConfigurationReference = FC8F4CF8D0FD8007CC7D2B28 /* Pods-TFGUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
