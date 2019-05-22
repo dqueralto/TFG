@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import SQLite
 import SQLite3
+import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
 class ViewController: UIViewController{
-    private var db: OpaquePointer?
-    private var dbName: String = "Datos.sqlite"
-    private var usuarios = [Usuario]()
-    //private var conexion = ConexionDB()
     private var funciones = Funciones()
     private var alertas = Alertas()
-    var ref: DatabaseReference!
+
+    private var db: OpaquePointer?
+    private var usuarios = [Usuarios]()
+    private var usu: [String] = []
+    
+    let fecha = Funciones().fechaActual()
 
     @IBOutlet weak var usuario: UITextField!
     @IBOutlet weak var contrasenia: UITextField!
@@ -28,81 +31,54 @@ class ViewController: UIViewController{
     {
         if funciones.tengoConexion()
         {
-            self.alertas.nuevoUsuario(vc: self,ms: "")
+            self.nuevoUsuario(vc: self,ms: "")
         }
         else
         {
             self.funciones.comprobarConexion(donde: self)
         }
+        
     }
+
     
-    func visUsu()
-    {
-        for usu in self.usuarios
-        {
-            print("usu: "+usu.usuario)
-            print("pass: "+usu.contrasenia)
-            print("tipo: "+usu.tipo)
-            //self.funciones.conexionAPI()
-        }
-        print("fin :"+String(self.usuarios.count))
-        ConexionDB().filtroUsuarioFirebase(coleccion: "Usuarios", usu: "pp")
-    }
+
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
-        ref = Database.database().reference()
-        
-        //self.funciones.comprobarConexion(donde: self)
-        //self.ref.child("admin").child(user.uid)
-        
-        //--------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------
         DispatchQueue.global(qos: .background).async {//hilo de fonde
             print("Esto se ejecuta en la cola de fondo")
             self.funciones.comprobarConexion(donde: self)
-            //self.conectarDB()
-            //ConexionDB().conectarDBSQLite()
-            self.visUsu()
-            self.visUsu()
+            self.crearBD()
             
+
             if self.usuarios.count == 0
             {
-                
-                //ConexionDB().insertarUsuarioFirebase(email: "admin@admin.admin", pass: "administrador",vc: self)
-                //ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuario",vc: self)
-                
-                
-                //self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-                //self.insertarUsuarioSQLite(usu: "usu", pass: "usu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@su.usu",sexo: "poco")
-                if self.usuarios.count == 2
-                {
-                    print("ADMIN insertado al loguear")
-                    print("USU insertado al loguear")
-                    self.visUsu()
-
-                }
-                else if self.usuarios.count == 0
-                {
-                    print("No se ha podido insertar al loguearse")
-                    self.visUsu()
-                }
+                //self.insertar(correo: "usu@usu.usu", clave: "usuusu", usuario: "usu",fec: self.fecha )
+                //ConexionDB().addUsuarioFirebase(usu: "usu", pass: "usuusu", email: "usu@usu.usu", fec: Date())
+                //ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuusu", vc: self)
+                print("usu base insertado al loguear")
             }
+            else if self.usuarios.count == 0
+            {
+                print("ADMIN no se ha podido insertar al loguearse")
+            }
+                
+            self.leerValores()
+
+    
+            
             DispatchQueue.main.async {//hilo principal
                 print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
-                self.visUsu()
-
+                if Funciones().tengoConexion(){
+                    self.actualizarUsuarios()
+                }
                 //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
 
-                
-
-                
-                
                 
             }//fin hilo de principal
         }//fin del hilo de fondo
         //--------------------------------------------------------------------------------------------------------------------------
-
-        
     }
     
     
@@ -110,7 +86,6 @@ class ViewController: UIViewController{
     //-------------------------------
     override func viewDidAppear(_ animated: Bool) {
         //self.alertas.alertaSinConexion(donde: self)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,83 +99,109 @@ class ViewController: UIViewController{
     //-------------------------------------
     @IBAction func informacion(_ sender: Any)
     {
-            Alertas().crearAlertainformacion(titulo: "Información", mensaje: "El inicio de sesion requiere que el usuario exista y la contraseña sea correcta. \nEn caso de no tener usuario pulse 'No tengo usuario' y rellene el formulario.", vc: self)    }
+            Alertas().crearAlertainformacion(titulo: "Información", mensaje: "El inicio de sesion requiere que el usuario exista y la contraseña sea correcta. \nEn caso de no tener usuario pulse 'No tengo usuario' y rellene el formulario.", vc: self)
+    }
+    
+    internal func actualizarUsuarios()
+    {
+        leerValores()
+        for usu in usuarios {
+            print("\(usu.usuario)  \(ConexionDB().existeUsuarioFirebase(usuario: usu.usuario))")
+            print(usu.usuario)
+            if !ConexionDB().existeUsuarioFirebase(usuario: usu.usuario){
+                print("¡¡¡¡¡¡¡¡TENGO MIEDO!!!!!!!")
+                self.eliminarUsuario(usu: usu.usuario)
+            }
+        }
+        leerValores()
+    }
+    
+    @IBAction func visualizarUsuarios(_ sender: Any)
+    {
+        
+
+        
+    }
+
     
     @IBAction func Conectar(_ sender: Any)
     {
-        //self.crearObjUsuario()
-        
+        leerValores()
+        for usu in usuarios {
+            print("usua: "+usu.usuario)
+            print("mail: "+usu.email)
+            print("pass: "+usu.pass)
+
+        }
         if self.usuario.text?.count == 0 || self.contrasenia.text?.count == 0
         {
             Alertas().crearAlertainformacion(titulo: "Cuidadin...", mensaje: "Los campos usuario y conraseña no pueden estar vacíos si quiere conectarse.\nLogica de primero de primaria.", vc: self)
         }else{
         //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
-        if self.usuarios.count <= 1
+        if usuarios.count == 0
         {
-            //self.conexion.insertarUsuarioFirebase(email: "admin@admin.admin", pass: "admin", vc: self)
-            //self.insertarUsuarioSQLite(usu: "admin", pass: "admiadmin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            
-            //self.insertarUsuarioSQLite(usu: "usu", pass: "usuusu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
-            
-            if self.usuarios.count == 2
-            {
-                print("ADMIN insertado al loguear")
-            }else if self.usuarios.count <= 1
-            {
-                print("ADMIN no se ha podido insertar al loguearse")
-                self.visUsu()
+            self.insertar(correo: "usu@dqp.dqp", clave: "usuusu", usuario: "usu",fec: self.fecha )
 
+            if usuarios.count == 1
+            {
+                print("usu1 insertado al loguear")
             }
-            self.visUsu()
-
+            else if usuarios.count == 0
+            {
+                print("usu1 no se ha podido insertar al loguearse")
+            }
         }
+
         //----------------------------------------------
         //Comprobacio de posibles fallos + seleccion del tipo de interfaz que se mostrara segun el tipo de usuario ----------------------------------------------
+        
+        self.filtrarValores(usuario: self.usuario.text!)
+            
         print("0")
+        print("text: "+self.usuario.text!)
+        print("bd: \(usuarios.count)")
         for usu in usuarios
         {
             print("1")
-            if usuario.text!.elementsEqual(usu.usuario)
+            print("text: "+self.usuario.text!)
+            print("bd: "+usu.usuario)
+
+            if self.usuario.text!.elementsEqual(usu.usuario)
             {
                 print("2")
-                if contrasenia.text!.elementsEqual(usu.contrasenia)
+                if self.contrasenia.text!.elementsEqual(usu.pass)
                 {
                     print("3")
-                    if usu.tipo.elementsEqual("A")//si el tipo del usuario introducido es "A"
-                    {
-                        print("3.1")
-                        performSegue(withIdentifier: "contenidoAdmin", sender: nil)//asignamos al segue el nombre de la ruta al view de los admin
-                        return//finalizamos acciones
-                        
-                    }
-                    if usu.tipo.elementsEqual("U")//si el tipo del usuario introducido es "U"
-                    {
-                        print("3.2")
-                        performSegue(withIdentifier: "contenido", sender: nil)//asignamos al segue el nombre de la ruta al view de los usuarios
-                        return//finalizamos acciones
-                    }
+                    performSegue(withIdentifier: "contenido", sender: nil)//asignamos al segue el nombre de la ruta al view de los usuarios
+                    return//finalizamos acciones
                 }
-                else
+                else //if usuarios.count==0
                 {
                     print("4")
-                    //alerta2.isHidden = false
                     self.alertas.alertaPassIncorecta(donde: self)
-                    //return
+                    return
                 }
             }
-            else
+            else //if usuarios.count==0
             {
                 print("5")
-                //alerta.isHidden = false
                 self.alertas.alertaUsuarioInexistente(donde: self)
-                //return
+                return
             }
-        }
         
         }
-        
+            if usuarios.count == 0
+            {
+                print("5")
+                self.alertas.alertaUsuarioInexistente(donde: self)
+                return
+            }
+
     }
     
+        
+}
+
     //Carga de la interfaz correspondiente al tipo de segue que le indicamos ----------------------------------------------
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -218,18 +219,8 @@ class ViewController: UIViewController{
             }
         }
         
-        if segue.identifier == "contenidoAdmin"
-        {
-            print("4")
-            
-            if let vistaContenido = segue.destination as? ContenidoAdminViewController
-            {
-                print("3")
-                
-                vistaContenido.usuario =  usuario.text!
-            }
-        }
     }
+    
     
     //---------------------------------------------------------------------------------------------------------
     //LE INDICAMOS QUE CUANDO TOQUEMOS EN ALGUNA PARTE DE LA VISTA CIERRE EL TECLADO
@@ -239,79 +230,66 @@ class ViewController: UIViewController{
     }
     
     
-   //* //_---------------------------------------------------------------------------------------------------------------
-    /*
-    internal func conectarDB()
+    //_---------------------------------------------------------------------------------------------------------------
+
+
+    
+    func crearBD()
     {
         //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("Datos.sqlite")
+            .appendingPathComponent("Usuarios.sqlite")
         //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
-            print("error al abrir la base de datos")
+            print("error opening database")
         }
         else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
             print("base abierta")
-            //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);COMMIT; CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (correo TEXT PRIMARY KEY, clave TEXT, usuario TEXT, fec_creacion TEXT)", nil, nil, nil) != SQLITE_OK {
                 let errmsg = String(cString: sqlite3_errmsg(db)!)
                 print("error creating table: \(errmsg)")
             }
         }
-        print("BD creada")
-        self.crearObjUsuario()
-        print("Usuarios creados")
-        if usuarios.count == 0
-        {
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admiadmin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            print("ADMIN insertado.")
-            self.insertarUsuarioSQLite(usu: "usu", pass: "usuusu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
-            ConexionDB().insertarUsuarioFirebase(email: "admin@admin.admin", pass: "administrador",vc: self)
-            ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuario",vc: self)
-        }
+        leerValores()
+        
         
     }
     
-    internal func conectarDB(nombreDB: String)
-    {
-        //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(nombreDB)
-        //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
-        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
-            print("error al abrir la base de datos")
+    func insertar(correo: String, clave: String, usuario: String,fec: String)  {
+        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
+        var stmt: OpaquePointer?
+        
+        //CREAMOS NUESTRA SENTENCIA
+        let queryString = "INSERT INTO Usuarios (correo, clave, usuario, fec_creacion) VALUES ("+"'"+correo+"','"+clave+"','"+usuario+"','"+fec+"');"
+        //PREPARAMOS LA SENTENCIA
+        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print(queryString)
+            print("error preparing insert: \(errmsg)")
+            return
         }
-        else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
-            print("base abierta")
-            //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);", nil, nil, nil) != SQLITE_OK {
-                //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
-                let errmsg = String(cString: sqlite3_errmsg(db)!)
-                print("error creating table: \(errmsg)")
-            }
+        
+        
+        //EJECUTAMOS LA SENTENCIA PARA INSERTAR LOS VALORES
+        if sqlite3_step(stmt) != SQLITE_DONE {
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print("fallo al insertar en Usuarios: \(errmsg)")
+            return
         }
-        print("BD creada")
-        self.crearObjUsuario()
-        print("Usuarios creados")
-        if usuarios.count == 0
-        {
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            self.insertarUsuarioSQLite(usu: "usu", pass: "usu", tipo: "U",nom: "Vista Usario",apell: "Vista Usario",fec_nac: "16/10/1996",email: "usu@usu.usu",sexo: "poco")
-            ConexionDB().insertarUsuarioFirebase(email: "admin@admin.admin", pass: "administrador",vc: self)
-            ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuario",vc: self)
-            //print("ADMIN insertado.")
-        }
+        
+        //FINALIZAMOS LA SENTENCIA
+        sqlite3_finalize(stmt)
+        //displaying a success message
+        print("Histo saved successfully")
         
     }
-    
-    
-    
-    internal func crearObjUsuario(){
+    func leerValores(){
         
+        //PRIMERO LIMPIAMOS LA LISTA "HISTORIAL"
+        usuarios.removeAll()
         
         //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "SELECT * FROM Usuarios;"
+        let queryString = "SELECT * FROM Usuarios"
         
         //PUNTERO DE INSTRUCCIÓN
         var stmt:OpaquePointer?
@@ -325,99 +303,82 @@ class ViewController: UIViewController{
         
         //RECORREMOS LOS REGISTROS
         while(sqlite3_step(stmt) == SQLITE_ROW){
-            print("illo")
-            let usuario = String(cString: sqlite3_column_text(stmt, 0))
-            let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
-            let tipo = String(cString: sqlite3_column_text(stmt, 2))
-            let nombre = String(cString: sqlite3_column_text(stmt, 3))
-            let apellidos = String(cString: sqlite3_column_text(stmt, 4))
-            let fec_nac = String(cString: sqlite3_column_text(stmt, 5))
-            let email = String(cString: sqlite3_column_text(stmt, 6))
-            let sexo = String(cString: sqlite3_column_text(stmt, 7))
-            print("illo2")
+            let correo = String(cString: sqlite3_column_text(stmt, 0))
+            let clave = String(cString: sqlite3_column_text(stmt, 1))
+            let usuar = String(cString: sqlite3_column_text(stmt, 2))
+            let fec = String(cString: sqlite3_column_text(stmt, 3))
+
             //AÑADIMOS LOS VALORES A LA LISTA
-            self.usuarios.append(Usuario(
-                usuario: String(describing: usuario),
-                contrasenia: String(describing: contrasenia),
-                tipo:String(describing: tipo)
-                ,nombre:String(describing: nombre)
-                ,apellidos:String(describing: apellidos)
-                ,fec_nac:String(describing: fec_nac)
-                ,email:String(describing: email)
-                ,sexo:String(describing: sexo)
-                
-            ))
+            usuarios.append(Usuarios(email: String(correo), pass: String(clave), usuario: String(usuar),fec: String(fec) ))
         }
-        print("siiiiiiiiii")
-    }
-    
-    internal func insertarUsuarioSQLite(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
-        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
-        var stmt: OpaquePointer?
-        
-        //CREAMOS NUESTRA SENTENCIA
-        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email,sexo) VALUES ('"+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');"
-        //PREPARAMOS LA SENTENCIA
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print(queryString)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        
-        
-        //EJECUTAMOS LA SENTENCIA PARA INSERTAR LOS VALORES
-        if sqlite3_step(stmt) != SQLITE_DONE {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("fallo al insertar en usuarios: \(errmsg)")
-            //nurvc.alerta2.isHidden = true
-            //nurvc.alerta3.isHidden = true
-            //nurvc.alerta.isHidden = false
-            return
-        }
-        
-        //FINALIZAMOS LA SENTENCIA
-        sqlite3_finalize(stmt)
-        print("Insertado")
-        //displaying a success message
-        print("Usuario saved successfully")
         
     }
-    
-    internal func eliminarUsuarios()
-    {
+    func filtrarValores(usuario:String){
+        
+        //PRIMERO LIMPIAMOS LA LISTA "HISTORIAL"
+        usuarios.removeAll()
+        
         //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "DELETE FROM Usuarios;"
-        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
-        var deleteStatement: OpaquePointer? = nil
+        let queryString = "SELECT * FROM Usuarios WHERE usuario LIKE '"+usuario+"'"
+        
+        //PUNTERO DE INSTRUCCIÓN
+        var stmt:OpaquePointer?
         
         //PREPARACIÓN DE LA CONSULTA
-        if sqlite3_prepare(db, queryString, -1, &deleteStatement, nil) != SQLITE_OK{
+        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
             let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print(queryString)
             print("error preparing insert: \(errmsg)")
             return
         }
-        //ELIMINAMOS LOS REGISTROS
-        if sqlite3_prepare_v2(db, queryString, -1, &deleteStatement, nil) == SQLITE_OK {
-            if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                print("Successfully deleted row.")
-            } else {
-                print("Could not delete row.")
-            }
-        } else {
-            print("DELETE statement could not be prepared")
+        
+        //RECORREMOS LOS REGISTROS
+        while(sqlite3_step(stmt) == SQLITE_ROW){
+            let correo = String(cString: sqlite3_column_text(stmt, 0))
+            let clave = String(cString: sqlite3_column_text(stmt, 1))
+            let usuar = String(cString: sqlite3_column_text(stmt, 2))
+            let fec = String(cString: sqlite3_column_text(stmt, 3))
+
+            //AÑADIMOS LOS VALORES A LA LISTA
+            usuarios.append(Usuarios(email: String(correo), pass: String(clave), usuario: String(usuar), fec: String(fec) ))
         }
         
-        //FINALIZAMOS LA SENTENCIA
-        sqlite3_finalize(deleteStatement)
-        //insertarAdmin()
+    }
+    func filtrarEmail(email:String){
+        
+        //PRIMERO LIMPIAMOS LA LISTA "HISTORIAL"
+        usuarios.removeAll()
+        
+        //GUARDAMOS NUESTRA CONSULTA
+        let queryString = "SELECT * FROM Usuarios WHERE correo LIKE '"+email+"'"
+        
+        //PUNTERO DE INSTRUCCIÓN
+        var stmt:OpaquePointer?
+        
+        //PREPARACIÓN DE LA CONSULTA
+        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print("error preparing insert: \(errmsg)")
+            return
+        }
+        
+        //RECORREMOS LOS REGISTROS
+        while(sqlite3_step(stmt) == SQLITE_ROW){
+            let correo = String(cString: sqlite3_column_text(stmt, 0))
+            let clave = String(cString: sqlite3_column_text(stmt, 1))
+            let usuar = String(cString: sqlite3_column_text(stmt, 2))
+            let fec = String(cString: sqlite3_column_text(stmt, 3))
+            
+            //AÑADIMOS LOS VALORES A LA LISTA
+            usuarios.append(Usuarios(email: String(correo), pass: String(clave), usuario: String(usuar), fec: String(fec) ))
+        }
+        
     }
     
     internal func eliminarUsuario(usu: String)
     {
+        var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
         //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "DELETE FROM Usuarios WHERE usuario ='"+usu+"';"
+        let queryString = sentDelUsu+usu+"'"
         //CREAMOS EL PUNTERO DE INSTRUCCIÓN
         var deleteStatement: OpaquePointer? = nil
         
@@ -443,12 +404,226 @@ class ViewController: UIViewController{
         sqlite3_finalize(deleteStatement)
         //insertarAdmin()
     }
+//---------------------------------------------------------------
+    internal func existeUsu(usuario usu:String) -> Bool
+    {
+        var existeUsu:Bool = false
+        self.filtrarValores(usuario: usu)
+        //print(self.usuarios)
+        
+        if self.usuarios.count == 1
+        {
+            existeUsu = true
+        }else if self.usuarios.count == 0
+        {
+            existeUsu = false
+        }
+        
+        return existeUsu
+    }
+    
+    internal func existeCorreo(correo email:String) -> Bool
+    {
+        var existeCorreo:Bool = false
+        self.filtrarEmail(email: email)
+        //print(self.usuarios)
+        
+        if self.usuarios.count == 1
+        {
+            existeCorreo = true
+        }else if self.usuarios.count == 0
+        {
+            existeCorreo = false
+        }
+        
+        return existeCorreo
+    }
+    
+    internal var usuarioRegistro: String = ""
+    internal var emailRegistro: String = ""
+    internal var reinicio: Bool = true
+    
+    internal func nuevoUsuario(vc: UIViewController,ms:String!){
+        
+        //1.
+        let alert = UIAlertController(title: "Nuevo Usuario",
+                                      message: "Introduce tus datos por favor.\n"+ms,
+                                      
+                                      preferredStyle: .alert)
+        //2.
+        let saveAction = UIAlertAction(title: "Guardar",
+                                       style: .default) { action in
+                                        
+                                        let usuario = alert.textFields![0].text!
+                                        let contrasenia = alert.textFields![1].text!
+                                        let confirmacion = alert.textFields![2].text!
+                                        let correo = alert.textFields![3].text!
+                                        
+                                        
+                                        //3.
+                                        if !usuario.elementsEqual("")
+                                        {
+                                            if !contrasenia.elementsEqual("")
+                                            {
+                                                if contrasenia.count >= 6
+                                                {
+                                                    if contrasenia.elementsEqual(confirmacion)
+                                                    {
+                                                        if !correo.elementsEqual("")
+                                                        {
+                                                            if Funciones().isValidEmail(testStr: correo)
+                                                            {
+                                                                
+                                                                if !self.existeUsu(usuario: usuario){
+                                                                
+                                                                    if !self.existeCorreo(correo: correo){
+                                                                        
+                                                                        //-------------------------------------
+                                                                        
+                                                                        self.insertar(correo: correo, clave: contrasenia, usuario: usuario,fec: self.fecha)//Insertamos ficha usuario a Firebase BD
+                                                                        
+                                                                        ConexionDB().insertarUsuarioFirebase(email: correo, pass: contrasenia, vc: self)//Insertamos usuario en Autenticatro Firebase
+                                                                        
+                                                                        ConexionDB().addUsuarioFirebase(usu: usuario, pass: contrasenia, email: correo, fec: Date())//Insertamos usuario en BD Firebase
+                                                                        
+                                                                        Alertas().crearAlertainformacion(titulo: "Registro Corecto", mensaje: "Usuario registrado correctamente", vc: self)//Alerta informativo cuando el registro es correcto
+                                                                        
+                                                                        self.reinicio = false
+                                                                        
+                                                                        //-------------------------------------
+                                                                        
+                                                                    }else{
+                                                                        self.reinicio = true
+                                                                        self.usuarioRegistro = usuario
+                                                                        //self.emailRegistro = correo
+                                                                        self.nuevoUsuario(vc: vc, ms: "El correo ya existe.")
+                                                                    }
+                                                                    
+                                                                }else{
+                                                                    self.reinicio = true
+                                                                    //self.usuarioRegistro = usuario
+                                                                    self.emailRegistro = correo
+                                                                    self.nuevoUsuario(vc: vc, ms: "El usuario ya existe.")
+                                                                }
+                                                                
+                                                            }
+                                                            else
+                                                            {
+                                                                self.reinicio = true
+                                                                self.usuarioRegistro = usuario
+                                                                self.emailRegistro = correo
+                                                                self.nuevoUsuario(vc: vc, ms: "El email no tiene el formato correcto.")
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            self.reinicio = true
+                                                            self.usuarioRegistro = usuario
+                                                            self.emailRegistro = correo
+                                                            self.nuevoUsuario(vc: vc, ms: "El email es obligatorio.")
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        self.reinicio = true
+                                                        self.usuarioRegistro = usuario
+                                                        self.emailRegistro = correo
+                                                        self.nuevoUsuario(vc: vc, ms: "Las contraseñas no coincide.")
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    self.reinicio = true
+                                                    self.usuarioRegistro = usuario
+                                                    self.emailRegistro = correo
+                                                    self.nuevoUsuario(vc: vc, ms: "La contraseña es demasiado corta \n(6 caracteres minimo).")
+                                                }
+                                            }
+                                            else
+                                            {
+                                                self.reinicio = true
+                                                self.usuarioRegistro = usuario
+                                                self.emailRegistro = correo
+                                                self.nuevoUsuario(vc: vc, ms: "La contraseñas es obligatoria.")
+                                            }
+                                        }
+                                        else
+                                        {
+                                            self.reinicio = true
+                                            self.usuarioRegistro = usuario
+                                            self.emailRegistro = correo
+                                            self.nuevoUsuario(vc: vc, ms: "El usuario es obligatorio.")
+                                        }
+                                        
+        }
+        //4.
+        let cancelAction = UIAlertAction(title: "Cancelar",
+                                         style: .default){action in
+                                            self.reinicio = false
+        }
+        //5.
+        
+        
+        alert.addTextField { textUsu in
+            textUsu.placeholder = "Usuario"
+            if self.reinicio
+            {
+                textUsu.text = String(self.usuarioRegistro)
+                
+            }
+        }
+        alert.addTextField { textPassword in
+            textPassword.isSecureTextEntry = true
+            textPassword.placeholder = "Contraseña"
+        }
+        alert.addTextField { textConfPass in
+            textConfPass.isSecureTextEntry = true
+            textConfPass.placeholder = "Confirmar contraseña"
+        }
+        alert.addTextField { textEmail in
+            textEmail.placeholder = "Email"
+            if self.reinicio
+            {
+                textEmail.text = String(self.emailRegistro)
+            }
+        }
+        
+        
+        
+        
+        //6.
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        //7.
+        
+        vc.present(alert, animated: true, completion: nil)
+    }
 
     
-    */
- 
-    
-    
+
+
+}
+//---------------------------------------------------------------------------------------------------------------
+//OBJETOS
+//---------------------------------------------------------------------------------------------------------------
+
+
+internal class Usuarios
+{
+    var usuario: String
+    var pass: String
+    var email: String
+    var fec: String
+
+    init (email: String, pass: String,usuario: String,fec:String)
+    {
+        self.email = email
+        self.pass = pass
+        self.usuario = usuario
+        self.fec = fec
+  
+    }
+
 }
 
 

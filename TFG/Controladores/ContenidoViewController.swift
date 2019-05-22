@@ -8,18 +8,19 @@
 
 import UIKit
 import Alamofire
-class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
- 
-    
+import SQLite3
+
+class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
+
     var usuario: String?
     internal var cabecera: String? 
     
     @IBOutlet weak var titulo: UINavigationItem!
     @IBOutlet weak var selector: UISegmentedControl!
     
-    @IBOutlet weak var movimientos: UIView!
     @IBOutlet weak var conversor: UIView!
     
+    @IBOutlet weak var histoConver: UITableView!
     @IBOutlet weak var valor: UITextField!
     @IBOutlet weak var resultado: UILabel!
     
@@ -30,7 +31,9 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     var codDivDes: String = ""
     var posVal: Int = 0
     var posRes: Int = 0
-    
+
+    var resulConversion: String = "0,0"
+    var insertHisto:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,28 +47,21 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         pickerDestino.delegate = self
         pickerDestino.dataSource = self
         
-        self.movimientos.isHidden = false
-        
-
-        
-        
-        
     }
     
+
     
     @IBAction func ventanas(_ sender: Any) {
         switch selector.selectedSegmentIndex
         {
             case 0:
             NSLog("Movimientos selected")
-            self.movimientos.isHidden = false
             self.conversor.isHidden = true
             //show movimientos view
             
             case 1:
             NSLog("Conversor selected")
             self.conversor.isHidden = false
-            self.movimientos.isHidden = true
             //show historial view
             
             default:
@@ -80,24 +76,13 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        /*let array = Array(self.valor.text!)
-        if array[0] == ","
-        {
-            let intermedia = self.valor.text!
-            self.valor.text = "0"+intermedia
-        }*/
+
     }
     
+
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        /*//agragar esto para controlar coma suelta
-         
-        let array = Array(self.valor.text!)
-        if array[0] == ","
-        {
-            let intermedia = self.valor.text!
-            self.valor.text = "0"+intermedia
-        }
-        */
+
         //For mobile numer validation
         if textField == self.valor {
 
@@ -130,13 +115,8 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 return false
                 
             }
-            
-            
-            
-            
-        }
 
-        
+        }
         
         return true
         
@@ -162,6 +142,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 //------------------------------------------------------botones de "Conversor"------------------------------------------------------
     @IBAction func limpiarConvertidor(_ sender: Any)
     {
+        
         self.valor.text = "0,0"
         self.resultado.text = "0,0"
     }
@@ -169,14 +150,170 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func convertir(_ sender: Any)
     {
-        harcoreConverter()
-    }
-    @IBAction func infoConversion(_ sender: Any)
-    {
-        Alertas().crearAlertainformacion(titulo: "Info:", mensaje: "Los cambios entre divisas se realizan tanto al seleccionar una divisa como al pulsar el botón 'Convertir'.\n \nEl botón con flechas invierte los valores y las divisas .", vc: self )
+        
+        if Funciones().tengoConexion(){
+            
+            if !codDivDes.elementsEqual(codDivOri)
+            {
+                self.insertHisto = true
+            }
+            self.conversionConAPI()
+                
+
+        }
+        else
+        {
+
+            conversionSinAPI()
+            
+            self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resultado.text!, divCon: self.codDivDes))
+            
+            self.conversiones.removeAll()
+            self.histoConver.reloadData()
+        }
+        
+        
+        
+        
     }
     
-    func harcoreConverter()
+    @IBAction func infoConversion(_ sender: Any)
+    {
+        Alertas().crearAlertainformacion(titulo: "Info:", mensaje: "Los cambios entre divisas se realizan tanto al seleccionar una divisa como al pulsar el botón 'Convertir', como funcion extra al pulsar este botón se dicha conversión se almacenara en un pequeño historial temporal que se eliminara al salir del usuario y/o cerrar la aplicación.\n \nEl botón con flechas invierte los valores y las divisas.", vc: self )
+    }
+
+
+    func conversionSinAPI()
+    {
+
+        
+        let array = Array(self.valor.text!)
+        let str = self.valor.text!
+        print(array.count)
+        
+        
+        if self.valor.text!.count == 0
+        {
+            self.valor.text = "0,0"
+        }
+        else if   array[0] == ","
+        {
+            if array[0] == "," && array.count == 1
+            {
+                self.valor.text = "0,0"
+            }
+            else if array[0] == "," && array.count > 1
+            {
+                let intermedia = self.valor.text!
+                self.valor.text = "0"+intermedia
+            }
+        }
+        else if array[0] == "0"  && array.count == 1
+        {
+            self.valor.text = "0,0"
+        }
+        
+        
+        if(codDivDes == "" ){
+            
+            codDivDes = codDivisa[0]
+        }
+        
+        if(codDivOri == "" ){
+            
+            codDivOri = codDivisa[0]
+        }
+        
+        var json:String = ""
+        
+        
+        let yourJSONString: String = """
+{"base":"GBP","rates":{"BGN":2.2552264105,"NZD":1.9667216309,"ILS":4.6293370847,"RUB":84.4186663284,"CAD":1.7431361922,"USD":1.2944662892,"PHP":67.9150859634,"CHF":1.303806372,"AUD":1.8636347912,"JPY":141.8308868466,"TRY":7.810154169,"HKD":10.1601651234,"MYR":5.398567854,"HRK":8.5459451357,"CZK":29.6933916032,"IDR":18679.1508596335,"DKK":8.6125941215,"NOK":11.2991939854,"HUF":373.868523921,"GBP":1.0,"MXN":24.8121029023,"THB":40.7758034201,"ISK":158.8967171339,"ZAR":18.4202576018,"BRL":5.159300301,"SGD":1.7718482986,"PLN":4.9653494459,"INR":91.1378757654,"KRW":1537.3084418205,"RON":5.4904696563,"CNY":8.9079021713,"SEK":12.4292286937,"EUR":1.153096641},"date":"2019-05-14"}
+"""
+        
+        
+        if let ruta = Bundle.main.path(forResource: "ChangesBaseUSD", ofType: "json"),
+            let datosJSON = FileManager.default.contents(atPath: ruta),
+            let datos = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? String {
+            json = datos
+        }
+        struct  Divisa:Codable
+        {
+            let base: String
+            let rates: [String: Double]
+            let date: String
+        }
+        
+        let jsonDecoder: JSONDecoder = JSONDecoder();
+        
+        // Decode by telling it which struct or class maps to which String containing JSON.
+        do {
+            let divisa: Divisa = try jsonDecoder.decode(Divisa.self, from: yourJSONString.data(using: String.Encoding.utf8)!);
+
+            print(divisa.rates["GBP"]) // "bar"
+            
+            
+            
+            if codDivOri != codDivDes{
+                
+                
+                var cambioOrigen: Double = 0.0
+                var cambioDestino: Double = 0.0
+                var cambio: Double = 0.0
+
+                
+                
+                var valor = self.valor.text!.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+                
+                if valor.count != 0{
+                    valor = Funciones().cambioCaracteres(texto: valor, de: ",", a: ".")
+                    var paso:Double = 0.0
+                    var fin: Double = 0.0
+                    paso = (Double(valor) as! Double)
+                    
+                    cambioOrigen = divisa.rates[codDivOri]!
+
+
+                    cambioDestino = divisa.rates[codDivDes]!
+
+                    
+                    fin = Funciones().reglaDeTres(cambio: cambioDestino, deseado: cambioOrigen)
+
+                    
+                    fin = Funciones().calcularConversion(cantidad: paso,cambio: fin)
+
+
+                    self.resultado.text = Funciones().cambioCaracteres(texto: String(fin), de: ".", a: ",")
+                    
+                    
+                    fin = 0
+                    
+                    
+                }
+                else
+                {
+                    Alertas().crearAlertainformacion(titulo: "Cuidadin", mensaje: "No a introducido una cantidad que convertir...",vc: self)
+                }
+                
+            }
+            else
+            {
+                self.resultado.text = self.valor.text!
+                self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resulConversion, divCon: self.codDivDes))
+                self.conversiones.removeAll()
+                
+                self.histoConver.reloadData()
+            }
+            
+        } catch {
+            // Handle if the JSON cannot map to the struct or class.
+        }
+        
+
+        
+        
+    }
+    func conversionConAPI()
     {
         
         let array = Array(self.valor.text!)
@@ -194,7 +331,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             {
                 self.valor.text = "0,0"
             }
-            else if array[0] == "," && array.count > 1 //|| array[1] == ","
+            else if array[0] == "," && array.count > 1
             {
                 let intermedia = self.valor.text!
                 self.valor.text = "0"+intermedia
@@ -204,10 +341,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         {
             self.valor.text = "0,0"
         }
-        /*else if  array[1] == "," && array[0] == "0" && array.count == 2
-        {
-            self.valor.text = "0,0"
-        }*/
         
 
         if(codDivDes == "" ){
@@ -219,6 +352,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             codDivOri = codDivisa[0]
         }
+        
         let url = "https://api.exchangeratesapi.io/latest?base="+self.codDivOri.uppercased()
         print("val1: "+self.codDivOri.uppercased())
         print("val2: "+self.codDivDes.uppercased())
@@ -232,20 +366,29 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                     var valor = self.valor.text!.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
                     if valor.count != 0{
                         valor = Funciones().cambioCaracteres(texto: valor, de: ",", a: ".")
-                        //valor = valor.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)
                         var paso:Double=0.0
                         
                         paso = (Double(valor) as! Double)
                         var fin: Double = 0.0
                         
                         fin = Funciones().calcularConversion(cantidad: paso,cambio: cambio)
-                        print("uffff")
-                        self.resultado.text = Funciones().cambioCaracteres(texto: String(fin), de: ".", a: ",")
+                       
+                        self.resulConversion = Funciones().cambioCaracteres(texto: String(fin), de: ".", a: ",")
+                        self.resultado.text = self.resulConversion
                         
+                        
+                        if self.insertHisto{
+                            self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resulConversion, divCon: self.codDivDes))
+                            self.conversiones.removeAll()
+                            
+                            self.histoConver.reloadData()
+                            self.insertHisto = false
+                        }
                     }
                     else
                     {
                         Alertas().crearAlertainformacion(titulo: "Cuidadin", mensaje: "No a introducido una cantidad que convertir...",vc: self)
+
                     }
                     
                 }
@@ -255,6 +398,14 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         else
         {
             self.resultado.text = self.valor.text!
+            if self.insertHisto{
+                self.resultado.text = self.valor.text!
+                self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resulConversion, divCon: self.codDivDes))
+                self.conversiones.removeAll()
+                
+                self.histoConver.reloadData()
+                self.insertHisto = false
+            }
         }
             
         
@@ -266,8 +417,10 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         {
             let valor = self.valor.text!
             let resultado = self.resultado.text!
+            
             self.valor.text = resultado
             self.resultado.text = valor
+            
             self.pickerOrigen.selectRow(self.posRes, inComponent: 0, animated: true)
             self.pickerDestino.selectRow(self.posVal, inComponent: 0, animated: true)
             
@@ -280,7 +433,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             codDivDes = intermediaDos
             
             
-            harcoreConverter()
         }
         else
         {
@@ -308,12 +460,12 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // Dispose of any resources that can be recreated.
     }
     
-    // Number of columns of data
+    // numero de columnas de datos
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
     }
     
-    // The number of rows of data
+    //  numero de filas de datos
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         return codDivisa.count
     }
@@ -321,9 +473,16 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // The data to return fopr the row and component (column) that's being passed in
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
         return codDivisa[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        
+        let titleData = codDivisa[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [.font:UIFont(name: "Georgia", size: 15.0)!, .foregroundColor:UIColor.white])
+        return myTitle
+    }
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
                            
         if pickerView == pickerOrigen {
@@ -332,23 +491,67 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             print(row)
             self.posVal = row
             print(self.posVal)
-            harcoreConverter()
             
-        } else if pickerView == pickerDestino{
+            
+        }else if pickerView == pickerDestino{
             self.codDivDes = codDivisa[row]
             print(row)
             self.posRes = row
             print(self.posRes)
-            harcoreConverter()
+  
+            
         }
         
         
+        if Funciones().tengoConexion(){
+            conversionConAPI()
+        }else if !Funciones().tengoConexion(){
+            conversionSinAPI()
+        }
 
-        
-
-        
-        
     }
     //---------------------------------------------------------------------------------------------------------
+    
 
+    
+    
+//---------HISTORIAL DE CONVERSION ------------------------------------------------------------------------------------------------
+    var conversiones: [String] = []
+    var conver = [Conversiones]()
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return conver.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let celda = tableView.dequeueReusableCell(withIdentifier: "celdilla", for: indexPath)
+        
+        for con in conver.reversed()
+        {
+            conversiones.append("\(con.valOri) \(con.divOri)  =  \(con.valCon) \(con.divCon)")//AÑADIMOS EL ESTRING "URL" A LA NUEVA COLECCION
+        }
+        
+        celda.textLabel?.text = conversiones[indexPath.row]//LE INDICAMOS QUE LOS INSERTE SEGUN EL INDICE DE FILAS QUE CREAMOS EN LA FUNCION ANTERIOR CON "historial.count"
+
+        celda.textLabel?.textAlignment = .center  //CENTRAMOS EL TEXTO DE LA LISTA
+        celda.textLabel?.textColor = UIColor.white //CAMBIAMOS EL COLOR DE LAS LETRAS DE LA LISTA
+        return celda
+    }
+//---------------------------------------------------------------------------------------------------------
+
+}
+
+internal class Conversiones{
+        var valOri: String
+        var divOri: String
+        var valCon: String
+        var divCon: String
+
+
+    init (valOri: String, divOri: String, valCon: String, divCon: String){
+        self.valOri = valOri
+        self.divOri = divOri
+        self.valCon = valCon
+        self.divCon = divCon
+    }
 }

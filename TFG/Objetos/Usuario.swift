@@ -9,29 +9,40 @@
 import Foundation
 
 internal class Usuario
+    
 {
+    //var id: Int
     var usuario: String
-    var contrasenia: String
-    var tipo: String
-    var nombre: String
-    var apellidos: String
-    var fec_nac: String
+    var pass: String
     var email: String
-    var sexo: String
+    //var tipo: String
+    //var tipo: String
+    //var nombre: String
+    //var apellidos: String
+    var fecha: String
+    //var email: String
+    //var sexo: String
 
 
     
-    init (usuario: String, contrasenia: String, tipo: String, nombre: String, apellidos: String, fec_nac: String, email: String, sexo: String)
+    //init (usuario: String, contrasenia: String, tipo: String, nombre: String, apellidos: String, fec_nac: String, email: String, sexo: String)
+    //init (usuario: String,email: String, pass: String, tipo:String)
+    init (email: String, pass: String,usuario: String, fecha:String)
+
     //init (usuario: String, contrasenia: String, tipo: String)
     {
-        self.usuario = usuario
-        self.contrasenia = contrasenia
-        self.tipo = tipo
-        self.nombre = nombre
-        self.apellidos = apellidos
-        self.fec_nac = fec_nac
         self.email = email
-        self.sexo = sexo
+        self.pass = pass
+        self.usuario = usuario
+        self.fecha = fecha
+        //self.tipo = tipo
+        
+        //self.tipo = tipo
+        //self.nombre = nombre
+        //self.apellidos = apellidos
+        //self.fec_nac = fec_nac
+        //self.email = email
+        //self.sexo = sexo
     }
     
     
@@ -39,7 +50,7 @@ internal class Usuario
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
     //GET
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
-    
+   /*
     internal func getUsu() -> Usuario
     {
         return self
@@ -128,5 +139,5 @@ internal class Usuario
     {
         self.sexo = sexo
     }
-    
+    */
 }

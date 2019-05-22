@@ -62,8 +62,42 @@ internal class Funciones{
     {
 
     }
-
-    func singup(with email: String, and password: String, onComplete: Completion?) {
+    
+    internal func compararContenidos(contHisto contUno:String, contConver contDos:String) -> Bool
+    {
+        
+        var iguales:Bool = false
+        
+        if contUno.elementsEqual(contDos)
+        {
+            iguales = true
+        }
+        else if !contUno.elementsEqual(contDos)
+        {
+            iguales = false
+        }
+        
+        return iguales
+        
+    }
+    
+    internal func fechaActual() -> String
+    {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let myString = formatter.string(from: Date()) // string purpose I add here
+        // convert your string to date
+        //let yourDate = formatter.date(from: myString)
+        //then again set the date format whhich type of output you need
+        //formatter.dateFormat = "dd-MMM-yyyy"
+        // again convert your date to string
+        //let myStringafd = formatter.string(from: yourDate!)
+        return myString
+    }
+    
+    internal func singup(with email: String, and password: String, onComplete: Completion?) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             
             if error != nil {
@@ -75,7 +109,7 @@ internal class Funciones{
         }
     }
     
-    func handleFirebaseError(error: NSError, onComplete: Completion?) {
+    internal func handleFirebaseError(error: NSError, onComplete: Completion?) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {
             switch errorCode {
             case .invalidEmail:
@@ -97,6 +131,7 @@ internal class Funciones{
     }
 
     //por ahora no uso esta clase
+/*
     internal func tipo_Usuario(usua: String, pass: String, confPass: String)
     {
         for usu in usuarios
@@ -108,7 +143,7 @@ internal class Funciones{
             if usua.elementsEqual(usu.usuario)
             {
                 print("2")
-                if pass.elementsEqual(usu.contrasenia)
+                if pass.elementsEqual(usu.pass)
                 {
                     print("3")
                     if usu.tipo.elementsEqual("A")//si el tipo del usuario introducido es "A"
@@ -142,8 +177,8 @@ internal class Funciones{
         }
         
     }
-    
-    func cambioCaracteres(texto:String, de:String, a: String) -> String {
+     */
+    internal func cambioCaracteres(texto:String, de:String, a: String) -> String {
         let cambio = texto.replacingOccurrences(of: de, with: a, options: .literal, range: nil)
         return cambio
     }
@@ -174,6 +209,15 @@ internal class Funciones{
         let total:Double = valUno/valDos
         return total
     }
+    
+    internal func reglaDeTres(cambio: Double, deseado: Double) -> Double
+    {
+        var resultado:Double = 0.0
+        resultado = ((1*cambio)/deseado)
+        return resultado
+        
+    }
+    
     /*
     func calcularConversion(cantidad:Double, divOri:String, divDes:String)->Double
     {
@@ -199,7 +243,7 @@ internal class Funciones{
         
         print(number) // 12334445.46*/
         //conversion = (conversion * 1000).rounded() / 1000
-        let text = String(format: "%.2f", arguments: [conversion])
+        let text = String(format: "%.5f", arguments: [conversion])
 
 
         return Double(text) as! Double
@@ -223,27 +267,26 @@ internal class Funciones{
         let url = "https://api.exchangeratesapi.io/latest?base="+divOri
         var cambio:Double = 0.0
         //Alamofire.request(url).responseString
-        print(url)
-        print(divOri)
-        print(divDes)
+        //print(url)
+        //print(divOri)
+        //print(divDes)
         
         Alamofire.request(url,method: .get).responseJSON { response in
             if let JSON = response.result.value as? [String:AnyObject] {
                 cambio = JSON["rates"]![divDes]!! as! Double
-                print(url)
-                print(divOri)
-                print(cambio)
-                print(divOri)
-                print(divDes)
-                
+                //print(url)
+                //print(divOri)
+                //print(cambio)
+                //print(divOri)
+                //print(divDes)
             }
             
         }
-        print(cambio)
+        //print(cambio)
         return cambio
         
         
-        
+    
     
         
         
@@ -288,7 +331,85 @@ internal class Funciones{
         
     }
     
-
+    func obtenerCambioDelJSON(divOri:String, divDes:String) ->Double
+    {
+        //let url = "https://api.exchangeratesapi.io/latest?base="+divOri
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("ChangesBaseEUR.json")
+        
+        if let ruta = Bundle.main.path(forResource: "ChangesBaseEUR.", ofType: "json"),
+            let datosJSON = FileManager.default.contents(atPath: ruta),
+            let datos = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? [[String:Any]] {
+            
+            
+            
+        }
+        
+        var cambio:Double = 0.0
+        //Alamofire.request(url).responseString
+        print(fileURL)
+        print(divOri)
+        print(divDes)
+        
+        Alamofire.request(fileURL,method: .get).responseJSON { response in
+            if let JSON = response.result.value as? [String:AnyObject] {
+                cambio = JSON["rates"]![divDes]!! as! Double
+                print(fileURL)
+                print(divOri)
+                print(cambio)
+                print(divOri)
+                print(divDes)
+            }
+            
+        }
+        print(cambio)
+        return cambio
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+         //let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/cambioMoneda.php?")! as URL)
+         
+         //let request = NSMutableURLRequest(url: NSURL(string: "https://storage.googleapis.com/ptfg-f6b2f.appspot.com/php")! as URL)
+         let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/php%2FcambioMoneda.php?alt=media&token=b89134cd-6b3d-4598-bded-18911e398d31")! as URL)
+         
+         request.httpMethod = "POST"
+         let postString = "$a=\(valor)&from=\(divOri)&to=\(divDes)"
+         request.httpBody = postString.data(using: String.Encoding.utf8)
+         
+         let task = URLSession.shared.dataTask(with: request as URLRequest) {
+         data, response, error in
+         print("feo")
+         if error != nil {
+         print("feo2")
+         print("error=\(error)")
+         return
+         }
+         
+         print("response = \(response)")
+         
+         let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+         print("responseString = \(responseString)")
+         }
+         task.resume()
+         */
+        
+        
+        
+    }
     
 
     
@@ -298,4 +419,6 @@ internal class Funciones{
 }
     
     
+
+
 

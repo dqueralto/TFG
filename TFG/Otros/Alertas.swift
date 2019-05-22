@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SQLite3
 class Alertas{
     //internal var conexion = ConexionDB()
     internal var usuarioRegistro: String = ""
@@ -16,7 +16,7 @@ class Alertas{
     internal var reinicio: Bool = false
     
     internal func alertaSinConexion(donde:UIViewController){
-        crearAlertainformacion(titulo: "Sin Conexion", mensaje: "No dispone de conexion a internet, algunas funciones que requieran dicha conexion podrian verse afectadas o inutilizadas.  Ejemplo: Copia de seguridad automatica/manual...",vc: donde)
+        crearAlertainformacion(titulo: "Sin Conexion", mensaje: "La App no dispone de conexion a internet, los resultados de las conversiones se haran con los cambios monetarios del 30-04-2019",vc: donde)
     }
         
         
@@ -67,136 +67,91 @@ class Alertas{
         vc.present(alert, animated: true, completion: nil)
     }
     
-    internal func nuevoUsuario(vc: UIViewController,ms:String!){
-        
-        //1.
-        let alert = UIAlertController(title: "Nuevo Usuario",
-                                      message: "Introduce tus datos por favor.\n"+ms,
-                                      
-                                      preferredStyle: .alert)
-        //2.
-        let saveAction = UIAlertAction(title: "Guardar",
-                                       style: .default) { action in
-
-                                        let usuario = alert.textFields![0].text!
-                                        let contrasenia = alert.textFields![1].text!
-                                        let confirmacion = alert.textFields![2].text!
-                                        let correo = alert.textFields![3].text!
-
-                                        
-                                        //3.
-                                        if !usuario.elementsEqual("")
-                                        {
-                                            if !contrasenia.elementsEqual("")
-                                            {
-                                                if contrasenia.count >= 6
-                                                {
-                                                    if contrasenia.elementsEqual(confirmacion)
-                                                    {
-                                                        if !correo.elementsEqual("")
-                                                        {
-                                                            if Funciones().isValidEmail(testStr: correo)
-                                                            {
-                                                                //ConexionDB().insertarUsuarioFirebase(email: correo, pass: contrasenia,vc: vc)
-                                                                //ViewController().insertarUsuarioSQLite(usu: usuario, pass: contrasenia, tipo: "U", nom: "u", apell: "u", fec_nac: "u", email: correo, sexo: "otro")
-                                                                
-                                                                ConexionDB().addUsuarioFirebase(usu: usuario, pass: contrasenia, tipo: "U",nom: "", apell: ""
-                                                                    ,fec_nac: "",email: correo,sexo: "poco")
-                                                                self.reinicio = false
-                                                            }
-                                                            else
-                                                            {
-                                                                self.reinicio = true
-                                                                self.usuarioRegistro = usuario
-                                                                self.emailRegistro = correo
-                                                                self.nuevoUsuario(vc: vc, ms: "El email no tiene el formato correcto.")
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            self.reinicio = true
-                                                            self.usuarioRegistro = usuario
-                                                            self.emailRegistro = correo
-                                                            self.nuevoUsuario(vc: vc, ms: "El email es obligatorio.")
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        self.reinicio = true
-                                                        self.usuarioRegistro = usuario
-                                                        self.emailRegistro = correo
-                                                        self.nuevoUsuario(vc: vc, ms: "Las contraseñas no coincide.")
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    self.reinicio = true
-                                                    self.usuarioRegistro = usuario
-                                                    self.emailRegistro = correo
-                                                    self.nuevoUsuario(vc: vc, ms: "La contraseña es demasiado corta \n(6 caracteres minimo).")
-                                                }
-                                            }
-                                            else
-                                            {
-                                                self.reinicio = true
-                                                self.usuarioRegistro = usuario
-                                                self.emailRegistro = correo
-                                                self.nuevoUsuario(vc: vc, ms: "La contraseñas es obligatoria.")
-                                            }
-                                        }
-                                        else
-                                        {
-                                            self.reinicio = true
-                                            self.usuarioRegistro = usuario
-                                            self.emailRegistro = correo
-                                            self.nuevoUsuario(vc: vc, ms: "El usuario es obligatorio.")
-                                        }
-                                        
+    
+    
+    private var db: OpaquePointer?
+    private var usuarios = [Usuarios]()
+    private var usu: [String] = []
+    
+    func crearBD()
+    {
+        //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("Usuarios.sqlite")
+        //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
+        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
+            print("error opening database")
         }
-        //4.
-        let cancelAction = UIAlertAction(title: "Cancelar",
-                                         style: .default){action in
-                                            self.reinicio = false
-        }
-        //5.
-        
-
-        alert.addTextField { textUsu in
-            textUsu.placeholder = "usuario"
-            if self.reinicio
-            {
-                textUsu.text = String(self.usuarioRegistro)
-                
+        else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
+            print("base abierta")
+            if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (correo TEXT PRIMARY KEY, clave TEXT, usuario TEXT)", nil, nil, nil) != SQLITE_OK {
+                let errmsg = String(cString: sqlite3_errmsg(db)!)
+                print("error creating table: \(errmsg)")
             }
         }
-        alert.addTextField { textPassword in
-            textPassword.isSecureTextEntry = true
-            textPassword.placeholder = "contraseña"
-        }
-        alert.addTextField { textNombre in
-            textNombre.isSecureTextEntry = true
-            textNombre.placeholder = "Confirmar contraseña"
-        }
-        alert.addTextField { textEmail in
-            textEmail.placeholder = "email"
-            if self.reinicio
-            {
-                textEmail.text = String(self.emailRegistro)
-            }
-        }
+        leerValores()
         
-
-
-
-        //6.
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        //7.
         
-        vc.present(alert, animated: true, completion: nil)
     }
     
-    
+    func insertar(correo: String, clave: String, usuario: String)  {
+        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
+        var stmt: OpaquePointer?
+        
+        //CREAMOS NUESTRA SENTENCIA
+        let queryString = "INSERT INTO Usuarios (correo, clave, usuario) VALUES ("+"'"+correo+"','"+clave+"','"+usuario+"');"
+        //PREPARAMOS LA SENTENCIA
+        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print(queryString)
+            print("error preparing insert: \(errmsg)")
+            return
+        }
+        
+        
+        //EJECUTAMOS LA SENTENCIA PARA INSERTAR LOS VALORES
+        if sqlite3_step(stmt) != SQLITE_DONE {
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print("fallo al insertar en Usuarios: \(errmsg)")
+            return
+        }
+        
+        //FINALIZAMOS LA SENTENCIA
+        sqlite3_finalize(stmt)
+        //displaying a success message
+        print("Histo saved successfully")
+        
+    }
+    func leerValores(){
+        
+        //PRIMERO LIMPIAMOS LA LISTA "HISTORIAL"
+        usuarios.removeAll()
+        
+        //GUARDAMOS NUESTRA CONSULTA
+        let queryString = "SELECT * FROM Usuarios"
+        
+        //PUNTERO DE INSTRUCCIÓN
+        var stmt:OpaquePointer?
+        
+        //PREPARACIÓN DE LA CONSULTA
+        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print("error preparing insert: \(errmsg)")
+            return
+        }
+        
+        //RECORREMOS LOS REGISTROS
+        while(sqlite3_step(stmt) == SQLITE_ROW){
+            let correo = String(cString: sqlite3_column_text(stmt, 0))
+            let clave = String(cString: sqlite3_column_text(stmt, 1))
+            let usuar = String(cString: sqlite3_column_text(stmt, 2))
+            let fec = String(cString: sqlite3_column_text(stmt, 3))
+
+            //AÑADIMOS LOS VALORES A LA LISTA
+            usuarios.append(Usuarios(email: String(correo), pass: String(clave), usuario: String(usuar), fec: fec))
+        }
+        
+    }
     
 }
 

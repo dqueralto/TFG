@@ -7,17 +7,22 @@
 //
 
 import Foundation
-internal class Rates
+struct Rates:Codable
 {
+    let divDestino:String
+    let cambioDestino: Double
+    //let base: String
+    //let rates: [String: Double]
+    //let date: String
+}
+
     
-    
-    var divOrigen: String
-    var divDestino: String
-    
-    internal init(divOrigen: String, divDestino: String) {
+    /*internal init(divOrigen: String, divDestino: String,cambioOrigen:Double,cambioDestino:Double) {
         self.divOrigen = divOrigen
         self.divDestino = divDestino
-    }
+        self.cambioOrigen = cambioOrigen
+        self.cambioDestino = cambioDestino
+    }*/
 
     
 
@@ -367,4 +372,4 @@ internal class Rates
     
     
 
-}
+//}

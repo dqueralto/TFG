@@ -12,7 +12,7 @@ import SQLite3
 import Firebase
 import FirebaseAuth
 import FirebaseFunctions
-import Firebase
+//import Firebase
 
 
 //import SQLite
@@ -23,20 +23,38 @@ typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
 
 internal class ConexionDB {
     
-    //-------------------------SQLite------------------------------------------------------------------
+//-------------------------SQLite------------------------------------------------------------------
     
-    private var db: OpaquePointer?
     private var usuarios = [Usuario]()
     private var dbName = "Datos.sqlite"
-    
+    private var db: OpaquePointer?
     private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);"
     private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
     private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
     private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
     
-    internal func conectarDBSQLite(){
-        let db = try! Connection("/Datos.sqlite")
+
+    
+
+    internal func conectarDBSQLite()
+    {
+        //let ruta: URL =  NSURL.fileURL(withPath: "tfgDataBase.sqlite3")
+        //let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        //.appendingPathComponent(dbName)
         
+        //print(fileURL)
+        //let db = try! Connection("tfgDataBase.sqlite3")
+        
+        //let db = try! Connection("tfgDataBase.sqlite3")
+        
+        //let path = Bundle.main.path(forResource: "tfgDataBase", ofType: "sqlite")!
+        //let db = try! Connection(path)
+        
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        
+        if !existeUsuariosDBSQLite(){
+            
         let users = Table("usuarios")
         let usu = Expression<String>("usuario")
         let pass = Expression<String>("pass")
@@ -47,6 +65,7 @@ internal class ConexionDB {
         let email = Expression<String>("email")
         let sexo = Expression<String?>("sexo")
         
+       
         try! db.run(users.create { t in
             t.column(usu, primaryKey: true)
             t.column(pass)
@@ -57,11 +76,16 @@ internal class ConexionDB {
             t.column(email, unique: true)
             t.column(sexo)
             print("usuarios parece creado")
-            
         })
+        }else {
+            print("existe la tabla usuarios")
+        }
         
+        
+        if existeMovimientosDBSQLite(){
+            
         let movimientos = Table("movimientos")
-        let numReg = Expression<String>("numero_registro")
+        let numReg = Expression<Int>("numero_registro")
         let usuar = Expression<String>("usuario")
         let fecha = Expression<String>("fecha")
         let importe = Expression<Double>("importe")
@@ -75,11 +99,131 @@ internal class ConexionDB {
             t.column(importe)
             t.column(tipoIngreso)
             print("movimientos parece creado")
-            
         })
+        }else {
+            print("existe la tabla movimientos")
+        }
         
     }
+    internal func insertarUsuarioDBSQLite(usuar: String,passw: String,tipoUs: String, correo:String)
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        
+        let usuarios = Table("usuarios")
+        let usu = Expression<String>("usuario")
+        let pass = Expression<String>("pass")
+        let tipo = Expression<String>("tipo")
+        let email = Expression<String>("email")
+        
+        let insert = usuarios.insert(usu <- usuar, pass <- passw, tipo <- tipoUs, email <- correo )
+        //(name <- "Alice", email <- "alice@mac.com")
+        print(insert)
+        
+
+        //try! db.run(insert)
+        
+        
+        for user in try! db.prepare(usuarios) {
+            print("usuario: \(user[usu]), pass: \(user[pass]), tipo: \(user[tipo]), email: \(user[email])")
+            // id: 1, name: Optional("Alice"), email: alice@mac.com
+        }
+        //let stmt = try db.prepare("INSERT INTO users (email) VALUES (?)")
+        //for email in ["betty@icloud.com", "cathy@icloud.com"] {
+        //    try stmt.run(email)
+        //x}
+    }
     
+    internal func insertarMovimientoDBSQLite(num_Reg:Int, usu:String, fec:String, impor:Double,tipoIngres:String)
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        
+        let movimientos = Table("movimientos")
+        let numReg = Expression<Int>("numero_registro")
+        let usuar = Expression<String>("usuario")
+        let fecha = Expression<String>("fecha")
+        let importe = Expression<Double>("importe")
+        let tipoIngreso = Expression<String>("tipo")
+        
+        let insert = movimientos.insert(numReg <- num_Reg, usuar <- usu, fecha <- fec, importe <- impor, tipoIngreso <- tipoIngres)
+        //(name <- "Alice", email <- "alice@mac.com")
+        print(insert)
+        
+        try! db.run(insert)
+        
+        
+        for mov in try! db.prepare(movimientos) {
+            print("numero_registro: \(mov[numReg]), usuario: \(mov[usuar]), fecha: \(mov[fecha]), importe: \(mov[importe]), tipo: \(mov[tipoIngreso])")
+            // id: 1, name: Optional("Alice"), email: alice@mac.com
+        }
+    }
+    
+    internal func selectUsuarioDBSQLite(usuario:String) -> Table
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        
+        _ = try! Connection("\(path)/tfgDataBase.sqlite3")
+        
+        let usuarios = Table("usuarios")
+        let usu = Expression<String>("usuario")
+        
+        let resultado = usuarios.filter(usu == usuario)
+        
+        return resultado
+    }
+   
+    internal func existeUsuariosDBSQLite() -> Bool
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        let table = Table("usuarios")
+        do {
+            try db.scalar(table.exists)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    internal func existeMovimientosDBSQLite() -> Bool
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        let table = Table("movimientos")
+        do {
+            try db.scalar(table.exists)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    internal func totalMovimientosDBSQLite() -> Int
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        let table = Table("movimientos")
+        do {
+            let reg = try db.scalar(table.count)
+            return reg
+        } catch {
+            return -1
+        }
+    }
+    
+    internal func totalUsuariosDBSQLite() -> Int
+    {
+        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
+        let table = Table("usuarios")
+        do {
+            let reg = try db.scalar(table.count)
+            return reg
+        } catch {
+            return -1
+        }
+    }
     
     //------------------------Firebase-------------------------------------------------------------
     var dbFirestore = Firestore.firestore()
@@ -95,20 +239,17 @@ internal class ConexionDB {
         return true
     }
 
-    internal func addUsuarioFirebase(usu:String,pass:String,tipo:String,nom:String,apell:String,fec_nac:String,email:String,sexo:String) {
-        
+    //internal func addUsuarioFirebase(usu:String,pass:String,tipo:String,nom:String,apell:String,fec_nac:String,email:String,sexo:String) {
+    internal func addUsuarioFirebase(usu:String,pass:String,email:String,fec:Date) {
+
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         let dbFirestore = Firestore.firestore()
         let docData: [String: Any] = [
             "usuario": usu,
             "pass": pass,
-            "tipo": tipo,
-            "nombre":nom,
-            "apellido":apell,
-            "fechaNacimiento":fec_nac,
             "email":email,
-            "sexo":sexo
+            "fecha_creacion":fec,
         ]
         dbFirestore.collection("Usuarios").document(usu).setData(docData) { err in
             if let err = err {
@@ -140,6 +281,7 @@ internal class ConexionDB {
             }
         }
     }
+    
     internal func delDegistroFirebase(coleccion:String,documento:String)
     {
         let settings = FirestoreSettings()
@@ -203,34 +345,58 @@ internal class ConexionDB {
                     print("Error fetching document: \(error!)")
                     return
                 }
+                
                 print("Current data: \(String(describing: document.data()))")
         }
         // [END listen_document]
     }
-    
-    func filtroUsuarioFirebase(coleccion:String,usu:String){//-> String{
+    internal func datosUsuarioFirebase(usuario usu:String){
         
-        let settings = FirestoreSettings()
-        Firestore.firestore().settings = settings
-        let dbFirestore = Firestore.firestore()
-        let docRef = dbFirestore.collection(coleccion).document(usu)
+        //let diccionario: [String : String]
+        
+        let db: Firestore!
+        db = Firestore.firestore()
+        let docRef = db.collection("Usuarios").document(usu)
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                let diccionario = document.data() as! [String : Any]
+
+                self.usuarios.append(Usuario(email: diccionario["email"]! as! String, pass: diccionario["pass"]! as! String, usuario: diccionario["usuario"]! as! String, fecha: diccionario["fecha_creacion"]! as! String) )
+                
+                for usu in self.usuarios{
+                    print(usu.usuario)
+                }
+                
             } else {
                 print("Document does not exist")
             }
         }
-        //return usuario.path
-        
-        // [START example_filters]
-        //citiesRef.whereField("state", isEqualTo: "CA")
-        //citiesRef.whereField("population", isLessThan: 100000)
-        //citiesRef.whereField("name", isGreaterThanOrEqualTo: "San Francisco")
-        // [END example_filters]
     }
+    internal func existeUsuarioFirebase(usuario usu:String)-> Bool
+    {
+        var existe:Bool = false
+        var usuariosEnFirebase:[String] = [""]
+        let db: Firestore!
+        db = Firestore.firestore()
+        db.collection("Usuarios").getDocuments() { (querySnapshot, err) in
+            if let err = err {print("Error getting documents: \(err)")}
+            else{
+                for doc in querySnapshot!.documents
+                {
+                    usuariosEnFirebase.append(doc.documentID)
+                }
+                if usuariosEnFirebase.contains(usu)
+                {
+                    existe = true
+                    
+                }
+            }
+        }
+        return existe
+    }
+
+    
     
     //---------------------------------------------------------
     internal func insertarUsuarioFirebase(email:String, pass:String, vc: UIViewController)
@@ -248,15 +414,15 @@ internal class ConexionDB {
             switch errorCode {
             case .invalidEmail:
                 //onComplete?("Invalid email address", nil)
-                Alertas().nuevoUsuario(vc: vc, ms: "Correo invalido.")
+                //Alertas().nuevoUsuario(vc: vc, ms: "Correo invalido.")
                 break
             case .wrongPassword:
                 //onComplete?("Invalid password", nil)
-                Alertas().nuevoUsuario(vc: vc, ms: "Contraseña invalida.")
+                //Alertas().nuevoUsuario(vc: vc, ms: "Contraseña invalida.")
                 break
             case .emailAlreadyInUse, .accountExistsWithDifferentCredential:
                 //onComplete?("Could not create account. Email already in use", nil)
-                Alertas().nuevoUsuario(vc: vc, ms: "Correo existente.")
+                //Alertas().nuevoUsuario(vc: vc, ms: "Correo existente.")
                 break
             case .userNotFound:
                 //onComplete?("Correct you email or sign up if you not have an account", nil)
@@ -484,6 +650,28 @@ internal class ConexionDB {
     //------------------------------
 
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     
@@ -502,10 +690,60 @@ internal class ConexionDB {
     
     
     
-
+    
+    
+    
+    
+    
     
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 

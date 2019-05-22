@@ -27,19 +27,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JMw-JE-vCM">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="JMw-JE-vCM" firstAttribute="centerX" secondItem="ydt-0E-nuS" secondAttribute="centerX" id="4vc-NS-dIq"/>
                             <constraint firstItem="udV-ab-qVh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5Fe-mt-146"/>
                             <constraint firstItem="ydt-0E-nuS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="116" id="5Oh-fr-4wC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ydt-0E-nuS" secondAttribute="trailing" constant="116" id="5Zf-fk-ND9"/>
                             <constraint firstAttribute="trailing" secondItem="udV-ab-qVh" secondAttribute="trailing" id="AJ0-SJ-JUF"/>
                             <constraint firstItem="udV-ab-qVh" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="JA9-FB-zXY"/>
-                            <constraint firstItem="JMw-JE-vCM" firstAttribute="centerY" secondItem="udV-ab-qVh" secondAttribute="centerY" id="Ww4-t0-zlo"/>
                             <constraint firstAttribute="bottom" secondItem="udV-ab-qVh" secondAttribute="bottom" id="aSc-U4-Yad"/>
                             <constraint firstItem="ydt-0E-nuS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="kKd-F6-DDM"/>
                         </constraints>

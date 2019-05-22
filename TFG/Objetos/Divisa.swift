@@ -8,13 +8,13 @@
 
 import Foundation
 
-internal class Divisa:Codable
+struct  Divisa:Codable
 {
-    internal init(base: String, rates: [String : Double], date: String) {
+    /*internal init(base: String, rates: [String : Double], date: String) {
         self.base = base
         self.rates = rates
         self.date = date
-    }
+    }*/
     
     let base: String
     let rates: [String: Double]
