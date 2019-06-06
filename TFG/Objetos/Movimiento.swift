@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal class Movimiento{
+internal class Consultas{
     //var usu = [Usuario]()
     
     var num_reg: Int

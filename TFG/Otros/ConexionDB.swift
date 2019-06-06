@@ -12,219 +12,17 @@ import SQLite3
 import Firebase
 import FirebaseAuth
 import FirebaseFunctions
-//import Firebase
 
 
-//import SQLite
-//typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
 
 
 typealias Completion = (_ errMsg: String?, _ data: Any?) -> Void
 
 internal class ConexionDB {
     
-//-------------------------SQLite------------------------------------------------------------------
-    
+    let fecha = Funciones().fechaActual()
     private var usuarios = [Usuario]()
-    private var dbName = "Datos.sqlite"
-    private var db: OpaquePointer?
-    private var sentAddTabUsu: String = "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT);"
-    private var sentDelUsu: String = "DELETE FROM Usuarios WHERE usuario ='"
-    private var sentDelAllUsu: String = "DELETE FROM Usuarios;COMMIT;"
-    private var sentInsertUsu: String = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email, sexo) VALUES ('"
-    
 
-    
-
-    internal func conectarDBSQLite()
-    {
-        //let ruta: URL =  NSURL.fileURL(withPath: "tfgDataBase.sqlite3")
-        //let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        //.appendingPathComponent(dbName)
-        
-        //print(fileURL)
-        //let db = try! Connection("tfgDataBase.sqlite3")
-        
-        //let db = try! Connection("tfgDataBase.sqlite3")
-        
-        //let path = Bundle.main.path(forResource: "tfgDataBase", ofType: "sqlite")!
-        //let db = try! Connection(path)
-        
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        
-        if !existeUsuariosDBSQLite(){
-            
-        let users = Table("usuarios")
-        let usu = Expression<String>("usuario")
-        let pass = Expression<String>("pass")
-        let tipo = Expression<String>("tipo")
-        let nom = Expression<String?>("nombre")
-        let ape = Expression<String?>("apellidos")
-        let fec_naz = Expression<String?>("fec_nac")
-        let email = Expression<String>("email")
-        let sexo = Expression<String?>("sexo")
-        
-       
-        try! db.run(users.create { t in
-            t.column(usu, primaryKey: true)
-            t.column(pass)
-            t.column(tipo)
-            t.column(nom)
-            t.column(ape)
-            t.column(fec_naz)
-            t.column(email, unique: true)
-            t.column(sexo)
-            print("usuarios parece creado")
-        })
-        }else {
-            print("existe la tabla usuarios")
-        }
-        
-        
-        if existeMovimientosDBSQLite(){
-            
-        let movimientos = Table("movimientos")
-        let numReg = Expression<Int>("numero_registro")
-        let usuar = Expression<String>("usuario")
-        let fecha = Expression<String>("fecha")
-        let importe = Expression<Double>("importe")
-        let tipoIngreso = Expression<Bool>("tipo")
-        
-        
-        try! db.run(movimientos.create { t in
-            t.column(numReg, primaryKey: true)
-            t.column(usuar)
-            t.column(fecha)
-            t.column(importe)
-            t.column(tipoIngreso)
-            print("movimientos parece creado")
-        })
-        }else {
-            print("existe la tabla movimientos")
-        }
-        
-    }
-    internal func insertarUsuarioDBSQLite(usuar: String,passw: String,tipoUs: String, correo:String)
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        
-        let usuarios = Table("usuarios")
-        let usu = Expression<String>("usuario")
-        let pass = Expression<String>("pass")
-        let tipo = Expression<String>("tipo")
-        let email = Expression<String>("email")
-        
-        let insert = usuarios.insert(usu <- usuar, pass <- passw, tipo <- tipoUs, email <- correo )
-        //(name <- "Alice", email <- "alice@mac.com")
-        print(insert)
-        
-
-        //try! db.run(insert)
-        
-        
-        for user in try! db.prepare(usuarios) {
-            print("usuario: \(user[usu]), pass: \(user[pass]), tipo: \(user[tipo]), email: \(user[email])")
-            // id: 1, name: Optional("Alice"), email: alice@mac.com
-        }
-        //let stmt = try db.prepare("INSERT INTO users (email) VALUES (?)")
-        //for email in ["betty@icloud.com", "cathy@icloud.com"] {
-        //    try stmt.run(email)
-        //x}
-    }
-    
-    internal func insertarMovimientoDBSQLite(num_Reg:Int, usu:String, fec:String, impor:Double,tipoIngres:String)
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        
-        let movimientos = Table("movimientos")
-        let numReg = Expression<Int>("numero_registro")
-        let usuar = Expression<String>("usuario")
-        let fecha = Expression<String>("fecha")
-        let importe = Expression<Double>("importe")
-        let tipoIngreso = Expression<String>("tipo")
-        
-        let insert = movimientos.insert(numReg <- num_Reg, usuar <- usu, fecha <- fec, importe <- impor, tipoIngreso <- tipoIngres)
-        //(name <- "Alice", email <- "alice@mac.com")
-        print(insert)
-        
-        try! db.run(insert)
-        
-        
-        for mov in try! db.prepare(movimientos) {
-            print("numero_registro: \(mov[numReg]), usuario: \(mov[usuar]), fecha: \(mov[fecha]), importe: \(mov[importe]), tipo: \(mov[tipoIngreso])")
-            // id: 1, name: Optional("Alice"), email: alice@mac.com
-        }
-    }
-    
-    internal func selectUsuarioDBSQLite(usuario:String) -> Table
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        
-        _ = try! Connection("\(path)/tfgDataBase.sqlite3")
-        
-        let usuarios = Table("usuarios")
-        let usu = Expression<String>("usuario")
-        
-        let resultado = usuarios.filter(usu == usuario)
-        
-        return resultado
-    }
-   
-    internal func existeUsuariosDBSQLite() -> Bool
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        let table = Table("usuarios")
-        do {
-            try db.scalar(table.exists)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
-    internal func existeMovimientosDBSQLite() -> Bool
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        let table = Table("movimientos")
-        do {
-            try db.scalar(table.exists)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
-    internal func totalMovimientosDBSQLite() -> Int
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        let table = Table("movimientos")
-        do {
-            let reg = try db.scalar(table.count)
-            return reg
-        } catch {
-            return -1
-        }
-    }
-    
-    internal func totalUsuariosDBSQLite() -> Int
-    {
-        let path = NSSearchPathForDirectoriesInDomains( .documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/tfgDataBase.sqlite3")
-        let table = Table("usuarios")
-        do {
-            let reg = try db.scalar(table.count)
-            return reg
-        } catch {
-            return -1
-        }
-    }
-    
     //------------------------Firebase-------------------------------------------------------------
     var dbFirestore = Firestore.firestore()
     
@@ -239,7 +37,6 @@ internal class ConexionDB {
         return true
     }
 
-    //internal func addUsuarioFirebase(usu:String,pass:String,tipo:String,nom:String,apell:String,fec_nac:String,email:String,sexo:String) {
     internal func addUsuarioFirebase(usu:String,pass:String,email:String,fec:Date) {
 
         let settings = FirestoreSettings()
@@ -260,20 +57,19 @@ internal class ConexionDB {
         }
     }
     
-    internal func addMovimientoFirebase(numReg:Int,usu:String,fecha:String,importe:Double,tipo:Bool,total:Double) {
+    
+    internal func addMovimientoFirebase(usu:String,fecha:String,total:Double) {
         
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         let dbFirestore = Firestore.firestore()
         let docData: [String: Any] = [
-            "numReg": numReg,
             "usuario": usu,
             "fecha":fecha,
-            "importe":importe,
-            "tipo": tipo,
             "total":total
         ]
-        dbFirestore.collection("Movimientos").document(usu).setData(docData) { err in
+        
+        dbFirestore.collection("Movimientos").document(usu).setData(docData)   { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -296,6 +92,8 @@ internal class ConexionDB {
             }
         }
     }
+    
+
     
     internal func delCampoFirebase(coleccion:String,documento:String,campo:String)
     {
@@ -331,12 +129,54 @@ internal class ConexionDB {
             }
         }
     }
-    
-    internal func listenDocumento(coleccion:String,documento:String)
+
+    internal func listenDocumentoMas(coleccion:String,documento:String, importe:String) -> String
      {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         let dbFirestore = Firestore.firestore()
+        var terminado = false
+        var result:String = "nil"
+
+        dbFirestore.collection(coleccion).document(documento)
+            .addSnapshotListener
+            { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                var x: String = ""
+                var calc: Double = 0.0
+                if !terminado{
+
+                    x = String(describing: document.data()!["total"]!)
+                    
+                    calc = Funciones().claculoSuma(valUno: Double(importe)!, valDos: Double(x)! )
+                    print("calc == \(calc)")
+                    terminado = true
+                    ConexionDB().addMovimientoFirebase(usu: documento, fecha: self.fecha, total: calc)
+                    let sCalc: String = String(calc)
+                    result = sCalc
+                    return
+                }
+                
+            }
+        
+        while true {
+            if result != "nil"{
+                return result
+            }
+        }
+
+    }
+    internal func listenDocumentoMenos(coleccion:String,documento:String, importe:String) -> String
+    {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        let dbFirestore = Firestore.firestore()
+        var terminado = false
+        //let contenido = ContenidoViewController()
+        var result:String = "nil"
         
         dbFirestore.collection(coleccion).document(documento)
             .addSnapshotListener
@@ -345,10 +185,33 @@ internal class ConexionDB {
                     print("Error fetching document: \(error!)")
                     return
                 }
+                var x: String = ""
+                var calc: Double = 0.0
+                if !terminado{
+                    //print("Current data: \(String(describing: document.data()!["importe"]))")
+                    print("Current data: \(String(describing: document.data()!["total"]!))")
+                    x = String(describing: document.data()!["total"]!)
+                    print("X == \(x)")
+                    
+                    calc = Funciones().claculoResta(valUno: Double(x)!, valDos: Double(importe)! )
+                    print("calc == \(calc)")
+                    terminado = true
+                    ConexionDB().addMovimientoFirebase(usu: documento, fecha: self.fecha, total: calc)
+                    let sCalc: String = String(calc)
+                    //contenido.totalRegistro.text = contenido.totalRegistroCalculado//sCalc
+
+                    result = sCalc
+                    return
+                }
                 
-                print("Current data: \(String(describing: document.data()))")
         }
-        // [END listen_document]
+        
+        while true {
+            if result != "nil"{
+                return result
+            }
+        }
+        
     }
     internal func datosUsuarioFirebase(usuario usu:String){
         
@@ -373,6 +236,7 @@ internal class ConexionDB {
             }
         }
     }
+    
     internal func existeUsuarioFirebase(usuario usu:String)-> Bool
     {
         var existe:Bool = false
@@ -409,7 +273,7 @@ internal class ConexionDB {
     }
     
     
-    func handleFirebaseError(error: NSError, vc: UIViewController) {
+    internal func handleFirebaseError(error: NSError, vc: UIViewController) {
         if let errorCode = AuthErrorCode(rawValue: error.code) {
             switch errorCode {
             case .invalidEmail:
@@ -433,316 +297,7 @@ internal class ConexionDB {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    internal func conectarDB()
-    {
-        //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(dbName)
-        //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
-        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
-            print("error al abrir la base de datos")
-        }
-        else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
-            print("base abierta")
-            //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, sentAddTabUsu, nil, nil, nil) != SQLITE_OK {
-                //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
-                let errmsg = String(cString: sqlite3_errmsg(db)!)
-                print("error creating table: \(errmsg)")
-            }
-        }
-        print("BD creada")
-        self.crearObjUsuario()
-        print("Usuarios creados")
-        if usuarios.count == 0
-        {
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            print("ADMIN insertado.")
-        }
-        
-    }
-    
-    internal func conectarDB(nombreDB: String)
-    {
-        //INDICAMOS DONDE SE GUARDARA LA BASE DE DATOS Y EL NOMBRE DE ESTAS
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(nombreDB)
-        //INDICAMOS SI DIERA ALGUN FALLO AL CONECTARSE
-        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
-            print("error al abrir la base de datos")
-        }
-        else {//SI PODEMOS CONECTARNOS A LA BASE DE DATOS CREAREMOS LA ESTRUCTURA DE ESTA, SI NO EXISTIERA NO SE HARIA NADA
-            print("base abierta")
-            //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT)", nil, nil, nil) != SQLITE_OK {
-            if sqlite3_exec(db, sentAddTabUsu, nil, nil, nil) != SQLITE_OK {
-                //if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS Usuarios (usuario TEXT PRIMARY KEY, contrasenia TEXT, tipo TEXT, nombre TEXT, apellidos TEXT, fec_nac TEXT, email TEXT,sexo TEXT); CREATE TABLE IF NOT EXISTS Movimientos (num_reg TEXT PRIMARY KEY, FOREIGN KEY(usuario) REFERENCES Usuarios(usuario), fecha TEXT, importe REAL, tipo BOOLEAN);", nil, nil, nil) != SQLITE_OK {
-                let errmsg = String(cString: sqlite3_errmsg(db)!)
-                print("error creating table: \(errmsg)")
-            }
-        }
-        print("BD creada")
-        self.crearObjUsuario()
-        print("Usuarios creados")
-        if usuarios.count == 0
-        {
-            self.insertarUsuarioSQLite(usu: "admin", pass: "admin", tipo: "A",nom: "Administrador",apell: "Administrador",fec_nac: "16/10/1996",email: "admin@admin.admin",sexo: "poco")
-            print("ADMIN insertado.")
-        }
-        
-    }
-    
-    
-    
-    internal func crearObjUsuario(){
-        
-        
-        //GUARDAMOS NUESTRA CONSULTA
-        let queryString = "SELECT * FROM Usuarios;"
-        
-        //PUNTERO DE INSTRUCCIÓN
-        var stmt:OpaquePointer?
-        
-        //PREPARACIÓN DE LA CONSULTA
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        
-        //RECORREMOS LOS REGISTROS
-        while(sqlite3_step(stmt) == SQLITE_ROW){
-            print("illo")
-            let usuario = String(cString: sqlite3_column_text(stmt, 0))
-            let contrasenia = String(cString: sqlite3_column_text(stmt, 1))
-            let tipo = String(cString: sqlite3_column_text(stmt, 2))
-            let nombre = String(cString: sqlite3_column_text(stmt, 3))
-            let apellidos = String(cString: sqlite3_column_text(stmt, 4))
-            let fec_nac = String(cString: sqlite3_column_text(stmt, 5))
-            let email = String(cString: sqlite3_column_text(stmt, 6))
-            let sexo = String(cString: sqlite3_column_text(stmt, 7))
-            print("illo2")
-            //AÑADIMOS LOS VALORES A LA LISTA
-            self.usuarios.append(Usuario(
-                usuario: String(describing: usuario),
-                contrasenia: String(describing: contrasenia),
-                tipo:String(describing: tipo)
-                ,nombre:String(describing: nombre)
-                ,apellidos:String(describing: apellidos)
-                ,fec_nac:String(describing: fec_nac)
-                ,email:String(describing: email)
-                ,sexo:String(describing: sexo)
-                
-            ))
-        }
-        print("siiiiiiiiii")
-    }
-    
-    internal func insertarUsuarioSQLite(usu:String,pass:String, tipo: String, nom: String,apell: String, fec_nac: String,email: String, sexo: String)  {
-        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
-        var stmt: OpaquePointer?
-        
-        //CREAMOS NUESTRA SENTENCIA
-        //let queryString = sentInsertUsu+usu+"','"+pass+"','"+tipo+"','"+nom+"','"+apell+"','"+fec_nac+"','"+email+"','"+sexo+"');commit;"
-        let queryString = "INSERT INTO Usuarios(usuario, contrasenia, tipo, nombre, apellidos, fec_nac, email,sexo) VALUES ('usu','usu','U','u','u','u','u','u');"
 
-        //PREPARAMOS LA SENTENCIA
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print(queryString)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        
-        
-        //EJECUTAMOS LA SENTENCIA PARA INSERTAR LOS VALORES
-        if sqlite3_step(stmt) != SQLITE_DONE {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("fallo al insertar en usuarios: \(errmsg)")
-            //nurvc.alerta2.isHidden = true
-            //nurvc.alerta3.isHidden = true
-            //nurvc.alerta.isHidden = false
-            return
-        }
-        
-        //FINALIZAMOS LA SENTENCIA
-        sqlite3_finalize(stmt)
-        print("Insertado")
-        //displaying a success message
-        print("Usuario saved successfully")
-        
-    }
-    
-    internal func eliminarUsuarios()
-    {
-        //GUARDAMOS NUESTRA CONSULTA
-        let queryString = sentDelAllUsu
-        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
-        var deleteStatement: OpaquePointer? = nil
-        
-        //PREPARACIÓN DE LA CONSULTA
-        if sqlite3_prepare(db, queryString, -1, &deleteStatement, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print(queryString)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        //ELIMINAMOS LOS REGISTROS
-        if sqlite3_prepare_v2(db, queryString, -1, &deleteStatement, nil) == SQLITE_OK {
-            if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                print("Successfully deleted row.")
-            } else {
-                print("Could not delete row.")
-            }
-        } else {
-            print("DELETE statement could not be prepared")
-        }
-        
-        //FINALIZAMOS LA SENTENCIA
-        sqlite3_finalize(deleteStatement)
-        //insertarAdmin()
-    }
-    
-    internal func eliminarUsuario(usu: String)
-    {
-        //GUARDAMOS NUESTRA CONSULTA
-        let queryString = sentDelUsu+usu+"';COMMIT;"
-        //CREAMOS EL PUNTERO DE INSTRUCCIÓN
-        var deleteStatement: OpaquePointer? = nil
-        
-        //PREPARACIÓN DE LA CONSULTA
-        if sqlite3_prepare(db, queryString, -1, &deleteStatement, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print(queryString)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        //ELIMINAMOS LOS REGISTROS
-        if sqlite3_prepare_v2(db, queryString, -1, &deleteStatement, nil) == SQLITE_OK {
-            if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                print("Successfully deleted row.")
-            } else {
-                print("Could not delete row.")
-            }
-        } else {
-            print("DELETE statement could not be prepared")
-        }
-        
-        //FINALIZAMOS LA SENTENCIA
-        sqlite3_finalize(deleteStatement)
-        //insertarAdmin()
-    }*/
-    
-    //
-    //------------------------------
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

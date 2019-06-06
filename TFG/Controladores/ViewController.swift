@@ -50,29 +50,12 @@ class ViewController: UIViewController{
             print("Esto se ejecuta en la cola de fondo")
             self.funciones.comprobarConexion(donde: self)
             self.crearBD()
-            
-
-            if self.usuarios.count == 0
-            {
-                //self.insertar(correo: "usu@usu.usu", clave: "usuusu", usuario: "usu",fec: self.fecha )
-                //ConexionDB().addUsuarioFirebase(usu: "usu", pass: "usuusu", email: "usu@usu.usu", fec: Date())
-                //ConexionDB().insertarUsuarioFirebase(email: "usu@usu.usu", pass: "usuusu", vc: self)
-                print("usu base insertado al loguear")
-            }
-            else if self.usuarios.count == 0
-            {
-                print("ADMIN no se ha podido insertar al loguearse")
-            }
                 
             self.leerValores()
 
-    
-            
             DispatchQueue.main.async {//hilo principal
                 print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
-                if Funciones().tengoConexion(){
-                    self.actualizarUsuarios()
-                }
+                
                 //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
 
                 
@@ -81,7 +64,11 @@ class ViewController: UIViewController{
         //--------------------------------------------------------------------------------------------------------------------------
     }
     
-    
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)//de esta forma selecciono el contenido del text field
+        
+    }
 
     //-------------------------------
     override func viewDidAppear(_ animated: Bool) {
@@ -115,15 +102,7 @@ class ViewController: UIViewController{
         }
         leerValores()
     }
-    
-    @IBAction func visualizarUsuarios(_ sender: Any)
-    {
-        
 
-        
-    }
-
-    
     @IBAction func Conectar(_ sender: Any)
     {
         leerValores()
@@ -140,8 +119,16 @@ class ViewController: UIViewController{
         //Creacion de ADMIN en caso de no existir almenos un usuario----------------------------------------------
         if usuarios.count == 0
         {
-            self.insertar(correo: "usu@dqp.dqp", clave: "usuusu", usuario: "usu",fec: self.fecha )
+            let usu = "usu"
+            let clave = "usuusu"
+            let correo = "usu@dqp.dqp"
+            let fecha = self.fecha
+            let total = 0.0
 
+            self.insertar(correo: correo, clave: clave, usuario: usu,fec: fecha )
+            ConexionDB().addUsuarioFirebase(usu: usu, pass: clave, email: correo, fec: Date())
+            ConexionDB().addMovimientoFirebase(usu: usu, fecha: fecha, total: total)
+            
             if usuarios.count == 1
             {
                 print("usu1 insertado al loguear")
@@ -485,6 +472,8 @@ class ViewController: UIViewController{
                                                                         ConexionDB().insertarUsuarioFirebase(email: correo, pass: contrasenia, vc: self)//Insertamos usuario en Autenticatro Firebase
                                                                         
                                                                         ConexionDB().addUsuarioFirebase(usu: usuario, pass: contrasenia, email: correo, fec: Date())//Insertamos usuario en BD Firebase
+                                                                        
+                                                                        ConexionDB().addMovimientoFirebase(usu: usuario, fecha: self.fecha, total: 0)
                                                                         
                                                                         Alertas().crearAlertainformacion(titulo: "Registro Corecto", mensaje: "Usuario registrado correctamente", vc: self)//Alerta informativo cuando el registro es correcto
                                                                         

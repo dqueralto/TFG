@@ -130,54 +130,6 @@ internal class Funciones{
         }
     }
 
-    //por ahora no uso esta clase
-/*
-    internal func tipo_Usuario(usua: String, pass: String, confPass: String)
-    {
-        for usu in usuarios
-        {
-            //alerta.isHidden = true
-            //alerta2.isHidden = true
-            print("1")
-            
-            if usua.elementsEqual(usu.usuario)
-            {
-                print("2")
-                if pass.elementsEqual(usu.pass)
-                {
-                    print("3")
-                    if usu.tipo.elementsEqual("A")//si el tipo del usuario introducido es "A"
-                    {
-                        print("3.1")
-                        //performSegue(withIdentifier: "contenidoAdmin", sender: nil)//asignamos al segue el nombre de la ruta al view de los admin
-                        return//finalizamos acciones
-                        
-                    }
-                    else if usu.tipo.elementsEqual("U")//si el tipo del usuario introducido es "U"
-                    {
-                        print("3.2")
-                        //performSegue(withIdentifier: "contenido", sender: nil)//asignamos al segue el nombre de la ruta al view de los usuarios
-                        return//finalizamos acciones
-                        
-                    }
-                }
-                else
-                {
-                    print("4")
-                    //alerta2.isHidden = false
-                    //return
-                }
-            }
-            else
-            {
-                print("5")
-                //alerta.isHidden = false
-                //return
-            }
-        }
-        
-    }
-     */
     internal func cambioCaracteres(texto:String, de:String, a: String) -> String {
         let cambio = texto.replacingOccurrences(of: de, with: a, options: .literal, range: nil)
         return cambio
@@ -217,32 +169,14 @@ internal class Funciones{
         return resultado
         
     }
-    
-    /*
-    func calcularConversion(cantidad:Double, divOri:String, divDes:String)->Double
-    {
-        
-        let cambio:Double = obtenerCambio(divOri: divOri, divDes: divDes)
-        var conversion:Double = 0.0
-        
-        conversion = cantidad*cambio
-        
-        return conversion
-        
-    }*/
+
     
     func calcularConversion(cantidad:Double, cambio:Double)->Double
     {
         
         var conversion:Double = 0.0
         conversion = cantidad*cambio
-        /*
-        var number: NSDecimalNumber = 12334445.4567721
-        let behavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
-        number = number.rounding(accordingToBehavior: behavior)
-        
-        print(number) // 12334445.46*/
-        //conversion = (conversion * 1000).rounded() / 1000
+
         let text = String(format: "%.5f", arguments: [conversion])
 
 
@@ -266,68 +200,17 @@ internal class Funciones{
     {
         let url = "https://api.exchangeratesapi.io/latest?base="+divOri
         var cambio:Double = 0.0
-        //Alamofire.request(url).responseString
-        //print(url)
-        //print(divOri)
-        //print(divDes)
+
         
         Alamofire.request(url,method: .get).responseJSON { response in
             if let JSON = response.result.value as? [String:AnyObject] {
                 cambio = JSON["rates"]![divDes]!! as! Double
-                //print(url)
-                //print(divOri)
-                //print(cambio)
-                //print(divOri)
-                //print(divDes)
+
             }
             
         }
         //print(cambio)
         return cambio
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        //let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/cambioMoneda.php?")! as URL)
-        
-       //let request = NSMutableURLRequest(url: NSURL(string: "https://storage.googleapis.com/ptfg-f6b2f.appspot.com/php")! as URL)
-        let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/php%2FcambioMoneda.php?alt=media&token=b89134cd-6b3d-4598-bded-18911e398d31")! as URL)
- 
-        request.httpMethod = "POST"
-        let postString = "$a=\(valor)&from=\(divOri)&to=\(divDes)"
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-            data, response, error in
-            print("feo")
-            if error != nil {
-                print("feo2")
-                print("error=\(error)")
-                return
-            }
-            
-            print("response = \(response)")
-            
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
-        */
-        
-        
         
     }
     
@@ -339,7 +222,7 @@ internal class Funciones{
         
         if let ruta = Bundle.main.path(forResource: "ChangesBaseEUR.", ofType: "json"),
             let datosJSON = FileManager.default.contents(atPath: ruta),
-            let datos = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? [[String:Any]] {
+            let _ = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? [[String:Any]] {
             
             
             
@@ -366,55 +249,7 @@ internal class Funciones{
         return cambio
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-         //let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/cambioMoneda.php?")! as URL)
-         
-         //let request = NSMutableURLRequest(url: NSURL(string: "https://storage.googleapis.com/ptfg-f6b2f.appspot.com/php")! as URL)
-         let request = NSMutableURLRequest(url: NSURL(string: "https://firebasestorage.googleapis.com/v0/b/ptfg-f6b2f.appspot.com/o/php%2FcambioMoneda.php?alt=media&token=b89134cd-6b3d-4598-bded-18911e398d31")! as URL)
-         
-         request.httpMethod = "POST"
-         let postString = "$a=\(valor)&from=\(divOri)&to=\(divDes)"
-         request.httpBody = postString.data(using: String.Encoding.utf8)
-         
-         let task = URLSession.shared.dataTask(with: request as URLRequest) {
-         data, response, error in
-         print("feo")
-         if error != nil {
-         print("feo2")
-         print("error=\(error)")
-         return
-         }
-         
-         print("response = \(response)")
-         
-         let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-         print("responseString = \(responseString)")
-         }
-         task.resume()
-         */
-        
-        
-        
     }
-    
-
-    
-    //----------------------------------------------------------------------------------------------------
-
     
 }
     

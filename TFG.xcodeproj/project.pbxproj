@@ -16,7 +16,6 @@
 		7F06689F2239212C00705E62 /* TFGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06689E2239212C00705E62 /* TFGUITests.swift */; };
 		7F0AE93A225F2EC000CEF780 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16DD8B2244F32D0070F0D3 /* Usuario.swift */; };
-		7F55F1912271BCA800089427 /* Consultas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55F1902271BCA800089427 /* Consultas.swift */; };
 		7F73D948228EB0C500C1CF92 /* MiFondoTalesOfPNG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D938228EB0C500C1CF92 /* MiFondoTalesOfPNG.png */; };
 		7F73D949228EB0C500C1CF92 /* cerdoCoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D939228EB0C500C1CF92 /* cerdoCoint.png */; };
 		7F73D94A228EB0C500C1CF92 /* fondoInicio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93A228EB0C500C1CF92 /* fondoInicio.jpg */; };
@@ -25,7 +24,6 @@
 		7F73D94D228EB0C500C1CF92 /* botonPlataAdmin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93D228EB0C500C1CF92 /* botonPlataAdmin.png */; };
 		7F73D94E228EB0C500C1CF92 /* fondoC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93E228EB0C500C1CF92 /* fondoC.jpg */; };
 		7F73D94F228EB0C500C1CF92 /* bucle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93F228EB0C500C1CF92 /* bucle.png */; };
-		7F73D950228EB0C500C1CF92 /* Fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D940228EB0C500C1CF92 /* Fondo.jpg */; };
 		7F73D951228EB0C500C1CF92 /* ChangesBaseUSD.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D942228EB0C500C1CF92 /* ChangesBaseUSD.json */; };
 		7F73D952228EB0C500C1CF92 /* botonadd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D944228EB0C500C1CF92 /* botonadd.png */; };
 		7F73D953228EB0C500C1CF92 /* simbolo-de-resta-r.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D945228EB0C500C1CF92 /* simbolo-de-resta-r.png */; };
@@ -33,7 +31,6 @@
 		7F73D955228EB0C500C1CF92 /* boton-de-suma-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D947228EB0C500C1CF92 /* boton-de-suma-g.png */; };
 		7F8A5F49227C428600F3E990 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8A5F48227C428600F3E990 /* Request.swift */; };
 		7F8A5F4B227C42DD00F3E990 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8A5F4A227C42DD00F3E990 /* NetworkManager.swift */; };
-		7F8A5F4D227C66CC00F3E990 /* GenerateSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8A5F4C227C66CC00F3E990 /* GenerateSignature.swift */; };
 		7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FC695A42241067900A4122B /* GoogleService-Info.plist */; };
 		7FF039BE2254B25000C56563 /* Divisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039BD2254B25000C56563 /* Divisa.swift */; };
 		7FF039CA2254BEA900C56563 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF039C32254BEA900C56563 /* ViewController.swift */; };
@@ -96,7 +93,7 @@
 		7F06689E2239212C00705E62 /* TFGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFGUITests.swift; sourceTree = "<group>"; };
 		7F0668A02239212C00705E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F16DD8B2244F32D0070F0D3 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
-		7F55F1902271BCA800089427 /* Consultas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consultas.swift; sourceTree = "<group>"; };
+		7F6DF9FF22959EB5009CEF54 /* TFG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TFG.entitlements; sourceTree = "<group>"; };
 		7F73D938228EB0C500C1CF92 /* MiFondoTalesOfPNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiFondoTalesOfPNG.png; sourceTree = "<group>"; };
 		7F73D939228EB0C500C1CF92 /* cerdoCoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cerdoCoint.png; sourceTree = "<group>"; };
 		7F73D93A228EB0C500C1CF92 /* fondoInicio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoInicio.jpg; sourceTree = "<group>"; };
@@ -105,15 +102,15 @@
 		7F73D93D228EB0C500C1CF92 /* botonPlataAdmin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlataAdmin.png; sourceTree = "<group>"; };
 		7F73D93E228EB0C500C1CF92 /* fondoC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoC.jpg; sourceTree = "<group>"; };
 		7F73D93F228EB0C500C1CF92 /* bucle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bucle.png; sourceTree = "<group>"; };
-		7F73D940228EB0C500C1CF92 /* Fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fondo.jpg; sourceTree = "<group>"; };
 		7F73D942228EB0C500C1CF92 /* ChangesBaseUSD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChangesBaseUSD.json; sourceTree = "<group>"; };
 		7F73D944228EB0C500C1CF92 /* botonadd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonadd.png; sourceTree = "<group>"; };
 		7F73D945228EB0C500C1CF92 /* simbolo-de-resta-r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta-r.png"; sourceTree = "<group>"; };
 		7F73D946228EB0C500C1CF92 /* botonDel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonDel.png; sourceTree = "<group>"; };
 		7F73D947228EB0C500C1CF92 /* boton-de-suma-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boton-de-suma-g.png"; sourceTree = "<group>"; };
+		7F77299D22A67FBE00308129 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		7F77299E22A67FBF00308129 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7F8A5F48227C428600F3E990 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		7F8A5F4A227C42DD00F3E990 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7F8A5F4C227C66CC00F3E990 /* GenerateSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateSignature.swift; sourceTree = "<group>"; };
 		7FC695A42241067900A4122B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FF039BD2254B25000C56563 /* Divisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisa.swift; sourceTree = "<group>"; };
 		7FF039C32254BEA900C56563 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +203,7 @@
 		7F06687D2239212B00705E62 /* TFG */ = {
 			isa = PBXGroup;
 			children = (
+				7F6DF9FF22959EB5009CEF54 /* TFG.entitlements */,
 				7F73D936228EB0C500C1CF92 /* Recursos */,
 				7F8A5F47227C426900F3E990 /* Request */,
 				7F06687E2239212B00705E62 /* AppDelegate.swift */,
@@ -245,7 +243,6 @@
 				7F16DD8B2244F32D0070F0D3 /* Usuario.swift */,
 				7FF039BD2254B25000C56563 /* Divisa.swift */,
 				7FF039DB2254C7F500C56563 /* Rates.swift */,
-				7F55F1902271BCA800089427 /* Consultas.swift */,
 			);
 			path = Objetos;
 			sourceTree = "<group>";
@@ -271,7 +268,6 @@
 				7F73D93D228EB0C500C1CF92 /* botonPlataAdmin.png */,
 				7F73D93E228EB0C500C1CF92 /* fondoC.jpg */,
 				7F73D93F228EB0C500C1CF92 /* bucle.png */,
-				7F73D940228EB0C500C1CF92 /* Fondo.jpg */,
 			);
 			path = img;
 			sourceTree = "<group>";
@@ -300,7 +296,6 @@
 			children = (
 				7F8A5F48227C428600F3E990 /* Request.swift */,
 				7F8A5F4A227C42DD00F3E990 /* NetworkManager.swift */,
-				7F8A5F4C227C66CC00F3E990 /* GenerateSignature.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -400,6 +395,11 @@
 					7F06687A2239212B00705E62 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					7F06688E2239212C00705E62 = {
 						CreatedOnToolsVersion = 10.1;
@@ -420,6 +420,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 7F0668722239212B00705E62;
 			productRefGroup = 7F06687C2239212B00705E62 /* Products */;
@@ -441,7 +442,6 @@
 				7F73D954228EB0C500C1CF92 /* botonDel.png in Resources */,
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
 				7F73D949228EB0C500C1CF92 /* cerdoCoint.png in Resources */,
-				7F73D950228EB0C500C1CF92 /* Fondo.jpg in Resources */,
 				7F73D951228EB0C500C1CF92 /* ChangesBaseUSD.json in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
 				7F73D94B228EB0C500C1CF92 /* fondoInicio.pxm in Resources */,
@@ -626,10 +626,8 @@
 				7FF039D72254BF4D00C56563 /* ConexionDB.swift in Sources */,
 				7F8A5F4B227C42DD00F3E990 /* NetworkManager.swift in Sources */,
 				7FF039D92254BF4D00C56563 /* Constantes.swift in Sources */,
-				7F8A5F4D227C66CC00F3E990 /* GenerateSignature.swift in Sources */,
 				7F16DD8C2244F32D0070F0D3 /* Usuario.swift in Sources */,
 				7FF039DA2254BF4D00C56563 /* Alertas.swift in Sources */,
-				7F55F1912271BCA800089427 /* Consultas.swift in Sources */,
 				7FF039CE2254BEA900C56563 /* ContenidoViewController.swift in Sources */,
 				7FF039D82254BF4D00C56563 /* Funciones.swift in Sources */,
 				7FF039BE2254B25000C56563 /* Divisa.swift in Sources */,
@@ -674,6 +672,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7F0668832239212B00705E62 /* Base */,
+				7F77299D22A67FBE00308129 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -682,6 +681,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7F0668882239212C00705E62 /* Base */,
+				7F77299E22A67FBF00308129 /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -693,6 +693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -754,6 +755,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

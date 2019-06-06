@@ -9,9 +9,10 @@
 import UIKit
 import Alamofire
 import SQLite3
+//import Firebase
 
 class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
-
+    
     var usuario: String?
     internal var cabecera: String? 
     
@@ -19,10 +20,15 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var selector: UISegmentedControl!
     
     @IBOutlet weak var conversor: UIView!
+    @IBOutlet weak var gestor: UIView!
     
     @IBOutlet weak var histoConver: UITableView!
+    @IBOutlet weak var histoGestor: UITableView!
+
     @IBOutlet weak var valor: UITextField!
     @IBOutlet weak var resultado: UILabel!
+    @IBOutlet weak var valorRegistro: UITextField!
+    @IBOutlet weak public var totalRegistro: UILabel!
     
     @IBOutlet weak var pickerOrigen: UIPickerView!
     @IBOutlet weak var pickerDestino: UIPickerView!
@@ -31,37 +37,89 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     var codDivDes: String = ""
     var posVal: Int = 0
     var posRes: Int = 0
-
-    var resulConversion: String = "0,0"
-    var insertHisto:Bool = false
     
+    private var db: OpaquePointer?
+    private var movimientos = [Movimientos]()
+    private var mov: [String] = []
+    
+    let fecha = Funciones().fechaActual()
+
+    var resulConversion: String = "0"
+    var insertHisto:Bool = false
+    var total = "nil"
     override func viewDidLoad() {
         super.viewDidLoad()
+        valor.delegate = self
+        valorRegistro.delegate = self
         
-        //cabecera = self.usuario!
-        titulo.title = cabecera
-        
-        self.valor.delegate = self
         pickerOrigen.delegate = self
         pickerOrigen.dataSource = self
         pickerDestino.delegate = self
-        pickerDestino.dataSource = self
+        self.pickerDestino.dataSource = self
+        
+        
+        
+        
+        DispatchQueue.global(qos: .background).async {//hilo de fondo
+            print("Esto se ejecuta en la cola de fondo")
+            
+            self.cabecera = self.usuario!
+            self.titulo.title = self.cabecera
+            
+            self.total = ConexionDB().listenDocumentoMas(coleccion: "Movimientos", documento: self.cabecera!, importe: "0")
+            
+            DispatchQueue.main.async {//hilo principal
+                print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
+                
+                self.controlConexion()
+                
+                
+            }//fin hilo de principal
+        }//fin del hilo de fondo
         
     }
     
-
+    internal func controlConexion(){
+        if Funciones().tengoConexion(){
+            self.conversor.isHidden = true
+            self.gestor.isHidden = false
+            self.selector.isHidden = false
+            self.total = self.total+" €"
+            self.totalRegistro.text = self.total
+        }else{
+            self.conversor.isHidden = false
+            self.gestor.isHidden = true
+            self.selector.isHidden = true
+        }
+        
+    }
     
     @IBAction func ventanas(_ sender: Any) {
         switch selector.selectedSegmentIndex
         {
             case 0:
-            NSLog("Movimientos selected")
-            self.conversor.isHidden = true
+                if Funciones().tengoConexion(){
+                    NSLog("Gestor selected")
+                    self.conversor.isHidden = true
+                    self.gestor.isHidden = false
+                    self.valor.text = "0"
+                }else{
+                    self.controlConexion()
+                    Alertas().alertaSinConexion(donde: self)
+                }
+
             //show movimientos view
             
             case 1:
-            NSLog("Conversor selected")
-            self.conversor.isHidden = false
+                if Funciones().tengoConexion(){
+                    NSLog("Conversor selected")
+                    self.conversor.isHidden = false
+                    self.gestor.isHidden = true
+                    self.valorRegistro.text = "0"
+                }else{
+                    self.controlConexion()
+                    Alertas().alertaSinConexion(donde: self)
+                }
             //show historial view
             
             default:
@@ -83,16 +141,19 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-        //For mobile numer validation
-        if textField == self.valor {
-
-            
-            
+        
+        if textField == self.valor||textField == self.valorRegistro {
             switch string {
+                
             case "0","1","2","3","4","5","6","7","8","9":
                 return true
             case ",":
-                let array = Array(self.valor.text!)
+                var array = Array("")
+                if textField == self.valor{
+                    array = Array(self.valor.text!)
+                }else if textField == self.valorRegistro {
+                    array = Array(self.valorRegistro.text!)
+                }
                 var decimalCount = 0
                 
                 for character in array {
@@ -115,7 +176,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 return false
                 
             }
-
         }
         
         return true
@@ -126,25 +186,78 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func infoMovimiento(_ sender: Any)
     {
-        Alertas().crearAlertainformacion(titulo: "Info:", mensaje: "Algo.", vc: self )
+        Alertas().crearAlertainformacion(titulo: "Info:", mensaje: "Esta seccion solo estara habilitada si dispone de conexión a internet. \n\nEl al insertar una cantidad puedes elegir ente registrarlo como un valor positivo (+) en cullo caso se sumara al total o por el contrario insertarlo como un valor negativo (-) en cuyo caso se restara al total. \n\nEsta permitido que el total sea negativo lo que implica que se esta perdiendo dinero, tenga cuidado con eso...", vc: self )
     }
-    
+
+
     @IBAction func sumar(_ sender: Any)
     {
-        
+        if Funciones().tengoConexion(){
+            let importe = Funciones().cambioCaracteres(texto: valorRegistro.text!, de: ",", a: ".")
+            
+            DispatchQueue.global(qos: .background).async {//hilo de fondo
+                print("Esto se ejecuta en la cola de fondo")
+                //var
+                if Funciones().tengoConexion(){
+                    self.total = ConexionDB().listenDocumentoMas(coleccion: "Movimientos", documento: self.cabecera!, importe: importe)
+                }
+                
+                DispatchQueue.main.async {//hilo principal
+                    
+                    self.total = self.total+" €"
+                    self.totalRegistro.text = Funciones().cambioCaracteres(texto: self.total, de: ".", a: ",")
+                
+                    self.histoGes.append("Ingreso Registrado: +\(self.valorRegistro.text!) €")
+                    self.histoGestiones.removeAll()
+                    self.histoGestor.reloadData()
+                    self.valorRegistro.text = ""
+                    
+                }
+            }
+            
+        }else{
+            
+            self.controlConexion()
+            Alertas().alertaSinConexion(donde: self)
+        }
+
     }
     
     @IBAction func restar(_ sender: Any)
     {
-        
+        if Funciones().tengoConexion(){
+            let importe = Funciones().cambioCaracteres(texto: valorRegistro.text!, de: ",", a: ".")
+            
+            DispatchQueue.global(qos: .background).async {//hilo de fondo
+                print("Esto se ejecuta en la cola de fondo")
+                //var
+                if Funciones().tengoConexion(){
+                    self.total = ConexionDB().listenDocumentoMenos(coleccion: "Movimientos", documento: self.cabecera!, importe: importe)
+                }
+                DispatchQueue.main.async {//hilo principal
+                    
+                    self.total = self.total+" €"
+                    self.totalRegistro.text = Funciones().cambioCaracteres(texto: self.total, de: ".", a: ",")
+
+                    self.histoGes.append("Gasto Registrado: -\(self.valorRegistro.text!) €")
+                    self.histoGestiones.removeAll()
+                    self.histoGestor.reloadData()
+                    self.valorRegistro.text = ""
+                }
+            }
+            
+        }else{
+            self.controlConexion()
+            Alertas().alertaSinConexion(donde: self)
+        }
     }
-    
+
 //------------------------------------------------------botones de "Conversor"------------------------------------------------------
     @IBAction func limpiarConvertidor(_ sender: Any)
     {
         
-        self.valor.text = "0,0"
-        self.resultado.text = "0,0"
+        self.valor.text = "0"
+        self.resultado.text = "0"
     }
     
     
@@ -152,7 +265,11 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     {
         
         if Funciones().tengoConexion(){
-            
+            if Funciones().tengoConexion(){
+                self.selector.selectedSegmentIndex = 1
+                self.selector.isHidden = false
+                
+            }
             if !codDivDes.elementsEqual(codDivOri)
             {
                 self.insertHisto = true
@@ -167,9 +284,11 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             conversionSinAPI()
             
             self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resultado.text!, divCon: self.codDivDes))
-            
             self.conversiones.removeAll()
             self.histoConver.reloadData()
+            
+
+            
         }
         
         
@@ -194,13 +313,13 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         if self.valor.text!.count == 0
         {
-            self.valor.text = "0,0"
+            self.valor.text = "0"
         }
         else if   array[0] == ","
         {
             if array[0] == "," && array.count == 1
             {
-                self.valor.text = "0,0"
+                self.valor.text = "0"
             }
             else if array[0] == "," && array.count > 1
             {
@@ -210,7 +329,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         else if array[0] == "0"  && array.count == 1
         {
-            self.valor.text = "0,0"
+            self.valor.text = "0"
         }
         
         
@@ -299,7 +418,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             else
             {
                 self.resultado.text = self.valor.text!
-                self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resulConversion, divCon: self.codDivDes))
+                //self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resulConversion, divCon: self.codDivDes))
                 self.conversiones.removeAll()
                 
                 self.histoConver.reloadData()
@@ -323,13 +442,13 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         if self.valor.text!.count == 0
         {
-            self.valor.text = "0,0"
+            self.valor.text = "0"
         }
         else if   array[0] == ","
         {
             if array[0] == "," && array.count == 1
             {
-                self.valor.text = "0,0"
+                self.valor.text = "0"
             }
             else if array[0] == "," && array.count > 1
             {
@@ -339,7 +458,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         else if array[0] == "0"  && array.count == 1
         {
-            self.valor.text = "0,0"
+            self.valor.text = "0"
         }
         
 
@@ -358,6 +477,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         print("val2: "+self.codDivDes.uppercased())
         
         if codDivOri != codDivDes{
+            
             Alamofire.request(url,method: .get).responseJSON { response in
                 if let JSON = response.result.value as? [String:AnyObject] {
                     var cambio: Double = 0.0
@@ -438,8 +558,8 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         {
             if(self.valor.text! == "," ){
                 
-                self.valor.text = "0,0"
-                self.resultado.text = "0,0"
+                self.valor.text = "0"
+                self.resultado.text = "0"
             }
             self.resultado.text = self.valor.text!
         }
@@ -518,25 +638,66 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 //---------HISTORIAL DE CONVERSION ------------------------------------------------------------------------------------------------
     var conversiones: [String] = []
     var conver = [Conversiones]()
+    var histoGestiones: [String] = []
+    var histoGes: [String] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return conver.count
+        if tableView == histoConver {
+            return conver.count
+        }else{
+            return histoGes.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celda = tableView.dequeueReusableCell(withIdentifier: "celdilla", for: indexPath)
         
-        for con in conver.reversed()
-        {
-            conversiones.append("\(con.valOri) \(con.divOri)  =  \(con.valCon) \(con.divCon)")//AÑADIMOS EL ESTRING "URL" A LA NUEVA COLECCION
+        let celda = tableView.dequeueReusableCell(withIdentifier: "celdilla", for: indexPath)
+        print("tablasssssssss")
+        if tableView == histoConver{
+            print("histoConver")
+            for con in conver.reversed()
+            {
+                conversiones.append("\(con.valOri) \(con.divOri)  =  \(con.valCon) \(con.divCon)")//AÑADIMOS EL ESTRING "URL" A LA NUEVA COLECCION
+            }
+            celda.textLabel?.text = conversiones[indexPath.row]
+            //PARA QUE CADA TABLA TENGA UNA CONFIGURACION DISTINTA SE ESPECIFICA AQUI Y SE QUITA LA GENERICA
+            //celda.textLabel?.textAlignment = .center
+            //celda.textLabel?.textColor = UIColor.white //CAMBIAMOS EL COLOR DE LAS LETRAS DE LA LISTA
+
+        }
+        if tableView == histoGestor{
+            print("histoGestor")
+            for hg in histoGes.reversed()
+            {
+                print("HG:   \(hg)")
+                histoGestiones.append("\(hg)")//AÑADIMOS EL ESTRING "URL" A LA NUEVA COLECCION
+            }
+            print("histoGes \(histoGes)")
+            print("histoGestiones \(histoGestiones)")
+            celda.textLabel?.text = histoGestiones[indexPath.row]
+            //PARA QUE CADA TABLA TENGA UNA CONFIGURACION DISTINTA SE ESPECIFICA AQUI Y SE QUITA LA GENERICA
+
+            //celda.textLabel?.textAlignment = .center
+            //celda.textLabel?.textColor = UIColor.red //CAMBIAMOS EL COLOR DE LAS LETRAS DE LA LISTA
+
         }
         
-        celda.textLabel?.text = conversiones[indexPath.row]//LE INDICAMOS QUE LOS INSERTE SEGUN EL INDICE DE FILAS QUE CREAMOS EN LA FUNCION ANTERIOR CON "historial.count"
-
+        //celda.textLabel?.text = conversiones[indexPath.row]//LE INDICAMOS QUE LOS INSERTE SEGUN EL INDICE DE FILAS QUE CREAMOS EN LA FUNCION ANTERIOR CON "historial.count"
+        celda.textLabel?.font = UIFont(name: "Georgia", size: 15) // CAMBIAMOS LA FUENTE Y EL TAMAÑO DE LAS TABLAS 
         celda.textLabel?.textAlignment = .center  //CENTRAMOS EL TEXTO DE LA LISTA
         celda.textLabel?.textColor = UIColor.white //CAMBIAMOS EL COLOR DE LAS LETRAS DE LA LISTA
+            
         return celda
     }
+    
+    
+    
+    //_---------------------------------------------------------------------------------------------------------------
+    
+    
+    
+    
 //---------------------------------------------------------------------------------------------------------
 
 }
@@ -553,5 +714,19 @@ internal class Conversiones{
         self.divOri = divOri
         self.valCon = valCon
         self.divCon = divCon
+    }
+}
+
+
+internal class Movimientos{
+    var usuario: String
+    var valor: Double
+    var tipo: String
+    
+    
+    init (usuario: String, valor: Double, tipo: String){
+        self.usuario = usuario
+        self.valor = valor
+        self.tipo = tipo
     }
 }

@@ -1,0 +1,72 @@
+
+/* Class = "UITextField"; text = "0"; ObjectID = "0Ht-oD-VN5"; */
+"0Ht-oD-VN5.text" = "0";
+
+/* Class = "UITextField"; placeholder = "--> Cantidad <--"; ObjectID = "1ou-de-W5f"; */
+"1ou-de-W5f.placeholder" = "--> Cantidad <--";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "1ou-de-W5f"; */
+"1ou-de-W5f.text" = "0";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "2gU-22-u06"; */
+"2gU-22-u06.text" = "Total";
+
+/* Class = "UIButton"; normalTitle = "Limpiar"; ObjectID = "5dL-7a-kml"; */
+"5dL-7a-kml.normalTitle" = "Limpiar";
+
+/* Class = "UINavigationItem"; title = "TFG"; ObjectID = "AHZ-Zw-3l8"; */
+"AHZ-Zw-3l8.title" = "TFG";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "CwN-dF-twt"; */
+"CwN-dF-twt.title" = "Title";
+
+/* Class = "UITextField"; text = "usuusu"; ObjectID = "EUA-E7-lbV"; */
+"EUA-E7-lbV.text" = "usuusu";
+
+/* Class = "UIButton"; normalTitle = "Conectar"; ObjectID = "ErY-jJ-QrH"; */
+"ErY-jJ-QrH.normalTitle" = "Conectar";
+
+/* Class = "UILabel"; text = "son:"; ObjectID = "JA8-Is-XPQ"; */
+"JA8-Is-XPQ.text" = "son:";
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "JWC-Mn-add"; */
+"JWC-Mn-add.normalTitle" = "-";
+
+/* Class = "UISegmentedControl"; Mz5-ul-tpE.segmentTitles[0] = "Gestor"; ObjectID = "Mz5-ul-tpE"; */
+"Mz5-ul-tpE.segmentTitles[0]" = "Gestor";
+
+/* Class = "UISegmentedControl"; Mz5-ul-tpE.segmentTitles[1] = "Conversor"; ObjectID = "Mz5-ul-tpE"; */
+"Mz5-ul-tpE.segmentTitles[1]" = "Conversor";
+
+/* Class = "UILabel"; text = "Iniciar sesión"; ObjectID = "SjI-eR-wXt"; */
+"SjI-eR-wXt.text" = "Iniciar sesión";
+
+/* Class = "UILabel"; text = "Contraseña:"; ObjectID = "Ul2-aC-1dA"; */
+"Ul2-aC-1dA.text" = "Contraseña:";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "Xd6-hb-iof"; */
+"Xd6-hb-iof.text" = "Total";
+
+/* Class = "UIButton"; normalTitle = "Convertir"; ObjectID = "d4O-kw-oLf"; */
+"d4O-kw-oLf.normalTitle" = "Convertir";
+
+/* Class = "UILabel"; text = "0,0"; ObjectID = "fQp-Yy-reB"; */
+"fQp-Yy-reB.text" = "0,0";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ir7-Iu-azw"; */
+"ir7-Iu-azw.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "j4Y-a3-ppq"; */
+"j4Y-a3-ppq.normalTitle" = "+";
+
+/* Class = "UITextField"; text = "usu"; ObjectID = "k5B-Ir-4c1"; */
+"k5B-Ir-4c1.text" = "usu";
+
+/* Class = "UIButton"; normalTitle = "No tengo usuario"; ObjectID = "sar-K4-VNs"; */
+"sar-K4-VNs.normalTitle" = "No tengo usuario";
+
+/* Class = "UITextField"; placeholder = "--> Cantidad <--"; ObjectID = "vCN-dI-GGu"; */
+"vCN-dI-GGu.placeholder" = "--> Cantidad <--";
+
+/* Class = "UILabel"; text = "Usuario:"; ObjectID = "zBr-Ad-EzE"; */
+"zBr-Ad-EzE.text" = "Usuario:";
