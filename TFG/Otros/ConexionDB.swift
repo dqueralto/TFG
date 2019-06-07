@@ -145,13 +145,13 @@ internal class ConexionDB {
                     print("Error fetching document: \(error!)")
                     return
                 }
-                var x: String = ""
+                var totalenFB: String = ""
                 var calc: Double = 0.0
                 if !terminado{
 
-                    x = String(describing: document.data()!["total"]!)
+                    totalenFB = String(describing: document.data()!["total"]!)
                     
-                    calc = Funciones().claculoSuma(valUno: Double(importe)!, valDos: Double(x)! )
+                    calc = Funciones().claculoSuma(valUno: Double(importe)!, valDos: Double(totalenFB)! )
                     print("calc == \(calc)")
                     terminado = true
                     ConexionDB().addMovimientoFirebase(usu: documento, fecha: self.fecha, total: calc)
@@ -185,20 +185,16 @@ internal class ConexionDB {
                     print("Error fetching document: \(error!)")
                     return
                 }
-                var x: String = ""
+                var totalenFB: String = ""
                 var calc: Double = 0.0
                 if !terminado{
-                    //print("Current data: \(String(describing: document.data()!["importe"]))")
-                    print("Current data: \(String(describing: document.data()!["total"]!))")
-                    x = String(describing: document.data()!["total"]!)
-                    print("X == \(x)")
                     
-                    calc = Funciones().claculoResta(valUno: Double(x)!, valDos: Double(importe)! )
+                    totalenFB = String(describing: document.data()!["total"]!)
+                    calc = Funciones().claculoResta(valUno: Double(totalenFB)!, valDos: Double(importe)! )
                     print("calc == \(calc)")
                     terminado = true
                     ConexionDB().addMovimientoFirebase(usu: documento, fecha: self.fecha, total: calc)
                     let sCalc: String = String(calc)
-                    //contenido.totalRegistro.text = contenido.totalRegistroCalculado//sCalc
 
                     result = sCalc
                     return

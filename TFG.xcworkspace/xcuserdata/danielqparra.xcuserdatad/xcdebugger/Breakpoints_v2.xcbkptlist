@@ -47,16 +47,8 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__66-[FIRUser reauthenticateAndRetrieveDataWithCredential:completion:]_block_invoke_2"
-                  moduleName = "TFG"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielqparra/Documents/Programacion/Xcode/Conversor/Pods/FirebaseAuth/Firebase/Auth/Source/FIRUser.m"
-                  timestampString = "581515519.880241"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "896">
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -106,7 +98,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TFG/Controladores/ContenidoViewController.swift"
-            timestampString = "581515519.52263"
+            timestampString = "581516761.220831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "482"
@@ -122,12 +114,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TFG/Controladores/ViewController.swift"
-            timestampString = "581515519.522849"
+            timestampString = "581597846.1786259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "Conectar(_:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "actualizarUsuarios()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,7 +130,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TFG/Controladores/ContenidoViewController.swift"
-            timestampString = "581515519.5229191"
+            timestampString = "581516761.22101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "438"
@@ -154,7 +146,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TFG/Controladores/ContenidoViewController.swift"
-            timestampString = "581515519.523062"
+            timestampString = "581516761.221102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"

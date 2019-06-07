@@ -86,7 +86,7 @@ class ViewController: UIViewController{
     //-------------------------------------
     @IBAction func informacion(_ sender: Any)
     {
-            Alertas().crearAlertainformacion(titulo: "Información", mensaje: "El inicio de sesion requiere que el usuario exista y la contraseña sea correcta. \nEn caso de no tener usuario pulse 'No tengo usuario' y rellene el formulario.", vc: self)
+            Alertas().crearAlertainformacion(titulo: "Información", mensaje: "El inicio de sesion requiere que el usuario exista y la contraseña sea correcta. \n\nEn caso de no tener usuario pulse 'No tengo usuario' y rellene el formulario.\n\nAl crear un usuario aceptas que usemos la información facilitada para fines comerciales.", vc: self)
     }
     
     internal func actualizarUsuarios()

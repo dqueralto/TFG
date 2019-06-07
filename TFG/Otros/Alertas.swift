@@ -16,7 +16,7 @@ class Alertas{
     internal var reinicio: Bool = false
     
     internal func alertaSinConexion(donde:UIViewController){
-        crearAlertainformacion(titulo: "Sin Conexion", mensaje: "La App no dispone de conexion a internet, los resultados de las conversiones se haran con los cambios monetarios del 30-04-2019",vc: donde)
+        crearAlertainformacion(titulo: "Sin Conexion", mensaje: "La App no dispone de conexion a internet, algunas funcionalidades pueden verse afectadas o deshabilitadas, por ejemplo el gestor que sera deshabilitado o el conversor que no dejara de dar cambios actualizador. \n\nCuando se recupere la conexion todo sera habilitado nuevamente de forma silenciosa. \n\nDisculpe las molestias.",vc: donde)
     }
         
         

@@ -206,7 +206,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                     
                     self.total = self.total+" €"
                     self.totalRegistro.text = Funciones().cambioCaracteres(texto: self.total, de: ".", a: ",")
-                
                     self.histoGes.append("Ingreso Registrado: +\(self.valorRegistro.text!) €")
                     self.histoGestiones.removeAll()
                     self.histoGestor.reloadData()
@@ -653,7 +652,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdilla", for: indexPath)
-        print("tablasssssssss")
         if tableView == histoConver{
             print("histoConver")
             for con in conver.reversed()
@@ -670,11 +668,9 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             print("histoGestor")
             for hg in histoGes.reversed()
             {
-                print("HG:   \(hg)")
                 histoGestiones.append("\(hg)")//AÑADIMOS EL ESTRING "URL" A LA NUEVA COLECCION
             }
-            print("histoGes \(histoGes)")
-            print("histoGestiones \(histoGestiones)")
+
             celda.textLabel?.text = histoGestiones[indexPath.row]
             //PARA QUE CADA TABLA TENGA UNA CONFIGURACION DISTINTA SE ESPECIFICA AQUI Y SE QUITA LA GENERICA
 
