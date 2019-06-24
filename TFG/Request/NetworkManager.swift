@@ -26,8 +26,7 @@ class NetworkManager: NSObject {
         }
     }
 
-    
-    func conexionApi(url:String, cosaQueBusco:String) -> String
+     func conexionApi(url:String, cosaQueBusco:String) -> String
     {
         var resultado:String = ""
         //modifica el metodo de comunicacion se es necesario
@@ -40,9 +39,6 @@ class NetworkManager: NSObject {
         }
         return resultado
         
-        
     }
     
-
-
 }

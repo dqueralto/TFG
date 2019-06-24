@@ -56,7 +56,7 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         pickerOrigen.dataSource = self
         pickerDestino.delegate = self
         self.pickerDestino.dataSource = self
-        
+        let funcion = Funciones()
         
         
         
@@ -70,14 +70,55 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             DispatchQueue.main.async {//hilo principal
                 print("Esto se ejecuta en la cola principal, después del código anterior en el bloque externo")
-                
+                if funcion.tengoConexion(){
+                    self.actualizarJSON()
+                }
                 self.controlConexion()
+                
+
+                
+                
+                
+                
+                
                 
                 
             }//fin hilo de principal
         }//fin del hilo de fondo
         
     }
+    
+    internal func actualizarJSON(){//escribimos el json en un fichero fisico de esta manera
+        let url = "https://api.exchangeratesapi.io/latest?base=GBP"
+        
+        var control:Bool = false
+        
+        Alamofire.request(url,method: .get).responseJSON { response in
+            let funcion = Funciones()
+            if let JSON = response.result.value as? [String:AnyObject] {
+                
+                //let x:String = JSON["rates"] as! String
+                print("response-----------------------------------------------------------------------------------------------")
+                print(response)
+                
+                var x = funcion.cambioCaracteres(texto: JSON.description, de: "[", a: "{")
+                x = funcion.cambioCaracteres(texto: x, de: "]", a: "}")
+                //x = funcion.cambioCaracteres(texto: x, de: "=", a: ":")
+                //x = funcion.cambioCaracteres(texto: x, de: ";", a: ",")
+                
+                funcion.escribirFichero(text: x)//.description)
+                control = true
+            }
+            
+            
+            
+        }
+        while !control {
+            return
+        }
+    }
+    
+    
     
     internal func controlConexion(){
         if Funciones().tengoConexion(){
@@ -254,9 +295,14 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 //------------------------------------------------------botones de "Conversor"------------------------------------------------------
     @IBAction func limpiarConvertidor(_ sender: Any)
     {
-        
         self.valor.text = "0"
         self.resultado.text = "0"
+        //var x = Funciones().cambioCaracteres(texto: Funciones().leerFichero(), de: "[", a: "{")
+        //x = Funciones().cambioCaracteres(texto: x, de: "]", a: "}")
+        //print(x)
+        
+        //let x = Funciones().obtenerCambioDelJSON(divOri: codDivOri, divDes: codDivDes)
+        //print(x)
     }
     
     
@@ -274,24 +320,16 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 self.insertHisto = true
             }
             self.conversionConAPI()
-                
-
         }
         else
         {
-
             conversionSinAPI()
             
             self.conver.append(Conversiones(valOri: self.valor.text!, divOri: self.codDivOri, valCon: self.resultado.text!, divCon: self.codDivDes))
             self.conversiones.removeAll()
             self.histoConver.reloadData()
             
-
-            
         }
-        
-        
-        
         
     }
     
@@ -303,7 +341,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     func conversionSinAPI()
     {
-
         
         let array = Array(self.valor.text!)
         let str = self.valor.text!
@@ -344,21 +381,26 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         var json:String = ""
         
-        
-        let yourJSONString: String = """
+        var x = Funciones().cambioCaracteres(texto: Funciones().leerFichero(), de: "[", a: "{")
+        x = Funciones().cambioCaracteres(texto: x, de: "]", a: "}")
+        print("---------------------sin...Conexion----------------------")
+        print(Funciones().leerFichero())
+        print("---------------------------------------------------------")
+
+        //la siguiente variable almacena el string que contiene el json
+        let miJSONString: String =  """
+        \(Funciones().leerFichero())
+        """
+        /*"""
 {"base":"GBP","rates":{"BGN":2.2552264105,"NZD":1.9667216309,"ILS":4.6293370847,"RUB":84.4186663284,"CAD":1.7431361922,"USD":1.2944662892,"PHP":67.9150859634,"CHF":1.303806372,"AUD":1.8636347912,"JPY":141.8308868466,"TRY":7.810154169,"HKD":10.1601651234,"MYR":5.398567854,"HRK":8.5459451357,"CZK":29.6933916032,"IDR":18679.1508596335,"DKK":8.6125941215,"NOK":11.2991939854,"HUF":373.868523921,"GBP":1.0,"MXN":24.8121029023,"THB":40.7758034201,"ISK":158.8967171339,"ZAR":18.4202576018,"BRL":5.159300301,"SGD":1.7718482986,"PLN":4.9653494459,"INR":91.1378757654,"KRW":1537.3084418205,"RON":5.4904696563,"CNY":8.9079021713,"SEK":12.4292286937,"EUR":1.153096641},"date":"2019-05-14"}
-"""
-        
-        
-        if let ruta = Bundle.main.path(forResource: "ChangesBaseUSD", ofType: "json"),
-            let datosJSON = FileManager.default.contents(atPath: ruta),
-            let datos = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? String {
-            json = datos
-        }
+"""*/
+
         struct  Divisa:Codable
         {
-            let base: String
+            
+            //let date: String
             let rates: [String: Double]
+            let base: String
             let date: String
         }
         
@@ -366,14 +408,18 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // Decode by telling it which struct or class maps to which String containing JSON.
         do {
-            let divisa: Divisa = try jsonDecoder.decode(Divisa.self, from: yourJSONString.data(using: String.Encoding.utf8)!);
+            
+ 
+            print("dataaaaaaaaaaaaaaa")
+            let divisa: Divisa = try jsonDecoder.decode(Divisa.self, from: miJSONString.data(using: String.Encoding.utf8)!);
+
+            print(divisa)
 
             print(divisa.rates["GBP"]) // "bar"
             
             
             
             if codDivOri != codDivDes{
-                
                 
                 var cambioOrigen: Double = 0.0
                 var cambioDestino: Double = 0.0
@@ -427,9 +473,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             // Handle if the JSON cannot map to the struct or class.
         }
         
-
-        
-        
     }
     func conversionConAPI()
     {
@@ -472,8 +515,6 @@ class ContenidoViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         
         let url = "https://api.exchangeratesapi.io/latest?base="+self.codDivOri.uppercased()
-        print("val1: "+self.codDivOri.uppercased())
-        print("val2: "+self.codDivDes.uppercased())
         
         if codDivOri != codDivDes{
             

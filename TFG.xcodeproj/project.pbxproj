@@ -24,7 +24,6 @@
 		7F73D94D228EB0C500C1CF92 /* botonPlataAdmin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93D228EB0C500C1CF92 /* botonPlataAdmin.png */; };
 		7F73D94E228EB0C500C1CF92 /* fondoC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93E228EB0C500C1CF92 /* fondoC.jpg */; };
 		7F73D94F228EB0C500C1CF92 /* bucle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D93F228EB0C500C1CF92 /* bucle.png */; };
-		7F73D951228EB0C500C1CF92 /* ChangesBaseUSD.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D942228EB0C500C1CF92 /* ChangesBaseUSD.json */; };
 		7F73D952228EB0C500C1CF92 /* botonadd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D944228EB0C500C1CF92 /* botonadd.png */; };
 		7F73D953228EB0C500C1CF92 /* simbolo-de-resta-r.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D945228EB0C500C1CF92 /* simbolo-de-resta-r.png */; };
 		7F73D954228EB0C500C1CF92 /* botonDel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F73D946228EB0C500C1CF92 /* botonDel.png */; };
@@ -102,7 +101,6 @@
 		7F73D93D228EB0C500C1CF92 /* botonPlataAdmin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonPlataAdmin.png; sourceTree = "<group>"; };
 		7F73D93E228EB0C500C1CF92 /* fondoC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondoC.jpg; sourceTree = "<group>"; };
 		7F73D93F228EB0C500C1CF92 /* bucle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bucle.png; sourceTree = "<group>"; };
-		7F73D942228EB0C500C1CF92 /* ChangesBaseUSD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChangesBaseUSD.json; sourceTree = "<group>"; };
 		7F73D944228EB0C500C1CF92 /* botonadd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonadd.png; sourceTree = "<group>"; };
 		7F73D945228EB0C500C1CF92 /* simbolo-de-resta-r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simbolo-de-resta-r.png"; sourceTree = "<group>"; };
 		7F73D946228EB0C500C1CF92 /* botonDel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonDel.png; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				7F73D937228EB0C500C1CF92 /* img */,
-				7F73D941228EB0C500C1CF92 /* JSON */,
 				7F73D943228EB0C500C1CF92 /* icon */,
 			);
 			path = Recursos;
@@ -270,14 +267,6 @@
 				7F73D93F228EB0C500C1CF92 /* bucle.png */,
 			);
 			path = img;
-			sourceTree = "<group>";
-		};
-		7F73D941228EB0C500C1CF92 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				7F73D942228EB0C500C1CF92 /* ChangesBaseUSD.json */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 		7F73D943228EB0C500C1CF92 /* icon */ = {
@@ -442,7 +431,6 @@
 				7F73D954228EB0C500C1CF92 /* botonDel.png in Resources */,
 				7F0668892239212C00705E62 /* LaunchScreen.storyboard in Resources */,
 				7F73D949228EB0C500C1CF92 /* cerdoCoint.png in Resources */,
-				7F73D951228EB0C500C1CF92 /* ChangesBaseUSD.json in Resources */,
 				7FC695A52241067A00A4122B /* GoogleService-Info.plist in Resources */,
 				7F73D94B228EB0C500C1CF92 /* fondoInicio.pxm in Resources */,
 				7F73D948228EB0C500C1CF92 /* MiFondoTalesOfPNG.png in Resources */,

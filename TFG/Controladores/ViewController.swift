@@ -96,7 +96,6 @@ class ViewController: UIViewController{
             print("\(usu.usuario)  \(ConexionDB().existeUsuarioFirebase(usuario: usu.usuario))")
             print(usu.usuario)
             if !ConexionDB().existeUsuarioFirebase(usuario: usu.usuario){
-                print("¡¡¡¡¡¡¡¡TENGO MIEDO!!!!!!!")
                 self.eliminarUsuario(usu: usu.usuario)
             }
         }

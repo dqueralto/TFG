@@ -171,7 +171,7 @@ internal class Funciones{
     }
 
     
-    func calcularConversion(cantidad:Double, cambio:Double)->Double
+    internal func calcularConversion(cantidad:Double, cambio:Double)->Double
     {
         
         var conversion:Double = 0.0
@@ -196,7 +196,7 @@ internal class Funciones{
     
     //------------------Conexion API----------------------------------------------------------------------------
 
-     func obtenerCambio(divOri:String, divDes:String) ->Double
+     internal func obtenerCambio(divOri:String, divDes:String) ->Double
     {
         let url = "https://api.exchangeratesapi.io/latest?base="+divOri
         var cambio:Double = 0.0
@@ -214,26 +214,17 @@ internal class Funciones{
         
     }
     
-    func obtenerCambioDelJSON(divOri:String, divDes:String) ->Double
+    internal func obtenerCambioDelJSON(divOri:String, divDes:String) ->Double
     {
         //let url = "https://api.exchangeratesapi.io/latest?base="+divOri
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("ChangesBaseEUR.json")
-        
-        if let ruta = Bundle.main.path(forResource: "ChangesBaseEUR.", ofType: "json"),
+            .appendingPathComponent("cambios.JSON.json")
+        if let ruta = Bundle.main.path(forResource: "cambios.JSON.", ofType: "JSON"),
             let datosJSON = FileManager.default.contents(atPath: ruta),
             let _ = try? JSONSerialization.jsonObject(with: datosJSON, options: .mutableContainers) as? [[String:Any]] {
-            
-            
-            
         }
-        
         var cambio:Double = 0.0
-        //Alamofire.request(url).responseString
-        print(fileURL)
-        print(divOri)
         print(divDes)
-        
         Alamofire.request(fileURL,method: .get).responseJSON { response in
             if let JSON = response.result.value as? [String:AnyObject] {
                 cambio = JSON["rates"]![divDes]!! as! Double
@@ -243,15 +234,39 @@ internal class Funciones{
                 print(divOri)
                 print(divDes)
             }
-            
         }
         print(cambio)
         return cambio
-        
-        
     }
     
+    internal func escribirFichero(text tx:String) {//este metodo escribe el json en un fichero fisico
+        
+        let dir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create:true)
+        let file = dir.appendingPathComponent("cambios.JSON")
+        let cadena = tx as! String
+        do{
+            try cadena.write(to: file, atomically: true, encoding: String.Encoding.utf8)
+        }
+        catch {}
+
+    }
+    
+    
+    internal func leerFichero() -> String {//este metodo lee el fichero fisico y retorna su contenido en un string
+        var fichText:String = ""
+        let directorio = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let file = directorio.appendingPathComponent("cambios.JSON")
+        do{
+            let datosGuardados = try String(contentsOf: file, encoding: String.Encoding.utf8)
+            fichText = datosGuardados
+        }
+        catch{}
+        
+        return fichText
+    }
 }
+
+
     
     
 
